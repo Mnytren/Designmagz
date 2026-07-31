@@ -6,6 +6,9 @@
 temporary screenshots/
 *.log
 
+# Local-only notes (kept on disk, not published)
+CLAUDE (1).md
+
 # Dependencies (if any tooling is added later)
 node_modules/
 
