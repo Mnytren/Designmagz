@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Character System — Work — MAGZ</title>
+  <meta name="description" content="Extending a brand character system — how an established brand character can evolve across new contexts while keeping a consistent visual identity. Brand design by MAGZ." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'forest-deep': '#172412',
+            'forest': '#276F27',
+            'moss': '#499A16',
+            'lime': '#8ECA3C',
+            'acid': '#B8DC12',
+            'cream': '#F4F1EB',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-cream text-forest-deep antialiased">
+
+  <!-- ============ NAV ============ -->
+  <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
+    <nav class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between relative z-10">
+      <a href="index.html" class="flex items-center gap-3 quiet-link" aria-label="MAGZ — home">
+        <svg viewBox="0 0 660.46 481.69" class="h-7 w-auto" fill="currentColor" aria-hidden="true">
+          <circle cx="387.12" cy="28.61" r="28.61"/>
+          <path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/>
+        </svg>
+        <span class="font-display text-xl tracking-wide">MAGZ</span>
+      </a>
+      <div class="hidden md:flex items-center gap-10 eyebrow">
+        <a href="work.html" class="quiet-link text-acid" aria-current="page">Work</a>
+        <a href="practice.html" class="quiet-link">Practice</a>
+        <a href="blog.html" class="quiet-link">Blog</a>
+        <a href="#contact" class="quiet-link">Contact</a>
+      </div>
+      <button id="menu-toggle" type="button" class="md:hidden relative z-10 w-8 h-8 flex flex-col justify-center items-center gap-[6px]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
+        <span class="burger-line burger-line-1 block w-6 h-[1.5px] bg-cream"></span>
+        <span class="burger-line burger-line-2 block w-6 h-[1.5px] bg-cream"></span>
+        <span class="burger-line burger-line-3 block w-6 h-[1.5px] bg-cream"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div id="mobile-menu" class="md:hidden bg-forest-deep text-cream grain">
+    <nav class="h-full flex flex-col justify-center px-8 gap-2 relative z-10">
+      <a href="work.html" class="font-display text-4xl py-3 quiet-link text-acid">Work</a>
+      <a href="practice.html" class="font-display text-4xl py-3 quiet-link">Practice</a>
+      <a href="blog.html" class="font-display text-4xl py-3 quiet-link">Blog</a>
+      <a href="#contact" class="font-display text-4xl py-3 quiet-link">Contact</a>
+    </nav>
+  </div>
+
+  <!-- ============ PROJECT HERO ============ -->
+  <section class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="stars"></div>
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-20 pb-24 md:pt-28 md:pb-32 relative z-10">
+      <a href="work.html" class="quiet-link eyebrow text-cream/60 inline-flex items-center gap-2 reveal">
+        <span aria-hidden="true">&larr;</span> All work
+      </a>
+      <p class="eyebrow text-acid mt-10 reveal" style="transition-delay: 80ms;">Selected work — Brand design &amp; illustration</p>
+      <h1 class="font-display text-5xl md:text-7xl leading-[1.05] mt-6 max-w-3xl reveal" style="transition-delay: 160ms;">
+        Extending a brand<br/>character system.
+      </h1>
+      <p class="mt-6 max-w-2xl text-cream/90 text-xl md:text-2xl font-display leading-snug reveal" style="transition-delay: 220ms;">
+        Exploring how an established brand character can evolve across new contexts and experiences.
+      </p>
+      <p class="mt-8 max-w-xl text-cream/80 text-lg leading-[1.8] reveal" style="transition-delay: 300ms;">
+        An ongoing exploration of how an existing brand character can grow through new
+        expressions, themes and use cases &mdash; while keeping a consistent visual identity.
+      </p>
+
+      <dl class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl reveal" style="transition-delay: 380ms;">
+        <div>
+          <dt class="eyebrow text-cream/50">Client</dt>
+          <dd class="mt-2 text-cream/90">Digitale Medier 1881</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-cream/50">Role</dt>
+          <dd class="mt-2 text-cream/90">Brand design &amp; illustration</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-cream/50">Deliverables</dt>
+          <dd class="mt-2 text-cream/90">Character variations, themed variants, mockups</dd>
+        </div>
+        <div>
+          <dt class="eyebrow text-cream/50">Status</dt>
+          <dd class="mt-2 text-cream/90">Ongoing</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ COVER + 01 OVERVIEW ============ -->
+  <section class="bg-cream">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+      <figure class="reveal">
+        <img src="assets/brand-character-cover.jpg" alt="The brand character rendered in 3D, standing alone under a ceiling of light" class="w-full rounded-2xl shadow-forest" />
+        <figcaption class="eyebrow text-forest-deep/40 mt-4">The character &mdash; one recognisable face, many possible worlds</figcaption>
+      </figure>
+
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16 mt-20 md:mt-28">
+        <div class="md:col-span-5 reveal">
+          <p class="eyebrow text-forest">01 &mdash; Overview</p>
+          <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">Familiar,<br/>but never fixed.</h2>
+        </div>
+        <div class="md:col-span-7 max-w-xl space-y-6 text-forest-deep/80 reveal" style="transition-delay: 120ms;">
+          <p>
+            Strong brand assets become more valuable when they can adapt to new situations
+            without losing their identity.
+          </p>
+          <p>
+            This ongoing project explores how an existing brand character can be extended
+            through new variations, expressions and scenarios while maintaining a consistent
+            visual language.
+          </p>
+          <p>
+            Rather than redesigning the character itself, the work focuses on expanding its
+            possibilities &mdash; exploring how a recognisable brand asset can support
+            communication across different contexts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 THE CHALLENGE ============ -->
+  <section class="bg-cream">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pb-24 md:pb-32">
+      <div class="pt-16 md:pt-20 border-t border-forest-deep/15 grid md:grid-cols-12 gap-10 md:gap-16">
+        <div class="md:col-span-5 reveal">
+          <p class="eyebrow text-forest">02 &mdash; The challenge</p>
+          <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">Recognisable,<br/>yet ready to change.</h2>
+        </div>
+        <div class="md:col-span-7 max-w-xl space-y-6 text-forest-deep/80 reveal" style="transition-delay: 120ms;">
+          <p>
+            A well-established character creates recognition and familiarity. However,
+            communication needs evolve over time.
+          </p>
+          <p>
+            New campaigns, themes, services and situations require new visual assets while
+            still feeling connected to the existing identity. The challenge became:
+          </p>
+          <ul class="space-y-3 pl-5 list-disc marker:text-forest">
+            <li>How can a character remain recognisable while adapting to new scenarios?</li>
+            <li>Which visual elements should remain fixed?</li>
+            <li>How can new expressions and themes be introduced without losing consistency?</li>
+            <li>How can the character stay relevant as communication needs change?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 MY ROLE ============ -->
+  <section class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32 relative z-10">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+        <div class="md:col-span-5 reveal">
+          <p class="eyebrow text-acid">03 &mdash; My role</p>
+          <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">Growing the<br/>cast, carefully.</h2>
+        </div>
+        <div class="md:col-span-7 max-w-xl space-y-6 text-cream/80 reveal" style="transition-delay: 120ms;">
+          <p>
+            My contribution focused on exploring and creating new character variations based
+            on the existing visual identity. This included:
+          </p>
+          <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-3 pl-5 list-disc marker:text-acid">
+            <li>Creating new themed versions</li>
+            <li>Developing new poses and expressions</li>
+            <li>Exploring seasonal adaptations</li>
+            <li>Extending the character into new visual contexts</li>
+            <li>Maintaining visual consistency across variants</li>
+          </ul>
+          <p class="text-cream/70">
+            The work was iterative and continues to evolve as new opportunities emerge.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 DESIGN EXPLORATION ============ -->
+  <section class="bg-cream">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+        <div class="md:col-span-5 reveal">
+          <p class="eyebrow text-forest">04 &mdash; Design exploration</p>
+          <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">Keep what's known,<br/>add what's new.</h2>
+        </div>
+        <div class="md:col-span-7 max-w-xl text-forest-deep/80 reveal" style="transition-delay: 120ms;">
+          <p>
+            A key focus has been preserving recognisable elements while introducing new
+            ideas. Throughout the process I have explored:
+          </p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 mt-14 md:mt-16">
+        <div class="bg-[#FBF8F0] border border-forest-deep/15 rounded-2xl p-6 reveal">
+          <h3 class="font-display text-xl">New expressions</h3>
+          <p class="text-forest-deep/70 mt-2 text-[15px]">Using body language, accessories and posture to communicate different situations.</p>
+        </div>
+        <div class="bg-[#FBF8F0] border border-forest-deep/15 rounded-2xl p-6 reveal" style="transition-delay: 80ms;">
+          <h3 class="font-display text-xl">Themed variants</h3>
+          <p class="text-forest-deep/70 mt-2 text-[15px]">Adapting the character to seasonal events, campaigns and special occasions.</p>
+        </div>
+        <div class="bg-[#FBF8F0] border border-forest-deep/15 rounded-2xl p-6 reveal">
+          <h3 class="font-display text-xl">Storytelling</h3>
+          <p class="text-forest-deep/70 mt-2 text-[15px]">Exploring how the character can support communication through visual narratives.</p>
+        </div>
+        <div class="bg-[#FBF8F0] border border-forest-deep/15 rounded-2xl p-6 reveal" style="transition-delay: 80ms;">
+          <h3 class="font-display text-xl">Consistency</h3>
+          <p class="text-forest-deep/70 mt-2 text-[15px]">Ensuring that new variants still feel like part of the same family.</p>
+        </div>
+      </div>
+
+      <!-- Character variations gallery -->
+      <figure class="mt-16 md:mt-24 reveal">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/high-five.png" alt="Two versions of the character giving each other a high-five, one wearing a winter cap" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/data.png" alt="The character holding up letters spelling DATA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/api-letters.png" alt="The character juggling letters spelling API" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/summer.png" alt="A summer variant of the character with a sun hat and surfboard by a palm tree" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/gaming.png" alt="The character wearing headphones and holding game controllers, with a receiver companion" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/contact.png" alt="The character holding an envelope and a phone" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/error-404.png" alt="A 404 error variant of the character with crossed-out eyes holding the numbers 4 0 4" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/scarf.png" alt="An active variant of the character running with a flowing scarf and a wrench" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/purple.png" alt="A purple-themed recolour of the character" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/badge-1881.png" alt="The character inside a circular Digitale Medier 1881 search badge" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/gaming-wide.jpg" alt="The character gaming with a controller beside a small receiver character" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+          <div class="aspect-square rounded-2xl bg-white border border-forest-deep/10 shadow-forest flex items-center justify-center p-4">
+            <img src="assets/brand-character/city-search.jpg" alt="The character placed inside an isometric City Search illustration for 1881" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <figcaption class="eyebrow text-forest-deep/40 mt-5">Poses, expressions and themed versions, gathered in one place</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ IN USE (mockups to come) ============ -->
+  <section class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32 relative z-10">
+      <div class="max-w-2xl reveal">
+        <p class="eyebrow text-acid">In use</p>
+        <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">The same face,<br/>everywhere it's needed.</h2>
+        <p class="mt-6 text-cream/75 leading-[1.8]">
+          The character has to hold up far beyond the screen &mdash; on printed roll-ups,
+          on apparel, and inside product interfaces. Mockups showing it in context are on
+          the way.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14 md:mt-16">
+        <figure class="reveal">
+          <div class="rounded-2xl border border-cream/15 bg-cream/[0.05] aspect-[3/4] flex items-center justify-center px-6 text-center">
+            <span class="eyebrow text-cream/45">Roll-ups &amp; print</span>
+          </div>
+          <figcaption class="eyebrow text-cream/40 mt-4">Image coming soon</figcaption>
+        </figure>
+        <figure class="reveal" style="transition-delay: 80ms;">
+          <div class="rounded-2xl border border-cream/15 bg-cream/[0.05] aspect-[3/4] flex items-center justify-center px-6 text-center">
+            <span class="eyebrow text-cream/45">Apparel &amp; t-shirts</span>
+          </div>
+          <figcaption class="eyebrow text-cream/40 mt-4">Image coming soon</figcaption>
+        </figure>
+        <figure class="reveal sm:col-span-2 lg:col-span-1" style="transition-delay: 160ms;">
+          <div class="rounded-2xl border border-cream/15 bg-cream/[0.05] aspect-[3/4] flex items-center justify-center px-6 text-center">
+            <span class="eyebrow text-cream/45">Interface examples</span>
+          </div>
+          <figcaption class="eyebrow text-cream/40 mt-4">Image coming soon</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 A LIVING SYSTEM ============ -->
+  <section class="bg-cream">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-32">
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16">
+        <div class="md:col-span-5 reveal">
+          <p class="eyebrow text-forest">05 &mdash; A living system</p>
+          <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">No final<br/>version.</h2>
+        </div>
+        <div class="md:col-span-7 max-w-xl space-y-6 text-forest-deep/80 reveal" style="transition-delay: 120ms;">
+          <p>
+            One of the most interesting aspects of this work is that there is no final
+            version.
+          </p>
+          <p>
+            Each new variation becomes part of a growing collection that can support future
+            communication needs.
+          </p>
+          <p>
+            Rather than viewing the character as a fixed asset, I see it as a living system
+            that can continue evolving while remaining recognisable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 REFLECTION ============ -->
+  <section class="bg-cream">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pb-24 md:pb-32">
+      <div class="pt-16 md:pt-20 border-t border-forest-deep/15 grid md:grid-cols-12 gap-10 md:gap-16">
+        <div class="md:col-span-5 reveal">
+          <p class="eyebrow text-forest">06 &mdash; Reflection</p>
+          <h2 class="font-display text-3xl md:text-4xl mt-4 leading-tight">Creativity within<br/>constraints.</h2>
+        </div>
+        <div class="md:col-span-7 max-w-xl space-y-6 text-forest-deep/80 reveal" style="transition-delay: 120ms;">
+          <p>This project reinforced the importance of working within established design constraints.</p>
+          <p>
+            The most interesting challenge was not creating something entirely new, but finding
+            ways to expand an existing visual language while preserving the qualities that made
+            it recognisable in the first place.
+          </p>
+          <p>
+            The work demonstrates how consistency and creativity can coexist when developing
+            brand assets over time.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-16 md:mt-20 text-center reveal">
+        <a href="work.html" class="btn-field inline-block bg-forest-deep text-cream font-medium px-8 py-4 rounded-full">
+          &larr; Back to all work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer id="contact" class="bg-forest-deep text-cream relative overflow-hidden grain border-t border-cream/10">
+    <div class="stars"></div>
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-12 md:pt-32 relative z-10">
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow text-acid">Contact</p>
+        <h2 class="font-display text-4xl md:text-6xl mt-4 leading-tight">Send me a field note.</h2>
+        <p class="mt-8 text-cream/75 max-w-xl leading-[1.8]">
+          If this project reminded you of something you are trying to build,
+          write to me. I read everything, and I reply slowly and properly.
+        </p>
+        <a href="mailto:hello@magz.no" class="btn-field inline-block mt-10 bg-cream text-forest-deep font-medium px-8 py-4 rounded-full">
+          hello@magz.no
+        </a>
+      </div>
+
+      <div class="mt-24 md:mt-32 pt-8 border-t border-cream/15 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <svg viewBox="0 0 660.46 481.69" class="h-5 w-auto" fill="currentColor" aria-hidden="true">
+            <circle cx="387.12" cy="28.61" r="28.61"/>
+            <path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/>
+          </svg>
+          <span class="font-display text-lg">MAGZ</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+          <nav class="flex items-center gap-5" aria-label="Social media">
+            <a href="https://www.instagram.com/designmagz" target="_blank" rel="noopener" aria-label="Instagram" class="quiet-link text-cream/80"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.linkedin.com/in/magnus-nytroen" target="_blank" rel="noopener" aria-label="LinkedIn" class="quiet-link text-cream/80"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </nav>
+          <a href="magz-design-system.html" class="quiet-link eyebrow text-cream/40">Design System &#8599;</a>
+          <p class="eyebrow text-cream/40">Oslo &middot; Tynset, Norway &mdash; 62.28&deg;N</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function setMenuOpen(open) {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.toggle('is-open', open);
+      document.body.classList.toggle('overflow-hidden', open);
+    }
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    });
+  </script>
+</body>
+</html>

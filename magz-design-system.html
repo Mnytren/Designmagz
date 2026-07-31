@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAGZ — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-deep:#172412;
+  --forest:#276F27;
+  --moss:#499A13;
+  --lime:#8ECA3C;
+  --acid:#BBDC12;
+  --cream:#F4F1EB;
+  --white:#FFFFFF;
+  --rust:#A3402E;
+
+  --ink:var(--forest-deep);
+  --surface:var(--white);
+  --surface-sunken:var(--cream);
+  --border:rgba(23,36,18,.14);
+  --border-strong:rgba(23,36,18,.28);
+  --muted:rgba(23,36,18,.78);
+  --faint:rgba(23,36,18,.65);
+
+  --serif:'DM Serif Display', serif;
+  --sans:'DM Sans', sans-serif;
+  --mono:'DM Mono', monospace;
+
+  --radius-sm:2px;
+  --radius-md:4px;
+  --radius-lg:6px;
+  --radius-pill:999px;
+
+  --sidebar-w:264px;
+  --content-max:920px;
+
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+
+  --ease:cubic-bezier(.4,0,.2,1);
+  --dur-fast:.15s; --dur-base:.2s; --dur-slow:.3s;
+
+  --focus-ring:var(--forest);
+}
+
+html[data-theme="dark"]{
+  --ink:var(--cream);
+  --surface:#1B2A14;
+  --surface-sunken:#10190C;
+  --border:rgba(244,241,235,.14);
+  --border-strong:rgba(244,241,235,.32);
+  --muted:rgba(244,241,235,.78);
+  --faint:rgba(244,241,235,.64);
+  --focus-ring:var(--acid);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:32px;}
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--surface-sunken);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+/* Serif display face is reserved for h1 only; smaller headings use the sans for legibility. */
+h1{font-family:var(--serif); font-weight:400; margin:0;}
+h2,h3,h4{font-family:var(--sans); font-weight:700; letter-spacing:-.01em; margin:0;}
+p{margin:0;}
+a{color:inherit;}
+ul{margin:0; padding:0;}
+button{font-family:inherit;}
+
+::selection{background:var(--acid); color:var(--forest-deep);}
+
+:focus-visible{
+  outline:2px solid var(--focus-ring);
+  outline-offset:2px;
+  border-radius:2px;
+}
+
+/* ---------- layout shell ---------- */
+.shell{ display:flex; min-height:100vh; }
+
+.sidebar{
+  width:var(--sidebar-w);
+  flex-shrink:0;
+  background:var(--forest-deep);
+  color:var(--cream);
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  padding:28px 24px 40px;
+  scrollbar-width:thin;
+}
+.sidebar-brand{ display:flex; align-items:center; gap:10px; margin-bottom:6px; text-decoration:none; }
+.sidebar-brand .mark{ width:26px; height:auto; color:var(--cream); }
+.sidebar-brand .mark path{ fill:currentColor; }
+.sidebar-brand .word{ font-family:var(--serif); font-size:19px; letter-spacing:.01em; }
+.sidebar-sub{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; opacity:.55; margin:0 0 24px 36px; }
+.sidebar-back{ display:inline-flex; align-items:center; gap:7px; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:rgba(244,241,235,.6); text-decoration:none; margin:0 0 30px 0; transition:color .15s var(--ease); }
+.sidebar-back:hover{ color:var(--cream); }
+
+.nav-group{ margin-bottom:28px; }
+.nav-group-title{ font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; opacity:.58; font-weight:700; margin-bottom:10px; padding:0 10px; }
+.nav-link{
+  display:flex; align-items:center; gap:9px;
+  padding:7px 10px;
+  border-radius:var(--radius-md);
+  font-size:13.5px;
+  color:rgba(244,241,235,.72);
+  text-decoration:none;
+  transition:background .15s var(--ease), color .15s var(--ease);
+  position:relative;
+}
+.nav-link .dot{
+  width:5px; height:5px; border-radius:50%;
+  background:currentColor; opacity:0;
+  transition:opacity .15s var(--ease), background .15s var(--ease);
+  flex-shrink:0;
+}
+.nav-link:hover{ background:rgba(244,241,235,.06); color:var(--cream); }
+.nav-link.active{ color:var(--cream); background:rgba(244,241,235,.09); }
+.nav-link.active .dot{ opacity:1; background:var(--acid); }
+
+.content{
+  flex:1;
+  min-width:0;
+  padding:56px 56px 88px;
+}
+.content-inner{ max-width:var(--content-max); margin:0 auto; }
+
+/* ---------- hero ---------- */
+.hero{ margin-bottom:72px; }
+.hero-eyebrow{ display:flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--muted); margin-bottom:18px; }
+.hero-eyebrow .orbit{ width:12px; height:12px; }
+.hero-eyebrow .orbit ellipse{ fill:none; stroke:currentColor; stroke-width:1.4; }
+.hero-eyebrow .orbit circle{ fill:var(--acid); stroke:none; }
+.hero h1{ font-size:clamp(36px, 4.6vw, 52px); line-height:1.05; letter-spacing:-.01em; max-width:16ch; text-wrap:balance; }
+.hero p.lead{ font-size:17px; line-height:1.65; color:var(--muted); max-width:52ch; margin-top:22px; }
+.hero-meta{ display:flex; gap:28px; margin-top:36px; padding-top:24px; border-top:1px solid var(--border); }
+.hero-meta div{ font-size:12.5px; }
+.hero-meta .k{ text-transform:uppercase; letter-spacing:.08em; color:var(--faint); font-size:10.5px; margin-bottom:4px; }
+.hero-meta .v{ font-weight:500; }
+
+/* ---------- sections ---------- */
+.section{ padding-top:44px; margin-top:44px; border-top:1px solid var(--border); scroll-margin-top:28px; }
+.section:first-of-type{ border-top:none; margin-top:0; padding-top:0; }
+.section-eyebrow{ display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--muted); margin-bottom:14px; }
+.section-eyebrow .orbit{ width:10px; height:10px; }
+.section-eyebrow .orbit ellipse{ fill:none; stroke:currentColor; stroke-width:1.4; }
+.section-eyebrow .orbit circle{ fill:var(--acid); stroke:none; }
+.section h2{ font-size:clamp(26px, 3vw, 32px); margin-bottom:14px; }
+.section > p.desc{ font-size:15.5px; color:var(--muted); max-width:62ch; margin-bottom:32px; }
+
+.subsection{ margin-top:40px; }
+.subsection:first-child{ margin-top:0; }
+.subsection h3{ font-family:var(--sans); font-weight:700; font-size:13px; letter-spacing:.03em; text-transform:uppercase; color:var(--faint); margin-bottom:16px; }
+
+/* ---------- demo frame ---------- */
+.demo{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:36px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:16px;
+}
+.demo.dark{ background:var(--forest-deep); border-color:transparent; }
+.demo.col{ flex-direction:column; align-items:stretch; }
+.demo.pad-lg{ padding:48px; }
+.demo-row{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; width:100%; }
+.demo-label{
+  font-size:11px; font-family:var(--mono); color:var(--faint);
+  margin-top:10px; width:100%;
+}
+.demo.dark .demo-label{ color:rgba(244,241,235,.45); }
+
+/* ---------- typography scale ---------- */
+.type-row{ display:flex; align-items:baseline; gap:28px; padding:20px 0; border-top:1px solid var(--border); }
+.type-row:first-child{ border-top:none; padding-top:0; }
+.type-row .tag{ width:130px; flex-shrink:0; font-family:var(--mono); font-size:11.5px; color:var(--muted); }
+.type-row .tag .px{ display:block; color:var(--faint); margin-top:2px; }
+.type-sample-display-xl{ font-family:var(--serif); font-size:44px; line-height:1.08; }
+.type-sample-display-l{ font-family:var(--sans); font-weight:700; letter-spacing:-.01em; font-size:32px; line-height:1.1; }
+.type-sample-h3{ font-family:var(--sans); font-weight:700; letter-spacing:-.01em; font-size:22px; }
+.type-sample-body{ font-size:16px; }
+.type-sample-small{ font-size:13.5px; color:var(--muted); }
+.type-sample-micro{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; font-weight:700; color:var(--muted); }
+.font-cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:36px; }
+.font-card{ border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; }
+.font-card .fname{ font-family:var(--serif); font-size:26px; margin-bottom:6px; }
+.font-card .frole{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-bottom:14px; }
+.font-card .fdesc{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+
+/* ---------- color ---------- */
+.color-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.swatch{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+.swatch-fill{ height:96px; }
+.swatch-info{ padding:12px 14px; background:var(--surface); }
+.swatch-info .name{ font-weight:700; font-size:13.5px; }
+.swatch-info .hex{ font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:2px; }
+.swatch-info .role{ font-size:11.5px; color:var(--faint); margin-top:6px; line-height:1.5; }
+
+/* ---------- spacing ---------- */
+.spacing-row{ display:flex; align-items:center; gap:20px; padding:10px 0; }
+.spacing-row .bar{ background:var(--moss); border-radius:2px; height:14px; }
+.spacing-row .tag{ font-family:var(--mono); font-size:12px; color:var(--muted); width:70px; flex-shrink:0; }
+.spacing-row .px{ font-family:var(--mono); font-size:12px; color:var(--faint); width:50px; }
+
+/* ---------- motif ---------- */
+.motif-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.motif-card{ border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; background:var(--surface); }
+.motif-card .glyph{ width:36px; height:36px; display:flex; align-items:center; justify-content:center; }
+.motif-card .cap{ font-size:11.5px; color:var(--muted); line-height:1.5; }
+.dot-lg{ width:14px; height:14px; border-radius:50%; background:var(--acid); }
+.orbit-demo{ width:34px; height:34px; }
+.orbit-demo ellipse{ fill:none; stroke:var(--ink); stroke-width:1.6; }
+.orbit-demo circle{ fill:var(--acid); }
+
+/* ============ BUTTONS ============ */
+.btn{
+  appearance:none; border:none; cursor:pointer;
+  font-family:var(--sans); font-weight:500; font-size:14px;
+  padding:11px 22px;
+  border-radius:var(--radius-pill);
+  display:inline-flex; align-items:center; gap:8px;
+  transition:background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease), transform .1s var(--ease);
+}
+.btn:active{ transform:translateY(1px); }
+.btn-primary{ background:var(--forest-deep); color:var(--cream); }
+.btn-primary:hover{ background:#0e1a0a; }
+.btn-secondary{ background:transparent; color:var(--ink); border:1.5px solid var(--border-strong); }
+.btn-secondary:hover{ border-color:var(--ink); background:rgba(23,36,18,.04); }
+.btn-ghost{ background:transparent; color:var(--ink); padding-left:8px; padding-right:8px; }
+.btn-ghost:hover{ background:rgba(23,36,18,.06); }
+.btn-danger{ background:var(--rust); color:var(--cream); }
+.btn-danger:hover{ background:#8a3526; }
+.btn-on-dark{ background:var(--cream); color:var(--forest-deep); }
+.btn-on-dark:hover{ background:#fff; }
+.btn-sm{ padding:7px 16px; font-size:12.5px; }
+.btn-lg{ padding:14px 26px; font-size:15.5px; }
+.btn:disabled{ opacity:.38; cursor:not-allowed; }
+.btn:disabled:hover{ background:inherit; }
+.btn svg{ width:14px; height:14px; }
+
+/* ============ FORM CONTROLS ============ */
+.field{ display:flex; flex-direction:column; gap:7px; width:100%; max-width:320px; }
+.field label{ font-size:12.5px; font-weight:700; color:var(--ink); }
+.field .helper{ font-size:12px; color:var(--faint); }
+.field .helper.error{ color:var(--rust); }
+.input, .textarea, .select{
+  font-family:var(--sans); font-size:14px; color:var(--ink);
+  background:var(--surface);
+  border:1.5px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  padding:10px 12px;
+  width:100%;
+  transition:border-color .15s var(--ease), box-shadow .15s var(--ease);
+}
+.input::placeholder, .textarea::placeholder{ color:var(--faint); }
+.input:hover, .textarea:hover, .select:hover{ border-color:rgba(23,36,18,.45); }
+.input:focus, .textarea:focus, .select:focus{
+  outline:none; border-color:var(--focus-ring);
+  box-shadow:0 0 0 3px rgba(139,202,60,.35);
+}
+.field.has-error .input{ border-color:var(--rust); }
+.field.has-error .input:focus{ box-shadow:0 0 0 3px rgba(163,64,46,.2); }
+.textarea{ resize:vertical; min-height:88px; }
+.select{ appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23172412' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; background-size:12px 8px; padding-right:32px; }
+
+.check-row{ display:flex; align-items:center; gap:10px; }
+.check-row label{ font-size:14px; cursor:pointer; }
+.checkbox, .radio{
+  appearance:none; width:18px; height:18px; flex-shrink:0;
+  border:1.5px solid var(--border-strong); background:var(--surface);
+  cursor:pointer; position:relative;
+  transition:border-color .15s var(--ease), background .15s var(--ease);
+}
+.checkbox{ border-radius:4px; }
+.radio{ border-radius:50%; }
+.checkbox:checked, .radio:checked{ background:var(--forest-deep); border-color:var(--forest-deep); }
+.checkbox:checked::after{
+  content:''; position:absolute; left:5px; top:1px; width:5px; height:9px;
+  border:solid var(--cream); border-width:0 2px 2px 0; transform:rotate(40deg);
+}
+.radio:checked::after{
+  content:''; position:absolute; inset:0; margin:auto; width:6px; height:6px; border-radius:50%; background:var(--acid);
+}
+
+.toggle{ position:relative; width:38px; height:22px; flex-shrink:0; }
+.toggle input{ opacity:0; width:100%; height:100%; position:absolute; margin:0; cursor:pointer; z-index:1; }
+.toggle-track{ position:absolute; inset:0; background:rgba(23,36,18,.22); border-radius:99px; transition:background .15s var(--ease); }
+.toggle-knob{ position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:var(--surface); box-shadow:0 1px 2px rgba(0,0,0,.25); transition:transform .18s var(--ease), background .15s var(--ease); }
+.toggle input:checked ~ .toggle-track{ background:var(--forest-deep); }
+.toggle input:checked ~ .toggle-knob{ transform:translateX(16px); background:var(--acid); }
+
+.form-grid{ display:flex; flex-wrap:wrap; gap:28px; }
+
+/* ============ BADGES ============ */
+.badge{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11.5px; font-weight:700; letter-spacing:.03em;
+  padding:4px 9px; border-radius:var(--radius-sm);
+  line-height:1.4;
+}
+.badge .dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
+.badge-neutral{ background:rgba(23,36,18,.08); color:var(--forest-deep); }
+.badge-info{ background:rgba(39,111,39,.12); color:#1E4E1E; }
+.badge-success{ background:rgba(73,154,19,.14); color:#2E620C; }
+.badge-warning{ background:rgba(187,220,18,.22); color:#4A4506; }
+.badge-danger{ background:rgba(163,64,46,.12); color:#8C3728; }
+.badge-outline{ background:transparent; border:1px solid var(--border-strong); color:var(--forest-deep); }
+
+/* ============ CARDS ============ */
+.card-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.card{
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  background:var(--surface); overflow:hidden;
+  transition:box-shadow .2s var(--ease), transform .2s var(--ease);
+}
+.card:hover{ box-shadow:0 12px 32px rgba(23,36,18,.12); transform:translateY(-2px); }
+.card-media{ height:120px; }
+.card-body{ padding:18px 18px 20px; }
+.card-eyebrow{ font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-bottom:8px; }
+.card-title{ font-family:var(--sans); font-weight:700; letter-spacing:-.01em; font-size:19px; margin-bottom:8px; }
+.card-desc{ font-size:13px; color:var(--muted); line-height:1.55; }
+.card-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid var(--border); font-size:11.5px; color:var(--faint); }
+.card.on-dark{ background:var(--forest-deep); }
+.card.on-dark .card-eyebrow{ color:rgba(244,241,235,.6); }
+.card.on-dark .card-title{ color:var(--cream); }
+.card.on-dark .card-desc{ color:rgba(244,241,235,.72); }
+.card.on-dark .card-foot{ color:rgba(244,241,235,.6); border-color:rgba(244,241,235,.14); }
+
+/* ============ NAVIGATION ============ */
+.navbar-demo{ background:var(--forest-deep); border-radius:var(--radius-lg); padding:16px 22px; display:flex; align-items:center; justify-content:space-between; width:100%; }
+.navbar-demo .brand{ display:flex; align-items:center; gap:9px; color:var(--cream); font-family:var(--serif); font-size:16px; }
+.navbar-demo .brand .mark{ width:18px; height:auto; color:var(--cream); }
+.navbar-demo .brand .mark path{ fill:currentColor; }
+.navbar-demo .links{ display:flex; gap:26px; }
+.navbar-demo .links a{ color:rgba(244,241,235,.68); text-decoration:none; font-size:13px; font-weight:500; transition:color .15s var(--ease); }
+.navbar-demo .links a.active{ color:var(--cream); }
+.navbar-demo .cta{ background:var(--cream); color:var(--forest-deep); padding:8px 18px; border-radius:var(--radius-pill); font-size:12.5px; font-weight:700; text-decoration:none; }
+
+.tabs{ width:100%; }
+.tab-list{ display:flex; gap:4px; border-bottom:1px solid var(--border); }
+.tab-input{ position:absolute; opacity:0; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.tab-label{ padding:11px 4px; margin-right:24px; font-size:13.5px; font-weight:500; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; transition:color .15s var(--ease), border-color .15s var(--ease); }
+.tab-label:hover{ color:var(--ink); }
+.tab-panel{ display:none; padding:22px 2px; font-size:13.5px; color:var(--muted); line-height:1.6; }
+#tab1:checked ~ .tab-list label[for="tab1"],
+#tab2:checked ~ .tab-list label[for="tab2"],
+#tab3:checked ~ .tab-list label[for="tab3"]{ color:var(--ink); border-color:var(--ink); font-weight:700; }
+#tab1:focus-visible ~ .tab-list label[for="tab1"],
+#tab2:focus-visible ~ .tab-list label[for="tab2"],
+#tab3:focus-visible ~ .tab-list label[for="tab3"]{ outline:2px solid var(--focus-ring); outline-offset:2px; }
+#tab1:checked ~ .panels #panel1,
+#tab2:checked ~ .panels #panel2,
+#tab3:checked ~ .panels #panel3{ display:block; }
+
+.breadcrumb{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted); }
+.breadcrumb a{ text-decoration:none; color:var(--muted); }
+.breadcrumb a:hover{ color:var(--ink); }
+.breadcrumb .sep{ opacity:.4; }
+.breadcrumb .current{ color:var(--ink); font-weight:500; }
+
+/* ============ ALERTS ============ */
+.alert{ display:flex; gap:12px; padding:16px 18px; border-radius:var(--radius-md); border:1px solid; width:100%; }
+.alert-icon{ width:18px; height:18px; flex-shrink:0; margin-top:1px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.alert-title{ font-weight:700; font-size:13.5px; margin-bottom:3px; }
+.alert-desc{ font-size:13px; line-height:1.55; opacity:.85; }
+.alert-info{ background:rgba(39,111,39,.07); border-color:rgba(39,111,39,.25); color:#1E4E1E; }
+.alert-success{ background:rgba(73,154,19,.08); border-color:rgba(73,154,19,.3); color:#2E620C; }
+.alert-warning{ background:rgba(187,220,18,.14); border-color:rgba(187,220,18,.45); color:#4A4506; }
+.alert-danger{ background:rgba(163,64,46,.07); border-color:rgba(163,64,46,.3); color:#8C3728; }
+.alert-title, .alert-desc{ color:var(--ink); }
+
+/* ============ TABLE ============ */
+.table-wrap{ width:100%; overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius-lg); }
+table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+thead th{ text-align:left; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; padding:12px 16px; background:rgba(23,36,18,.03); border-bottom:1px solid var(--border); }
+tbody td{ padding:13px 16px; border-bottom:1px solid var(--border); }
+tbody tr:last-child td{ border-bottom:none; }
+tbody tr{ transition:background .12s var(--ease); }
+tbody tr:hover{ background:rgba(23,36,18,.025); }
+
+/* ============ MODAL ============ */
+.modal-stage{ background:rgba(23,36,18,.55); border-radius:var(--radius-lg); padding:56px 24px; display:flex; justify-content:center; width:100%; }
+.modal{ background:var(--surface); border-radius:var(--radius-lg); width:100%; max-width:360px; box-shadow:0 24px 60px rgba(23,36,18,.35); overflow:hidden; }
+.modal-head{ padding:20px 22px 0; display:flex; justify-content:space-between; align-items:flex-start; }
+.modal-head h3{ font-size:19px; }
+.modal-close{ appearance:none; border:none; background:transparent; padding:0; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--faint); cursor:pointer; font-size:14px; }
+.modal-close:hover{ background:rgba(23,36,18,.06); color:var(--forest-deep); }
+.modal-body{ padding:12px 22px 22px; font-size:13.5px; color:var(--muted); line-height:1.6; }
+.modal-foot{ padding:16px 22px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:10px; }
+
+/* ============ TOOLTIP ============ */
+.tooltip-wrap{ position:relative; display:inline-flex; }
+.tooltip-trigger{ appearance:none; background:transparent; padding:0; font-family:inherit; border:1.5px dashed var(--border-strong); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--muted); cursor:default; }
+.tooltip-bubble{
+  position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px);
+  background:var(--forest-deep); color:var(--cream); font-size:12px; padding:7px 11px; border-radius:var(--radius-sm);
+  white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s var(--ease), transform .15s var(--ease);
+}
+.tooltip-bubble::after{ content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--forest-deep); }
+.tooltip-wrap:hover .tooltip-bubble, .tooltip-trigger:focus-visible ~ .tooltip-bubble{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ============ PROGRESS & LOADING ============ */
+.progress-track{ width:100%; height:8px; background:rgba(23,36,18,.1); border-radius:99px; overflow:hidden; }
+.progress-fill{ height:100%; background:var(--moss); border-radius:99px; transition:width .3s var(--ease); }
+
+.spinner{ width:28px; height:28px; position:relative; }
+.spinner-ring{ position:absolute; inset:0; border-radius:50%; border:2.5px solid rgba(23,36,18,.14); border-top-color:var(--forest-deep); animation:spin 0.9s linear infinite; }
+.spinner-dot{ position:absolute; top:-1px; left:50%; width:6px; height:6px; margin-left:-3px; border-radius:50%; background:var(--acid); animation:spin 0.9s linear infinite; transform-origin:3px 15px; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce){
+  .spinner-ring, .spinner-dot{ animation:none; }
+  *{ transition-duration:0.01ms !important; }
+}
+
+/* ============ AVATAR ============ */
+.avatar{ position:relative; width:44px; height:44px; border-radius:50%; background:var(--forest); color:var(--cream); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:16px; flex-shrink:0; }
+.avatar-status{ position:absolute; bottom:-1px; right:-1px; width:12px; height:12px; border-radius:50%; background:var(--acid); border:2.5px solid var(--surface); }
+.avatar-status.offline{ background:var(--faint); }
+.avatar-row{ display:flex; align-items:center; gap:12px; }
+.avatar-name{ font-size:13.5px; font-weight:700; }
+.avatar-meta{ font-size:12px; color:var(--muted); }
+
+/* ---------- footer ---------- */
+.ds-footer{ margin-top:64px; padding-top:28px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--faint); }
+
+/* ---------- dark theme component overrides ---------- */
+html[data-theme="dark"] body{ background:var(--surface-sunken); }
+html[data-theme="dark"] .btn-primary{ background:var(--cream); color:var(--forest-deep); }
+html[data-theme="dark"] .btn-primary:hover{ background:#FFF6E8; }
+html[data-theme="dark"] .btn-secondary:hover{ background:rgba(244,241,235,.06); }
+html[data-theme="dark"] .btn-ghost:hover{ background:rgba(244,241,235,.08); }
+html[data-theme="dark"] .checkbox:checked, html[data-theme="dark"] .radio:checked{ background:var(--lime); border-color:var(--lime); }
+html[data-theme="dark"] .checkbox:checked::after{ border-color:var(--forest-deep); }
+html[data-theme="dark"] .radio:checked::after{ background:var(--forest-deep); }
+html[data-theme="dark"] .toggle-track{ background:rgba(244,241,235,.24); }
+html[data-theme="dark"] .toggle input:checked ~ .toggle-track{ background:var(--lime); }
+html[data-theme="dark"] .toggle input:checked ~ .toggle-knob{ background:var(--forest-deep); }
+html[data-theme="dark"] .badge-neutral{ background:rgba(244,241,235,.12); color:var(--cream); }
+html[data-theme="dark"] .badge-info{ background:rgba(142,202,60,.14); color:#9FD457; }
+html[data-theme="dark"] .badge-success{ background:rgba(187,220,18,.14); color:#C4E32B; }
+html[data-theme="dark"] .badge-warning{ background:rgba(228,217,106,.14); color:#E0D468; }
+html[data-theme="dark"] .badge-danger{ background:rgba(224,138,118,.14); color:#E89B89; }
+html[data-theme="dark"] .badge-outline{ color:var(--cream); }
+html[data-theme="dark"] .alert-info{ background:rgba(142,202,60,.08); border-color:rgba(142,202,60,.3); color:#9FD457; }
+html[data-theme="dark"] .alert-success{ background:rgba(187,220,18,.08); border-color:rgba(187,220,18,.3); color:#C4E32B; }
+html[data-theme="dark"] .alert-warning{ background:rgba(228,217,106,.08); border-color:rgba(228,217,106,.32); color:#E0D468; }
+html[data-theme="dark"] .alert-danger{ background:rgba(224,138,118,.08); border-color:rgba(224,138,118,.32); color:#E89B89; }
+html[data-theme="dark"] thead th{ background:rgba(244,241,235,.05); }
+html[data-theme="dark"] tbody tr:hover{ background:rgba(244,241,235,.04); }
+html[data-theme="dark"] .modal-close:hover{ background:rgba(244,241,235,.1); color:var(--cream); }
+html[data-theme="dark"] .tooltip-bubble{ background:var(--cream); color:var(--forest-deep); }
+html[data-theme="dark"] .tooltip-bubble::after{ border-top-color:var(--cream); }
+html[data-theme="dark"] .progress-track{ background:rgba(244,241,235,.16); }
+html[data-theme="dark"] .spinner-ring{ border-color:rgba(244,241,235,.2); border-top-color:var(--cream); }
+html[data-theme="dark"] .demo.dark{ border:1px solid var(--border); }
+html[data-theme="dark"] .card.on-dark{ border-color:var(--border-strong); }
+html[data-theme="dark"] .sidebar{ background:var(--surface-sunken); border-right:1px solid var(--border); }
+html[data-theme="dark"] .code-block{ border:1px solid var(--border); }
+html[data-theme="dark"] .avatar-status{ border-color:var(--surface); }
+html[data-theme="dark"] .field .helper.error{ color:#E89B89; }
+html[data-theme="dark"] .field.has-error .input{ border-color:#E89B89; }
+html[data-theme="dark"] .field.has-error .input:focus{ box-shadow:0 0 0 3px rgba(224,138,118,.25); }
+
+/* ---------- theme switch (sidebar) ---------- */
+.theme-switch{ margin-top:8px; padding:14px 10px 0; border-top:1px solid rgba(244,241,235,.12); display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.theme-switch .ts-label{ font-size:12.5px; color:rgba(244,241,235,.72); }
+
+/* ---------- code block ---------- */
+.code-block{ background:var(--forest-deep); color:var(--cream); border-radius:var(--radius-lg); padding:22px 24px; font-family:var(--mono); font-size:12.5px; line-height:1.75; overflow-x:auto; white-space:pre; }
+.code-block .cm{ color:rgba(244,241,235,.58); }
+.code-block .tk{ color:var(--acid); }
+.code-block .vl{ color:var(--lime); }
+
+/* ---------- grid demo ---------- */
+.grid-demo{ display:grid; grid-template-columns:repeat(12,1fr); gap:24px; width:100%; }
+.grid-demo .gcol{ background:rgba(73,154,19,.16); border:1px dashed rgba(73,154,19,.55); border-radius:var(--radius-sm); height:56px; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:10.5px; color:var(--muted); }
+html[data-theme="dark"] .grid-demo .gcol{ background:rgba(142,202,60,.12); border-color:rgba(142,202,60,.4); }
+.span-12{ grid-column:span 12; } .span-8{ grid-column:span 8; } .span-6{ grid-column:span 6; } .span-4{ grid-column:span 4; }
+
+/* ---------- logo ---------- */
+.logo-lockup{ display:flex; align-items:center; gap:36px; flex-wrap:wrap; border:1px solid var(--border); border-radius:var(--radius-lg); background:var(--surface); padding:40px 44px; margin-bottom:16px; }
+.logo-lockup .logo-primary{ width:auto; height:120px; color:var(--forest-deep); flex-shrink:0; }
+.logo-lockup .logo-primary svg{ height:100%; width:auto; fill:currentColor; display:block; }
+html[data-theme="dark"] .logo-lockup .logo-primary{ color:var(--cream); }
+.logo-lockup .logo-note{ font-size:14px; color:var(--muted); line-height:1.7; max-width:42ch; }
+.logo-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:14px; }
+.logo-tile{ border:1px solid var(--border); border-radius:var(--radius-lg); min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:22px 16px 34px; position:relative; overflow:hidden; }
+.logo-tile svg{ height:50px; width:auto; fill:currentColor; }
+.logo-tile .cap{ position:absolute; left:0; right:0; bottom:12px; text-align:center; font-size:10px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:currentColor; opacity:.6; }
+.logo-mockup{ margin-top:8px; }
+.logo-mockup img{ display:block; width:100%; border-radius:var(--radius-lg); border:1px solid var(--border); }
+.logo-mockup figcaption{ font-size:12px; color:var(--faint); margin-top:12px; }
+
+/* ---------- touch targets on coarse pointers ---------- */
+@media (pointer:coarse){
+  .btn, .nav-link, .tab-label, .tooltip-trigger, .modal-close{ min-height:44px; }
+  .checkbox, .radio{ width:22px; height:22px; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:960px){
+  .sidebar{ display:none; }
+  .content{ padding:40px 24px 72px; }
+  .section{ padding-top:32px; margin-top:32px; }
+  .grid-demo{ gap:16px; }
+  .card-grid{ grid-template-columns:1fr; }
+  .color-grid{ grid-template-columns:repeat(2,1fr); }
+  .motif-grid{ grid-template-columns:repeat(2,1fr); }
+  .logo-lockup .logo-primary{ height:88px; }
+  .font-cards{ grid-template-columns:1fr; }
+  .hero h1{ font-size:38px; }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <nav class="sidebar" aria-label="Design system navigation">
+    <a class="sidebar-brand" href="index.html" aria-label="MAGZ — home">
+      <svg class="mark" viewBox="0 0 2643 1928" aria-hidden="true"><path d="M453.8,2.7c-5.3,6.2-449.7,609.7-451.5,613.2c-1.3,2.5-2.3,5.9-2.3,7.6c0,7,4.6,15.1,10.3,18.3c3,1.6,16.2,1.7,223.9,2.2l220.6,0.5l-226,305.5c-124.3,168-226.4,306.6-227,308c-2,4.9-2.1,9.9-0.3,14.5c1.8,4.9,6.3,10,10.4,11.8c1.9,0.9,58.5,1.3,222.7,1.7l220,0.5l-226.3,306c-137.7,186.1-226.7,307.4-227.3,309.5c-0.5,1.9-1,4.8-1,6.5c0.1,7.3,7.3,16.4,14.7,18.4c5.5,1.6,917.3,1.5,922.8,0c5.4-1.5,10.1-5.2,12.5-9.9c2-3.9,2-6.8,2-590.9c0-419.6,0.3-588.4,1.1-592.1c2-9.4,9.3-15,19.5-15c4.3,0,6.8,0.6,10.1,2.5c5.1,3.1-22.5-51.8,256.3,508c158.6,318.4,195.9,392.7,199,395.7c2.1,2,5.5,4.1,7.6,4.7c5.7,1.6,198.3,1.5,203.6-0.1c2.1-0.6,5.4-2.5,7.3-4.2c2.7-2.5,41.1-78.4,183.8-363.1c99.3-198,200.5-400.2,225.1-449.2c42.1-84.2,44.8-89.4,48.6-91.9c10.1-6.7,24.2-2.8,29.1,8.1c1.8,3.9,1.9,23.8,1.9,593c0,567.5,0.1,589.1,1.9,593c2.3,5.1,8,10.1,13,11.5c2.7,0.7,76.1,0.9,235.8,0.8l232-0.3l4.8-3c3.2-2,5.6-4.5,7.2-7.4l2.3-4.4l0-948.3c0-666.3-0.3-949.1-1.1-951.1c-1.4-3.8-6.7-9.2-10.6-10.9c-2.7-1.2-55.3-1.4-336.5-1.4l-333.2,0l-4.4,2.1c-2.5,1.2-5.3,3.7-6.7,5.8c-1.7,2.7-201.1,385.2-383.3,735.5c-4.7,9.1-9.9,12.6-18.4,12.6c-6.2,0-11.9-2.2-14.9-5.6c-0.9-1.1-87.7-168.4-192.9-371.9c-105.2-203.5-192.4-371.2-193.8-372.7c-1.4-1.5-4-3.4-5.7-4.3c-3-1.3-38.7-1.5-344.2-1.5c-323.5,0-341.1,0.1-342.5,1.7z M1525.5,3c-32.2,6.9-59.2,26.4-75.8,54.5c-12,20.4-17.7,47.7-14.7,71.1c6.2,49.6,41.8,88.3,91,99c13.2,2.9,36.4,2.5,49.1-0.9c12-3.1,23.5-7.7,31.4-12.4c29.5-17.8,48.8-45.4,55.1-79.1c2.3-12.1,1.5-36.5-1.5-47.5c-5.8-21.9-14.7-37.2-30.6-53.2c-16-15.9-31.3-24.7-53.2-30.7c-11.5-3.1-38.3-3.5-50.8-0.8z"/></svg>
+      <span class="word">MAGZ</span>
+    </a>
+    <div class="sidebar-sub">Design System</div>
+    <a class="sidebar-back" href="practice.html"><span aria-hidden="true">&larr;</span> Back to practice</a>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Foundations</div>
+      <a class="nav-link" data-target="f-logo" href="#f-logo"><span class="dot"></span>Logo</a>
+      <a class="nav-link" data-target="f-color" href="#f-color"><span class="dot"></span>Color</a>
+      <a class="nav-link" data-target="f-type" href="#f-type"><span class="dot"></span>Typography</a>
+      <a class="nav-link" data-target="f-spacing" href="#f-spacing"><span class="dot"></span>Spacing</a>
+      <a class="nav-link" data-target="f-motif" href="#f-motif"><span class="dot"></span>Mark &amp; Motif</a>
+      <a class="nav-link" data-target="f-grid" href="#f-grid"><span class="dot"></span>Grid &amp; Layout</a>
+      <a class="nav-link" data-target="f-responsive" href="#f-responsive"><span class="dot"></span>Responsive</a>
+      <a class="nav-link" data-target="f-tokens" href="#f-tokens"><span class="dot"></span>Design Tokens</a>
+      <a class="nav-link" data-target="f-a11y" href="#f-a11y"><span class="dot"></span>Accessibility</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Components</div>
+      <a class="nav-link" data-target="c-buttons" href="#c-buttons"><span class="dot"></span>Buttons</a>
+      <a class="nav-link" data-target="c-forms" href="#c-forms"><span class="dot"></span>Form Controls</a>
+      <a class="nav-link" data-target="c-badges" href="#c-badges"><span class="dot"></span>Badges</a>
+      <a class="nav-link" data-target="c-cards" href="#c-cards"><span class="dot"></span>Cards</a>
+      <a class="nav-link" data-target="c-nav" href="#c-nav"><span class="dot"></span>Navigation</a>
+      <a class="nav-link" data-target="c-alerts" href="#c-alerts"><span class="dot"></span>Alerts</a>
+      <a class="nav-link" data-target="c-table" href="#c-table"><span class="dot"></span>Table</a>
+      <a class="nav-link" data-target="c-modal" href="#c-modal"><span class="dot"></span>Modal</a>
+      <a class="nav-link" data-target="c-tooltip" href="#c-tooltip"><span class="dot"></span>Tooltip</a>
+      <a class="nav-link" data-target="c-progress" href="#c-progress"><span class="dot"></span>Progress &amp; Loading</a>
+      <a class="nav-link" data-target="c-avatar" href="#c-avatar"><span class="dot"></span>Avatar</a>
+    </div>
+
+    <div class="theme-switch">
+      <span class="ts-label" id="theme-label">Dark mode</span>
+      <label class="toggle"><input type="checkbox" id="theme-toggle" aria-labelledby="theme-label"><div class="toggle-track"></div><div class="toggle-knob"></div></label>
+    </div>
+  </nav>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="content">
+    <div class="content-inner">
+
+      <div class="hero">
+        <div class="hero-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Design System &mdash; Vol. 01</div>
+        <h1>Interface patterns for the forest &amp; the stars.</h1>
+        <p class="lead">A component library built on the same restraint as the brand: one accent per composition, hairline structure, and the mark&rsquo;s point of light carried through every interactive state.</p>
+        <div class="hero-meta">
+          <div><div class="k">Typefaces</div><div class="v">DM Serif Display &middot; DM Sans</div></div>
+          <div><div class="k">Base tokens</div><div class="v">7 colors &middot; 9 spacing steps</div></div>
+          <div><div class="k">Components</div><div class="v">11 patterns &middot; 2 themes</div></div>
+        </div>
+      </div>
+
+      <!-- ============ LOGO ============ -->
+      <section class="section" id="f-logo">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Logo</h2>
+        <p class="desc">MAGZ is rooted in the forests and mountains of Tynset and driven by a lifelong curiosity for the universe. The logo combines a bold M, a tree-like silhouette inspired by Nordic nature, and a celestial dot representing exploration, wonder and creativity. Together they form a symbol of where MAGZ exists: between the forest and the stars.</p>
+
+        <div class="logo-lockup">
+          <span class="logo-primary" aria-label="MAGZ logo"><svg viewBox="0 0 660.46 481.69" role="img" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg></span>
+          <p class="logo-note">The primary mark: an <strong>M</strong> that doubles as a spruce, with a single celestial dot resting above the tree line. It reads as one shape at any size, from a favicon to the side of a box.</p>
+        </div>
+
+        <div class="subsection">
+          <h3>The mark, across the palette</h3>
+          <div class="logo-grid">
+            <div class="logo-tile" style="background:#F4F1EB; color:#172412;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Forest Deep on Cream</span></div>
+            <div class="logo-tile" style="background:#172412; color:#F4F1EB;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Cream on Forest Deep</span></div>
+            <div class="logo-tile" style="background:#F4F1EB; color:#276F27;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Forest on Cream</span></div>
+            <div class="logo-tile" style="background:#F4F1EB; color:#499A13;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Moss on Cream</span></div>
+            <div class="logo-tile" style="background:#172412; color:#BBDC12;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Acid on Forest Deep</span></div>
+            <div class="logo-tile" style="background:#172412; color:#8ECA3C;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Lime on Forest Deep</span></div>
+            <div class="logo-tile" style="background:#BBDC12; color:#172412;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Forest Deep on Acid</span></div>
+            <div class="logo-tile" style="background:#F4F1EB; color:#A3402E;"><svg viewBox="0 0 660.46 481.69" aria-hidden="true"><circle cx="387.12" cy="28.61" r="28.61"/><path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/></svg><span class="cap">Rust on Cream</span></div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>In the world</h3>
+          <figure class="logo-mockup">
+            <img src="assets/magz-brand-mockup.jpg" alt="MAGZ branding applied to a notebook, folded t-shirt with woven label and hang tag, stickers, a pen and a gift box — all in forest green on cream" loading="lazy" decoding="async" />
+            <figcaption>The mark on stationery, apparel and packaging &mdash; forest green on cream, the system at rest.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ COLOR ============ -->
+      <section class="section" id="f-color">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Color</h2>
+        <p class="desc">Forest Deep and Cream carry the system as primary ink and surface. Forest and Moss support mid-weight moments. Lime and Acid are seasoning &mdash; reserved for a single accent per composition, never a base.</p>
+
+        <div class="color-grid">
+          <div class="swatch"><div class="swatch-fill" style="background:#172412;"></div><div class="swatch-info"><div class="name">Forest Deep</div><div class="hex">#172412</div><div class="role">Primary ink, dark surfaces, sidebar</div></div></div>
+          <div class="swatch"><div class="swatch-fill" style="background:#276F27;"></div><div class="swatch-info"><div class="name">Forest</div><div class="hex">#276F27</div><div class="role">Secondary surfaces, info state</div></div></div>
+          <div class="swatch"><div class="swatch-fill" style="background:#499A13;"></div><div class="swatch-info"><div class="name">Moss</div><div class="hex">#499A13</div><div class="role">Success state, progress fill</div></div></div>
+          <div class="swatch"><div class="swatch-fill" style="background:#8ECA3C;"></div><div class="swatch-info"><div class="name">Lime</div><div class="hex">#8ECA3C</div><div class="role">Rare accent, toggle knob</div></div></div>
+          <div class="swatch"><div class="swatch-fill" style="background:#BBDC12;"></div><div class="swatch-info"><div class="name">Acid</div><div class="hex">#BBDC12</div><div class="role">Focus ring, active dot, warning</div></div></div>
+          <div class="swatch"><div class="swatch-fill" style="background:#F4F1EB;"></div><div class="swatch-info"><div class="name">Cream</div><div class="hex">#F4F1EB</div><div class="role">Primary surface, text on dark</div></div></div>
+        </div>
+
+        <div class="subsection">
+          <h3>Semantic mapping</h3>
+          <div class="color-grid">
+            <div class="swatch"><div class="swatch-fill" style="background:#FFFFFF; border-bottom:1px solid var(--border);"></div><div class="swatch-info"><div class="name">Surface</div><div class="hex">#FFFFFF</div><div class="role">Card and input backgrounds</div></div></div>
+            <div class="swatch"><div class="swatch-fill" style="background:#A3402E;"></div><div class="swatch-info"><div class="name">Rust</div><div class="hex">#A3402E</div><div class="role">Danger, destructive actions, errors</div></div></div>
+            <div class="swatch"><div class="swatch-fill" style="background:var(--surface-sunken);"></div><div class="swatch-info"><div class="name">Sunken</div><div class="hex">#F4F1EB</div><div class="role">Page background</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TYPOGRAPHY ============ -->
+      <section class="section" id="f-type">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Typography</h2>
+        <p class="desc">Two faces, two jobs. The serif carries editorial weight; the sans carries function. Neither is ever asked to do the other&rsquo;s work.</p>
+
+        <div class="font-cards">
+          <div class="font-card">
+            <div class="fname">Aa</div>
+            <div class="frole">Display &mdash; DM Serif Display</div>
+            <div class="fdesc">The top-level headline (h1) only. Serif reads well at hero scale but loses legibility smaller, so nothing below h1 uses it. Regular weight only &mdash; never bold, never italic for emphasis.</div>
+          </div>
+          <div class="font-card">
+            <div class="fname" style="font-family:var(--sans); font-weight:700;">Aa</div>
+            <div class="frole">UI / Body &mdash; DM Sans</div>
+            <div class="fdesc">Everything below the h1: section titles, card titles, pull quotes, buttons, labels, body copy, navigation, data. Weights 400 / 500 / 700 cover the full interface.</div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Type scale</h3>
+          <div class="type-row"><div class="tag">Display XL<span class="px">44 / 1.08</span></div><div class="type-sample-display-xl">Forest &amp; Frontier</div></div>
+          <div class="type-row"><div class="tag">Display L<span class="px">32 / 1.1</span></div><div class="type-sample-display-l">Field Notes from Tynset</div></div>
+          <div class="type-row"><div class="tag">Heading<span class="px">22 / 1.3</span></div><div class="type-sample-h3">Studio Journal &mdash; Entry 014</div></div>
+          <div class="type-row"><div class="tag">Body<span class="px">16 / 1.6</span></div><div class="type-sample-body">Set for long-form reading and interface text alike, at a comfortable measure.</div></div>
+          <div class="type-row"><div class="tag">Small<span class="px">13.5 / 1.5</span></div><div class="type-sample-small">Captions, helper text, and secondary metadata.</div></div>
+          <div class="type-row"><div class="tag">Micro<span class="px">11 / caps</span></div><div class="type-sample-micro">Eyebrow &amp; Label</div></div>
+        </div>
+      </section>
+
+      <!-- ============ SPACING ============ -->
+      <section class="section" id="f-spacing">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Spacing</h2>
+        <p class="desc">A 4px base unit, scaled geometrically. Generous whitespace is part of the restraint &mdash; when in doubt, take the larger step.</p>
+
+        <div class="spacing-row"><div class="tag">space-1</div><div class="px">4px</div><div class="bar" style="width:4px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-2</div><div class="px">8px</div><div class="bar" style="width:8px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-3</div><div class="px">12px</div><div class="bar" style="width:12px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-4</div><div class="px">16px</div><div class="bar" style="width:16px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-5</div><div class="px">24px</div><div class="bar" style="width:24px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-6</div><div class="px">32px</div><div class="bar" style="width:32px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-7</div><div class="px">48px</div><div class="bar" style="width:48px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-8</div><div class="px">64px</div><div class="bar" style="width:64px;"></div></div>
+        <div class="spacing-row"><div class="tag">space-9</div><div class="px">96px</div><div class="bar" style="width:96px;"></div></div>
+      </section>
+
+      <!-- ============ MARK & MOTIF ============ -->
+      <section class="section" id="f-motif">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Mark &amp; motif</h2>
+        <p class="desc">The mark&rsquo;s circular counterform &mdash; a point of light above the tree line &mdash; is the one signature the system allows itself. It recurs as the single active indicator throughout, so it always means the same thing: attention, here.</p>
+
+        <div class="motif-grid">
+          <div class="motif-card"><div class="glyph"><span class="dot-lg"></span></div><div class="cap">Active nav &amp; status</div></div>
+          <div class="motif-card"><div class="glyph"><svg class="orbit-demo" viewBox="0 0 34 34" aria-hidden="true"><ellipse cx="17" cy="17" rx="15" ry="6" transform="rotate(-15 17 17)"/><circle cx="17" cy="17" r="5"/></svg></div><div class="cap">Section eyebrows</div></div>
+          <div class="motif-card"><div class="glyph"><div class="radio" style="pointer-events:none;" data-checked></div></div><div class="cap">Selected input</div></div>
+          <div class="motif-card"><div class="glyph" aria-hidden="true"><div class="toggle" style="pointer-events:none;"><div class="toggle-track" style="background:var(--forest-deep);"></div><div class="toggle-knob" style="transform:translateX(16px); background:var(--acid);"></div></div></div><div class="cap">Toggle knob, on</div></div>
+        </div>
+      </section>
+
+      <!-- ============ GRID & LAYOUT ============ -->
+      <section class="section" id="f-grid">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Grid &amp; layout</h2>
+        <p class="desc">A 12-column grid on desktop, collapsing to 8 on tablet and 4 on mobile. Columns are fluid; gutters and margins come from the spacing scale, so layout and whitespace share one vocabulary.</p>
+
+        <div class="subsection">
+          <h3>Column grid &mdash; desktop</h3>
+          <div class="demo col">
+            <div class="grid-demo">
+              <div class="gcol span-12">12</div>
+              <div class="gcol span-6">6</div><div class="gcol span-6">6</div>
+              <div class="gcol span-4">4</div><div class="gcol span-4">4</div><div class="gcol span-4">4</div>
+              <div class="gcol span-8">8</div><div class="gcol span-4">4</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Specification</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Tier</th><th>Columns</th><th>Gutter</th><th>Outer margin</th><th>Container</th></tr></thead>
+              <tbody>
+                <tr><td>Desktop &ge; 960px</td><td>12</td><td>24px (space-5)</td><td>56px</td><td>max 1200px, content measure 920px</td></tr>
+                <tr><td>Tablet 640&ndash;959px</td><td>8</td><td>16px (space-4)</td><td>32px</td><td>fluid</td></tr>
+                <tr><td>Mobile &lt; 640px</td><td>4</td><td>16px (space-4)</td><td>20px</td><td>fluid</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ RESPONSIVE ============ -->
+      <section class="section" id="f-responsive">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Responsive</h2>
+        <p class="desc">Three breakpoints, mobile-content-first. Display type scales fluidly with the viewport; spacing steps down one token below the desktop tier so density rises gently, never abruptly.</p>
+
+        <div class="subsection">
+          <h3>Breakpoints</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Token</th><th>Range</th><th>Behavior</th></tr></thead>
+              <tbody>
+                <tr><td>bp-sm</td><td>&lt; 640px</td><td>4-col grid, stacked layouts, full-width cards and modals</td></tr>
+                <tr><td>bp-md</td><td>640&ndash;959px</td><td>8-col grid, sidebar collapses to top navigation</td></tr>
+                <tr><td>bp-lg</td><td>&ge; 960px</td><td>12-col grid, persistent sidebar, content measure 920px</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Fluid typography</h3>
+          <div class="code-block"><span class="cm">/* Display sizes interpolate between tiers &mdash; no jump cuts */</span>
+<span class="tk">--display-xl</span>: <span class="vl">clamp(36px, 4.6vw, 52px)</span>;
+<span class="tk">--display-l</span>:  <span class="vl">clamp(26px, 3vw, 32px)</span>;
+
+<span class="cm">/* Body, small and micro sizes stay fixed at every tier */</span></div>
+        </div>
+
+        <div class="subsection">
+          <h3>Spacing compression</h3>
+          <p class="desc" style="margin-bottom:14px;">Below bp-lg, section rhythm steps down one token (48 &rarr; 32) and page padding tightens. Component-internal spacing never changes &mdash; only the space between blocks compresses.</p>
+        </div>
+      </section>
+
+      <!-- ============ DESIGN TOKENS ============ -->
+      <section class="section" id="f-tokens">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Design tokens</h2>
+        <p class="desc">The full sheet, ready to drop into CSS, Tailwind config, or a token pipeline. Components consume semantic aliases &mdash; never primitives &mdash; which is what makes the dark theme a pure token swap.</p>
+
+        <div class="code-block"><span class="cm">/* ---------- primitives ---------- */</span>
+<span class="tk">--forest-deep</span>: <span class="vl">#172412</span>;   <span class="tk">--forest</span>: <span class="vl">#276F27</span>;   <span class="tk">--moss</span>: <span class="vl">#499A13</span>;
+<span class="tk">--lime</span>: <span class="vl">#8ECA3C</span>;          <span class="tk">--acid</span>: <span class="vl">#BBDC12</span>;     <span class="tk">--cream</span>: <span class="vl">#F4F1EB</span>;
+<span class="tk">--rust</span>: <span class="vl">#A3402E</span>;
+
+<span class="cm">/* ---------- semantic (light) ---------- */</span>
+<span class="tk">--ink</span>: <span class="vl">var(--forest-deep)</span>;      <span class="tk">--surface</span>: <span class="vl">#FFFFFF</span>;
+<span class="tk">--surface-sunken</span>: <span class="vl">var(--cream)</span>;
+<span class="tk">--border</span>: <span class="vl">rgba(23,36,18,.14)</span>;  <span class="tk">--border-strong</span>: <span class="vl">rgba(23,36,18,.28)</span>;
+<span class="tk">--muted</span>: <span class="vl">rgba(23,36,18,.78)</span>;   <span class="tk">--faint</span>: <span class="vl">rgba(23,36,18,.65)</span>;
+<span class="tk">--focus-ring</span>: <span class="vl">var(--forest)</span>;
+
+<span class="cm">/* ---------- semantic (dark) &mdash; html[data-theme="dark"] ---------- */</span>
+<span class="tk">--ink</span>: <span class="vl">var(--cream)</span>;            <span class="tk">--surface</span>: <span class="vl">#1B2A14</span>;
+<span class="tk">--surface-sunken</span>: <span class="vl">#10190C</span>;
+<span class="tk">--border</span>: <span class="vl">rgba(244,241,235,.14)</span>; <span class="tk">--border-strong</span>: <span class="vl">rgba(244,241,235,.32)</span>;
+<span class="tk">--muted</span>: <span class="vl">rgba(244,241,235,.78)</span>; <span class="tk">--faint</span>: <span class="vl">rgba(244,241,235,.64)</span>;
+<span class="tk">--focus-ring</span>: <span class="vl">var(--acid)</span>;
+
+<span class="cm">/* ---------- spacing (4px base) ---------- */</span>
+<span class="tk">--space-1</span>: <span class="vl">4px</span>;  <span class="tk">--space-2</span>: <span class="vl">8px</span>;  <span class="tk">--space-3</span>: <span class="vl">12px</span>; <span class="tk">--space-4</span>: <span class="vl">16px</span>;
+<span class="tk">--space-5</span>: <span class="vl">24px</span>; <span class="tk">--space-6</span>: <span class="vl">32px</span>; <span class="tk">--space-7</span>: <span class="vl">48px</span>; <span class="tk">--space-8</span>: <span class="vl">64px</span>;
+<span class="tk">--space-9</span>: <span class="vl">96px</span>;
+
+<span class="cm">/* ---------- radius / type / motion ---------- */</span>
+<span class="tk">--radius-sm</span>: <span class="vl">2px</span>;  <span class="tk">--radius-md</span>: <span class="vl">4px</span>;  <span class="tk">--radius-lg</span>: <span class="vl">6px</span>;  <span class="tk">--radius-pill</span>: <span class="vl">999px</span>;
+<span class="tk">--serif</span>: <span class="vl">'DM Serif Display', serif</span>;
+<span class="tk">--sans</span>: <span class="vl">'DM Sans', sans-serif</span>;
+<span class="tk">--mono</span>: <span class="vl">'DM Mono', monospace</span>;
+<span class="tk">--ease</span>: <span class="vl">cubic-bezier(.4,0,.2,1)</span>;
+<span class="tk">--dur-fast</span>: <span class="vl">.15s</span>; <span class="tk">--dur-base</span>: <span class="vl">.2s</span>; <span class="tk">--dur-slow</span>: <span class="vl">.3s</span>;</div>
+      </section>
+
+      <!-- ============ ACCESSIBILITY ============ -->
+      <section class="section" id="f-a11y">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Foundations</div>
+        <h2>Accessibility</h2>
+        <p class="desc">Every ratio below is computed, not estimated, against the actual composited backgrounds. Body and secondary text meet WCAG 2.1 AA (4.5:1); large display text and non-text indicators meet 3:1.</p>
+
+        <div class="subsection">
+          <h3>Contrast &mdash; measured</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Pair</th><th>Light</th><th>Dark</th><th>Requirement</th></tr></thead>
+              <tbody>
+                <tr><td>Ink on surface</td><td>12.5 : 1</td><td>11.8 : 1</td><td>4.5 : 1 &mdash; AA body</td></tr>
+                <tr><td>Muted text on surface</td><td>7.9 : 1</td><td>7.2 : 1</td><td>4.5 : 1 &mdash; AA body</td></tr>
+                <tr><td>Faint labels on surface</td><td>5.1 : 1</td><td>5.0 : 1</td><td>4.5 : 1 &mdash; AA body</td></tr>
+                <tr><td>Cream on Forest Deep</td><td colspan="2" style="text-align:left;">12.5 : 1</td><td>4.5 : 1 &mdash; AA body</td></tr>
+                <tr><td>Focus ring on surface</td><td>3.6 : 1 (Forest)</td><td>9.3 : 1 (Acid)</td><td>3 : 1 &mdash; non-text</td></tr>
+                <tr><td>Badge &amp; alert text</td><td>5.2&ndash;8.8 : 1</td><td>&ge; 5 : 1</td><td>4.5 : 1 &mdash; AA body</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="desc" style="margin-top:14px; margin-bottom:0;">The focus ring is theme-aware on purpose: Acid fails 3:1 on white, so light mode uses Forest &mdash; the brand&rsquo;s point of light appears at full strength only where it can actually be seen, in the dark.</p>
+        </div>
+
+        <div class="subsection">
+          <h3>Keyboard &amp; focus order</h3>
+          <p class="desc" style="margin-bottom:14px;">Focus order follows DOM order, which matches visual order: sidebar, then content, top to bottom. Every interactive element &mdash; including tabs, tooltips and the modal close &mdash; is a native focusable element with a visible ring. Tooltips open on keyboard focus, not only hover. Reduced-motion preferences disable the spinner and all transitions.</p>
+        </div>
+
+        <div class="subsection">
+          <h3>ARIA in practice</h3>
+          <div class="code-block"><span class="cm">&lt;!-- Tooltip: described-by, native button --&gt;</span>
+&lt;button type="button" <span class="tk">aria-describedby</span>=<span class="vl">"tip1"</span>&gt;?&lt;/button&gt;
+&lt;div <span class="tk">role</span>=<span class="vl">"tooltip"</span> <span class="tk">id</span>=<span class="vl">"tip1"</span>&gt;1&times; mark height, every side&lt;/div&gt;
+
+<span class="cm">&lt;!-- Toggle: labelled input, decorative parts hidden --&gt;</span>
+&lt;label class="toggle"&gt;
+  &lt;input type="checkbox" <span class="tk">aria-labelledby</span>=<span class="vl">"theme-label"</span>&gt;
+  &hellip;
+&lt;/label&gt;
+
+<span class="cm">&lt;!-- Decorative SVGs never reach the accessibility tree --&gt;</span>
+&lt;svg class="orbit" <span class="tk">aria-hidden</span>=<span class="vl">"true"</span>&gt;&hellip;&lt;/svg&gt;</div>
+        </div>
+
+        <div class="subsection">
+          <h3>Touch targets</h3>
+          <p class="desc" style="margin-bottom:0;">On coarse pointers, all interactive elements enforce a 44px minimum height and selection controls grow to 22px &mdash; no layout change needed on precision devices.</p>
+        </div>
+      </section>
+
+      <!-- ============ BUTTONS ============ -->
+      <section class="section" id="c-buttons">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Buttons</h2>
+        <p class="desc">One primary action per view. Secondary and ghost styles recede on purpose &mdash; they should never compete with the primary button for attention. Buttons and CTAs are the system&rsquo;s <strong>brand UI</strong>: fully rounded pills, the organic shape reserved for invitations to act.</p>
+
+        <div class="subsection">
+          <h3>Variants</h3>
+          <div class="demo">
+            <div class="demo-row">
+              <button class="btn btn-primary">Save changes</button>
+              <button class="btn btn-secondary">Cancel</button>
+              <button class="btn btn-ghost">Learn more</button>
+              <button class="btn btn-danger">Delete entry</button>
+              <button class="btn btn-primary" disabled>Disabled</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Sizes</h3>
+          <div class="demo">
+            <div class="demo-row" style="align-items:center;">
+              <button class="btn btn-primary btn-sm">Small</button>
+              <button class="btn btn-primary">Medium</button>
+              <button class="btn btn-primary btn-lg">Large</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>On dark surface</h3>
+          <div class="demo dark">
+            <div class="demo-row">
+              <button class="btn btn-on-dark">Get started</button>
+              <button class="btn" style="background:transparent; color:var(--cream); border:1.5px solid rgba(244,241,235,.35);">View docs</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FORM CONTROLS ============ -->
+      <section class="section" id="c-forms">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Form controls</h2>
+        <p class="desc">Focus states use the acid ring rather than a generic blue &mdash; the same point of light that marks an active nav item marks an active field.</p>
+
+        <div class="subsection">
+          <h3>Text inputs</h3>
+          <div class="demo">
+            <div class="form-grid">
+              <div class="field">
+                <label for="i1">Studio name</label>
+                <input class="input" id="i1" type="text" placeholder="e.g. MAGZ" value="MAGZ">
+                <span class="helper">Shown on your public profile.</span>
+              </div>
+              <div class="field has-error">
+                <label for="i2">Contact email</label>
+                <input class="input" id="i2" type="text" value="hello@magz">
+                <span class="helper error">Enter a complete email address.</span>
+              </div>
+              <div class="field">
+                <label for="i3">Project brief</label>
+                <textarea class="textarea" id="i3" placeholder="Tell us what you&rsquo;re building&hellip;"></textarea>
+              </div>
+              <div class="field">
+                <label for="i4">Discipline</label>
+                <select class="select" id="i4">
+                  <option>Brand identity</option>
+                  <option>Editorial</option>
+                  <option>Type design</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Selection controls</h3>
+          <div class="demo">
+            <div class="demo-row" style="gap:28px;">
+              <div class="check-row"><input class="checkbox" type="checkbox" id="ch1" checked><label for="ch1">Notify me by email</label></div>
+              <div class="check-row"><input class="radio" type="radio" name="r" id="r1" checked><label for="r1">Studio plan</label></div>
+              <div class="check-row"><input class="radio" type="radio" name="r" id="r2"><label for="r2">Solo plan</label></div>
+              <div class="check-row"><label class="toggle"><input type="checkbox" id="tgl-dark" checked aria-label="Dark mode"><div class="toggle-track"></div><div class="toggle-knob"></div></label><label for="tgl-dark" style="font-size:14px; cursor:pointer;">Dark mode</label></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BADGES ============ -->
+      <section class="section" id="c-badges">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Badges</h2>
+        <p class="desc">Square corners, not pills &mdash; deliberately. Badges, inputs, tables and alerts are <strong>system UI</strong>: tight geometry for dense information. The pill shape stays reserved for actions, so form alone tells you whether something is an invitation or a control.</p>
+        <div class="demo">
+          <div class="demo-row">
+            <span class="badge badge-neutral">Draft</span>
+            <span class="badge badge-info"><span class="dot"></span>In review</span>
+            <span class="badge badge-success"><span class="dot"></span>Shipped</span>
+            <span class="badge badge-warning"><span class="dot"></span>Needs input</span>
+            <span class="badge badge-danger"><span class="dot"></span>Blocked</span>
+            <span class="badge badge-outline">Archived</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CARDS ============ -->
+      <section class="section" id="c-cards">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Cards</h2>
+        <p class="desc">A lift on hover &mdash; 2px of translation, a soft shadow &mdash; is the only motion a card needs to feel touchable.</p>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-media" style="background:linear-gradient(155deg,#172412,#276F27);"></div>
+            <div class="card-body">
+              <div class="card-eyebrow">Brand &mdash; 2025</div>
+              <div class="card-title">Nordlys Identity</div>
+              <div class="card-desc">A full identity system for a Troms&oslash;-based aurora tourism collective.</div>
+              <div class="card-foot"><span>6 min read</span><span>04 Jun 2026</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-media" style="background:linear-gradient(155deg,#276F27,#8ECA3C);"></div>
+            <div class="card-body">
+              <div class="card-eyebrow">Print &mdash; 2025</div>
+              <div class="card-title">Fjellrom Editorial</div>
+              <div class="card-desc">Layout and type system for a quarterly print journal on mountain living.</div>
+              <div class="card-foot"><span>8 min read</span><span>02 May 2026</span></div>
+            </div>
+          </div>
+          <div class="card on-dark">
+            <div class="card-media" style="background:linear-gradient(155deg,#0e1a0a,#1e3018);"></div>
+            <div class="card-body">
+              <div class="card-eyebrow">Type &mdash; 2024</div>
+              <div class="card-title">Aurora Type Study</div>
+              <div class="card-desc">An in-progress display face exploring the same forest-and-cosmos duality.</div>
+              <div class="card-foot"><span>Ongoing</span><span>2024 &mdash;</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ NAVIGATION ============ -->
+      <section class="section" id="c-nav">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Navigation</h2>
+        <p class="desc">The top bar carries the mark; tabs and breadcrumbs carry the wayfinding. Neither ever fights for the same job.</p>
+
+        <div class="subsection">
+          <h3>Top bar</h3>
+          <div class="demo">
+            <div class="navbar-demo" role="presentation">
+              <div class="brand"><svg class="mark" viewBox="0 0 2643 1928" aria-hidden="true"><path d="M453.8,2.7c-5.3,6.2-449.7,609.7-451.5,613.2c-1.3,2.5-2.3,5.9-2.3,7.6c0,7,4.6,15.1,10.3,18.3c3,1.6,16.2,1.7,223.9,2.2l220.6,0.5l-226,305.5c-124.3,168-226.4,306.6-227,308c-2,4.9-2.1,9.9-0.3,14.5c1.8,4.9,6.3,10,10.4,11.8c1.9,0.9,58.5,1.3,222.7,1.7l220,0.5l-226.3,306c-137.7,186.1-226.7,307.4-227.3,309.5c-0.5,1.9-1,4.8-1,6.5c0.1,7.3,7.3,16.4,14.7,18.4c5.5,1.6,917.3,1.5,922.8,0c5.4-1.5,10.1-5.2,12.5-9.9c2-3.9,2-6.8,2-590.9c0-419.6,0.3-588.4,1.1-592.1c2-9.4,9.3-15,19.5-15c4.3,0,6.8,0.6,10.1,2.5c5.1,3.1-22.5-51.8,256.3,508c158.6,318.4,195.9,392.7,199,395.7c2.1,2,5.5,4.1,7.6,4.7c5.7,1.6,198.3,1.5,203.6-0.1c2.1-0.6,5.4-2.5,7.3-4.2c2.7-2.5,41.1-78.4,183.8-363.1c99.3-198,200.5-400.2,225.1-449.2c42.1-84.2,44.8-89.4,48.6-91.9c10.1-6.7,24.2-2.8,29.1,8.1c1.8,3.9,1.9,23.8,1.9,593c0,567.5,0.1,589.1,1.9,593c2.3,5.1,8,10.1,13,11.5c2.7,0.7,76.1,0.9,235.8,0.8l232-0.3l4.8-3c3.2-2,5.6-4.5,7.2-7.4l2.3-4.4l0-948.3c0-666.3-0.3-949.1-1.1-951.1c-1.4-3.8-6.7-9.2-10.6-10.9c-2.7-1.2-55.3-1.4-336.5-1.4l-333.2,0l-4.4,2.1c-2.5,1.2-5.3,3.7-6.7,5.8c-1.7,2.7-201.1,385.2-383.3,735.5c-4.7,9.1-9.9,12.6-18.4,12.6c-6.2,0-11.9-2.2-14.9-5.6c-0.9-1.1-87.7-168.4-192.9-371.9c-105.2-203.5-192.4-371.2-193.8-372.7c-1.4-1.5-4-3.4-5.7-4.3c-3-1.3-38.7-1.5-344.2-1.5c-323.5,0-341.1,0.1-342.5,1.7z M1525.5,3c-32.2,6.9-59.2,26.4-75.8,54.5c-12,20.4-17.7,47.7-14.7,71.1c6.2,49.6,41.8,88.3,91,99c13.2,2.9,36.4,2.5,49.1-0.9c12-3.1,23.5-7.7,31.4-12.4c29.5-17.8,48.8-45.4,55.1-79.1c2.3-12.1,1.5-36.5-1.5-47.5c-5.8-21.9-14.7-37.2-30.6-53.2c-16-15.9-31.3-24.7-53.2-30.7c-11.5-3.1-38.3-3.5-50.8-0.8z"/></svg>MAGZ</div>
+              <div class="links"><a href="#c-nav" class="active">Work</a><a href="#c-nav">Journal</a><a href="#c-nav">Studio</a><a href="#c-nav">Contact</a></div>
+              <a href="#c-nav" class="cta">Get in touch</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Tabs</h3>
+          <div class="demo col">
+            <div class="tabs">
+              <input class="tab-input" type="radio" name="tabs" id="tab1" checked>
+              <input class="tab-input" type="radio" name="tabs" id="tab2">
+              <input class="tab-input" type="radio" name="tabs" id="tab3">
+              <div class="tab-list">
+                <label class="tab-label" for="tab1">Overview</label>
+                <label class="tab-label" for="tab2">Specimens</label>
+                <label class="tab-label" for="tab3">Usage</label>
+              </div>
+              <div class="panels">
+                <div class="tab-panel" id="panel1">A short summary of the pattern, its intent, and when to reach for it instead of a neighboring component.</div>
+                <div class="tab-panel" id="panel2">Live specimens showing every supported variant, state, and size side by side.</div>
+                <div class="tab-panel" id="panel3">Guidance on composition &mdash; spacing, pairing, and the one thing to never do with this component.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Breadcrumb</h3>
+          <div class="demo">
+            <nav class="breadcrumb" aria-label="Breadcrumb example"><a href="#c-nav">Studio</a><span class="sep">/</span><a href="#c-nav">Journal</a><span class="sep">/</span><span class="current" aria-current="page">Field Notes from Tynset</span></nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ALERTS ============ -->
+      <section class="section" id="c-alerts">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Alerts</h2>
+        <p class="desc">Brand-toned, not traffic-light. Every alert stays inside the palette &mdash; even danger is the rust already established in the guidelines, not a generic red.</p>
+
+        <div class="demo col">
+          <div class="alert alert-info"><div class="alert-icon">i</div><div><div class="alert-title">Draft saved</div><div class="alert-desc">Your changes are stored locally until you publish.</div></div></div>
+          <div class="alert alert-success"><div class="alert-icon">&#10003;</div><div><div class="alert-title">Published</div><div class="alert-desc">Field Notes from Tynset is now live on the journal.</div></div></div>
+          <div class="alert alert-warning"><div class="alert-icon">!</div><div><div class="alert-title">Missing cover image</div><div class="alert-desc">Entries without a cover fall back to the default gradient.</div></div></div>
+          <div class="alert alert-danger"><div class="alert-icon">&times;</div><div><div class="alert-title">Publish failed</div><div class="alert-desc">Check your connection and try publishing again.</div></div></div>
+        </div>
+      </section>
+
+      <!-- ============ TABLE ============ -->
+      <section class="section" id="c-table">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Table</h2>
+        <p class="desc">Hairline rules do the separating &mdash; no zebra striping, no heavy borders.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Project</th><th>Discipline</th><th>Status</th><th>Updated</th></tr></thead>
+            <tbody>
+              <tr><td>Nordlys Identity</td><td>Brand</td><td><span class="badge badge-success"><span class="dot"></span>Shipped</span></td><td>04 Jun 2026</td></tr>
+              <tr><td>Fjellrom Editorial</td><td>Print</td><td><span class="badge badge-info"><span class="dot"></span>In review</span></td><td>02 May 2026</td></tr>
+              <tr><td>Aurora Type Study</td><td>Type</td><td><span class="badge badge-neutral">Draft</span></td><td>21 Apr 2026</td></tr>
+              <tr><td>Studio Proposal 2026</td><td>Deck</td><td><span class="badge badge-warning"><span class="dot"></span>Needs input</span></td><td>18 Apr 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ MODAL ============ -->
+      <section class="section" id="c-modal">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Modal</h2>
+        <p class="desc">Reserved for decisions that need full attention &mdash; an overlay that dims everything else to Forest Deep at partial opacity.</p>
+
+        <div class="modal-stage">
+          <div class="modal">
+            <div class="modal-head"><h3>Delete this entry?</h3><button class="modal-close" type="button" aria-label="Close dialog">&times;</button></div>
+            <div class="modal-body">This removes &ldquo;Field Notes from Tynset&rdquo; from the journal. This can&rsquo;t be undone.</div>
+            <div class="modal-foot"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-danger btn-sm">Delete</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TOOLTIP ============ -->
+      <section class="section" id="c-tooltip">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Tooltip</h2>
+        <p class="desc">A quiet second voice &mdash; brief, dark, and dismissed the instant the cursor moves on.</p>
+
+        <div class="demo">
+          <div class="demo-row" style="align-items:center; gap:24px;">
+            <span style="font-size:14px;">Clearspace</span>
+            <div class="tooltip-wrap">
+              <button class="tooltip-trigger" type="button" aria-describedby="tip1">?</button>
+              <div class="tooltip-bubble" role="tooltip" id="tip1">1&times; mark height, every side</div>
+            </div>
+            <span style="font-size:14px; margin-left:24px;">Hover the mark for its meaning</span>
+            <div class="tooltip-wrap">
+              <button class="tooltip-trigger" type="button" aria-describedby="tip2">?</button>
+              <div class="tooltip-bubble" role="tooltip" id="tip2">A point of light above the tree line</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PROGRESS & LOADING ============ -->
+      <section class="section" id="c-progress">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Progress &amp; loading</h2>
+        <p class="desc">The spinner is the motif in motion &mdash; a point of light in orbit, not a generic ring.</p>
+
+        <div class="subsection">
+          <h3>Progress</h3>
+          <div class="demo col">
+            <div style="width:100%;"><div class="progress-track"><div class="progress-fill" style="width:72%;"></div></div><div class="demo-label">72% &mdash; uploading assets</div></div>
+            <div style="width:100%;"><div class="progress-track"><div class="progress-fill" style="width:35%; background:var(--acid);"></div></div><div class="demo-label">35% &mdash; accent variant</div></div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>Spinner</h3>
+          <div class="demo">
+            <div class="spinner"><div class="spinner-ring"></div><div class="spinner-dot"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ AVATAR ============ -->
+      <section class="section" id="c-avatar">
+        <div class="section-eyebrow"><svg class="orbit" viewBox="0 0 14 14" aria-hidden="true"><ellipse cx="7" cy="7" rx="6.3" ry="2.6" transform="rotate(-15 7 7)"/><circle cx="7" cy="7" r="2.4"/></svg>Components</div>
+        <h2>Avatar</h2>
+        <p class="desc">The status dot borrows directly from the mark &mdash; online is the same acid point of light used everywhere else in the system.</p>
+
+        <div class="demo">
+          <div class="demo-row" style="gap:28px;">
+            <div class="avatar-row">
+              <div class="avatar">MH<span class="avatar-status"></span></div>
+              <div><div class="avatar-name">Magnus H.</div><div class="avatar-meta">Online now</div></div>
+            </div>
+            <div class="avatar-row">
+              <div class="avatar" style="background:var(--moss);">AK<span class="avatar-status offline"></span></div>
+              <div><div class="avatar-name">Aksel K.</div><div class="avatar-meta">Offline &mdash; 3h ago</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ds-footer">
+        <span>MAGZ Design System &mdash; Vol. 01</span>
+        <span>Built on Between the Forest and the Stars</span>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // scroll-spy: highlight the section closest to the top reference line
+  const links = Array.from(document.querySelectorAll('.nav-link'));
+  const sections = links
+    .map(l => ({ link: l, el: document.getElementById(l.dataset.target) }))
+    .filter(s => s.el);
+
+  const REFERENCE_Y = 120; // px from top of viewport
+
+  function updateActiveLink() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= REFERENCE_Y) {
+        current = s;
+      } else {
+        break;
+      }
+    }
+    links.forEach(l => l.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { updateActiveLink(); ticking = false; });
+      ticking = true;
+    }
+  });
+  updateActiveLink();
+
+  // theme toggle: dark-first if the OS prefers it
+  const themeToggle = document.getElementById('theme-toggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  function applyTheme(dark) {
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    themeToggle.checked = dark;
+  }
+  applyTheme(prefersDark);
+  themeToggle.addEventListener('change', () => applyTheme(themeToggle.checked));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The high-school education system in Norway — MAGZ</title>
+  <meta name="description" content="A field note on how Norwegian high school evaluates students, what the 1–6 grading scale gets right, and how I would measure the quality of the experience instead." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'forest-deep': '#172412',
+            'forest': '#276F27',
+            'moss': '#499A16',
+            'lime': '#8ECA3C',
+            'acid': '#B8DC12',
+            'cream': '#F4F1EB',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-cream text-forest-deep antialiased">
+
+  <!-- ============ NAV ============ -->
+  <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
+    <nav class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between relative z-10">
+      <a href="index.html" class="flex items-center gap-3 quiet-link" aria-label="MAGZ — home">
+        <svg viewBox="0 0 660.46 481.69" class="h-7 w-auto" fill="currentColor" aria-hidden="true">
+          <circle cx="387.12" cy="28.61" r="28.61"/>
+          <path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/>
+        </svg>
+        <span class="font-display text-xl tracking-wide">MAGZ</span>
+      </a>
+      <div class="hidden md:flex items-center gap-10 eyebrow">
+        <a href="work.html" class="quiet-link">Work</a>
+        <a href="practice.html" class="quiet-link">Practice</a>
+        <a href="blog.html" class="quiet-link text-acid" aria-current="page">Blog</a>
+        <a href="#contact" class="quiet-link">Contact</a>
+      </div>
+      <button id="menu-toggle" type="button" class="md:hidden relative z-10 w-8 h-8 flex flex-col justify-center items-center gap-[6px]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
+        <span class="burger-line burger-line-1 block w-6 h-[1.5px] bg-cream"></span>
+        <span class="burger-line burger-line-2 block w-6 h-[1.5px] bg-cream"></span>
+        <span class="burger-line burger-line-3 block w-6 h-[1.5px] bg-cream"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div id="mobile-menu" class="md:hidden bg-forest-deep text-cream grain">
+    <nav class="h-full flex flex-col justify-center px-8 gap-2 relative z-10">
+      <a href="work.html" class="font-display text-4xl py-3 quiet-link">Work</a>
+      <a href="practice.html" class="font-display text-4xl py-3 quiet-link">Practice</a>
+      <a href="blog.html" class="font-display text-4xl py-3 quiet-link text-acid">Blog</a>
+      <a href="#contact" class="font-display text-4xl py-3 quiet-link">Contact</a>
+    </nav>
+  </div>
+
+  <!-- ============ POST HERO ============ -->
+  <section class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="stars"></div>
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-20 pb-20 md:pt-28 md:pb-28 relative z-10">
+      <p class="eyebrow text-acid reveal">Studio journal — 001</p>
+      <h1 class="font-display text-4xl md:text-6xl leading-[1.1] mt-6 max-w-4xl reveal" style="transition-delay: 120ms;">
+        The high-school education system in Norway, measured against traditional metrics.
+      </h1>
+      <p class="eyebrow text-cream/50 mt-8 reveal" style="transition-delay: 240ms;">February 11, 2025 &middot; 2 min read</p>
+    </div>
+  </section>
+
+  <!-- ============ ARTICLE ============ -->
+  <article class="bg-cream">
+    <div class="max-w-[54rem] mx-auto px-6 md:px-10 py-16 md:py-24">
+
+      <figure class="reveal">
+        <div class="relative rounded-2xl overflow-hidden shadow-forest">
+          <img src="https://placehold.co/1600x900/276F27/EEE0CC?text=Photo+coming+soon" alt="" class="w-full" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div class="absolute inset-0 bg-forest mix-blend-multiply opacity-20"></div>
+        </div>
+        <figcaption class="eyebrow text-forest-deep/40 mt-4">Photo to follow</figcaption>
+      </figure>
+
+      <div class="article-body mt-6 md:mt-10 reveal">
+        <h2>How does the system evaluate students? What are the benefits and limitations of these measurements?</h2>
+        <p>
+          Based on my personal experience from when I attended high school in the mid
+          to late 2000s, our education system used a numerical grading scale from 1
+          to 6, with 1 being the lowest and 6 being the highest. This system ensured
+          that education was accessible to everyone. For instance, students with
+          learning disabilities, such as dyslexia, were allowed to use computers to
+          simplify the writing process in literature classes. Special programs were
+          also available for students with more severe learning disabilities, while
+          all other students were graded on an equal footing. Norway&rsquo;s
+          education system is very inclusive and places a strong emphasis on student
+          welfare. I&rsquo;m not sure how much this has changed over the past 15
+          years, but based on what I&rsquo;ve heard and seen, most&mdash;if not
+          all&mdash;students now use a computer for every subject today.
+        </p>
+
+        <h2>How would I improve it and measure it in a way so it focuses on the quality of individuals&rsquo; educational experience rather than just test scores?</h2>
+        <p>
+          This grade measurement system has created stressful situations that can
+          become an obstacle for motivation, great class environment, and teaching.
+          Giving grades can be emotionally tough. I personally support the idea of a
+          system focusing on these aspects:
+        </p>
+        <ul>
+          <li>Both theoretical and practical knowledge.</li>
+          <li>A better balance between grading and non-grading&mdash;in other words, downplaying grading when it seems sensible.</li>
+          <li>The subject matter itself.</li>
+          <li>Consideration of students&rsquo; economic backgrounds.</li>
+          <li>The form of the grades and comments, and what they actually communicate.</li>
+        </ul>
+        <p>
+          There is no one-size-fits-all solution, but these factors are what I would
+          rely on in this situation and improve it.
+        </p>
+
+        <figure class="my-12">
+          <div class="grid md:grid-cols-2 gap-6 items-stretch">
+            <div class="rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-8 text-center flex flex-col justify-center">
+              <span class="eyebrow text-forest-deep/45 block">Current model</span>
+              <div class="mt-6">
+                <span class="font-display text-xl block" style="color:#172412">Exams</span>
+                <span class="flex justify-center py-3" aria-hidden="true">
+                  <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 1v20m0 0l-5-5m5 5l5-5" stroke="rgba(23,36,18,0.4)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="font-display text-xl block" style="color:#172412">Grades</span>
+                <span class="flex justify-center py-3" aria-hidden="true">
+                  <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 1v20m0 0l-5-5m5 5l5-5" stroke="rgba(23,36,18,0.4)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="font-display text-xl block" style="color:#172412">Higher education</span>
+              </div>
+              <span class="block mt-6 text-[0.95rem]" style="color:rgba(23,36,18,0.55)">One path, one measurement.</span>
+            </div>
+            <div class="rounded-2xl bg-forest text-cream p-6 md:p-8 text-center shadow-forest flex flex-col justify-center">
+              <span class="eyebrow block" style="color:rgba(244,241,235,0.6)">Alternative model</span>
+              <div class="mt-6 flex flex-wrap justify-center gap-2">
+                <span class="border border-cream/35 rounded-full px-4 py-1.5 text-[0.9rem]">Knowledge</span>
+                <span class="border border-cream/35 rounded-full px-4 py-1.5 text-[0.9rem]">Practical skills</span>
+                <span class="border border-cream/35 rounded-full px-4 py-1.5 text-[0.9rem]">Collaboration</span>
+                <span class="border border-cream/35 rounded-full px-4 py-1.5 text-[0.9rem]">Problem&#8209;solving</span>
+                <span class="border border-cream/35 rounded-full px-4 py-1.5 text-[0.9rem]">Communication</span>
+              </div>
+              <span class="flex justify-center py-4" aria-hidden="true">
+                <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 1v20m0 0l-5-5m5 5l5-5" stroke="rgba(244,241,235,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="font-display text-2xl block" style="color:#F4F1EB">Holistic assessment</span>
+            </div>
+          </div>
+          <figcaption class="eyebrow text-forest-deep/40 mt-5 text-center">One measurement, or many kinds of mastery</figcaption>
+        </figure>
+
+        <h2>Conclusion</h2>
+        <p>
+          Grades prove to be useful, but I do not think this kind of measurement
+          should be the absolute decisive factor for great success in school. A
+          modern educational system should not only evaluate students by what they
+          remember, but also how they apply knowledge, collaborate and handle
+          challenges in the real world.
+        </p>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-forest-deep/15 reveal">
+        <a href="blog.html" class="quiet-link eyebrow text-forest">&larr; Back to all field notes</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer id="contact" class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="stars"></div>
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-12 md:pt-32 relative z-10">
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow text-acid">Contact</p>
+        <h2 class="font-display text-4xl md:text-6xl mt-4 leading-tight">Send me a field note.</h2>
+        <p class="mt-8 text-cream/75 max-w-xl leading-[1.8]">
+          If something here resonated, or you have a project that could use some
+          quiet attention, write to me. I read everything, and I reply slowly and properly.
+        </p>
+        <a href="mailto:hello@magz.no" class="btn-field inline-block mt-10 bg-cream text-forest-deep font-medium px-8 py-4 rounded-full">
+          hello@magz.no
+        </a>
+      </div>
+
+      <div class="mt-24 md:mt-32 pt-8 border-t border-cream/15 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <svg viewBox="0 0 660.46 481.69" class="h-5 w-auto" fill="currentColor" aria-hidden="true">
+            <circle cx="387.12" cy="28.61" r="28.61"/>
+            <path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/>
+          </svg>
+          <span class="font-display text-lg">MAGZ</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+          <nav class="flex items-center gap-5" aria-label="Social media">
+            <a href="https://www.instagram.com/designmagz" target="_blank" rel="noopener" aria-label="Instagram" class="quiet-link text-cream/80"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.linkedin.com/in/magnus-nytroen" target="_blank" rel="noopener" aria-label="LinkedIn" class="quiet-link text-cream/80"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </nav>
+          <a href="magz-design-system.html" class="quiet-link eyebrow text-cream/40">Design System &#8599;</a>
+          <p class="eyebrow text-cream/40">Oslo &middot; Tynset, Norway &mdash; 62.28&deg;N</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function setMenuOpen(open) {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.toggle('is-open', open);
+      document.body.classList.toggle('overflow-hidden', open);
+    }
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    });
+  </script>
+</body>
+</html>

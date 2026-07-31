@@ -1,0 +1,15 @@
+# Local tooling & editor config
+.claude/
+.vscode/
+
+# Temporary / working files
+temporary screenshots/
+*.log
+
+# Dependencies (if any tooling is added later)
+node_modules/
+
+# OS cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
