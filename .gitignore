@@ -12,6 +12,7 @@ CLAUDE (1).md
 # Unoptimised source images — the web-sized .jpg next to each is what ships
 assets/pyramid/the-pyramid-board-game.png
 assets/pyramid/*-designmagz.png
+assets/pyramid/The-Pyramid-page-*.png
 
 # Dependencies (if any tooling is added later)
 node_modules/
