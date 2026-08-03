@@ -40,9 +40,11 @@
       '</figure>' +
     '</div>' +
     '<button class="lightbox-btn lightbox-close" type="button" aria-label="Close image viewer">&times;</button>' +
-    '<button class="lightbox-btn lightbox-prev" type="button" aria-label="Previous image">&#8592;</button>' +
-    '<button class="lightbox-btn lightbox-next" type="button" aria-label="Next image">&#8594;</button>' +
-    '<p class="lightbox-counter" aria-hidden="true"></p>';
+    '<div class="lightbox-controls">' +
+      '<button class="lightbox-btn lightbox-prev" type="button" aria-label="Previous image">&#8592;</button>' +
+      '<p class="lightbox-counter" aria-hidden="true"></p>' +
+      '<button class="lightbox-btn lightbox-next" type="button" aria-label="Next image">&#8594;</button>' +
+    '</div>';
   document.body.appendChild(box);
 
   var stage    = box.querySelector('.lightbox-stage');

@@ -332,10 +332,10 @@ h1.font-display,
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: rgba(23, 36, 18, 0.95);
+  background: #131E0F;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s var(--ease-spring);
+  transition: opacity 0.3s var(--ease-spring);
 }
 .lightbox.is-open { opacity: 1; pointer-events: auto; }
 
@@ -345,7 +345,7 @@ h1.font-display,
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 76px 76px 92px;
+  padding: 80px 24px 116px;
 }
 .lightbox-figure {
   margin: 0;
@@ -359,14 +359,13 @@ h1.font-display,
 .lightbox-img {
   display: block;
   max-width: 100%;
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 240px);
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 8px;
-  background: rgba(244, 241, 235, 0.04);
-  transform: scale(0.97);
-  transition: transform 0.35s var(--ease-spring);
+  border-radius: 10px;
+  transform: scale(0.98);
+  transition: transform 0.3s var(--ease-spring);
 }
 .lightbox.is-open .lightbox-img { transform: scale(1); }
 .lightbox-caption {
@@ -379,54 +378,76 @@ h1.font-display,
 }
 .lightbox-caption:empty { display: none; }
 
+/* Solid fill + hairline so the controls hold up over pale artwork too. */
 .lightbox-btn {
-  position: absolute;
-  z-index: 2;
-  border: none;
+  flex: none;
+  width: 46px;
+  height: 46px;
   padding: 0;
-  background: rgba(244, 241, 235, 0.12);
+  border: 1px solid rgba(244, 241, 235, 0.3);
+  background: rgba(23, 36, 18, 0.92);
   color: #F4F1EB;
   border-radius: 9999px;
   cursor: pointer;
   font-family: inherit;
+  font-size: 19px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.25s ease, transform 0.25s var(--ease-spring);
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
-.lightbox-btn:hover { background: rgba(244, 241, 235, 0.24); }
-.lightbox-btn:active { transform: scale(0.94); }
+.lightbox-btn:hover {
+  background: rgba(244, 241, 235, 0.18);
+  border-color: rgba(244, 241, 235, 0.55);
+}
 .lightbox-btn:focus-visible { outline: 2px solid #B8DC12; outline-offset: 3px; }
 .lightbox-btn[hidden] { display: none; }
 
-.lightbox-close { top: 20px; right: 20px; width: 46px; height: 46px; font-size: 26px; }
-.lightbox-prev,
-.lightbox-next { top: 50%; margin-top: -24px; width: 48px; height: 48px; font-size: 19px; }
-.lightbox-prev { left: 20px; }
-.lightbox-next { right: 20px; }
-
-.lightbox-counter {
+.lightbox-close {
   position: absolute;
-  bottom: 26px;
-  left: 0;
-  right: 0;
-  margin: 0;
-  text-align: center;
-  color: rgba(244, 241, 235, 0.5);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  font-size: 24px;
 }
 
+/* Arrows live in their own row beneath the picture, never on top of it. */
+.lightbox-controls {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.lightbox-counter {
+  margin: 0;
+  min-width: 6ch;
+  text-align: center;
+  color: rgba(244, 241, 235, 0.6);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.lightbox-counter:empty { display: none; }
+
 @media (max-width: 640px) {
-  .lightbox-stage { padding: 64px 12px 84px; }
-  .lightbox-img { max-height: calc(100vh - 175px); }
-  .lightbox-close { top: 12px; right: 12px; width: 42px; height: 42px; }
-  .lightbox-prev,
-  .lightbox-next { width: 42px; height: 42px; margin-top: -21px; }
-  .lightbox-prev { left: 8px; }
-  .lightbox-next { right: 8px; }
+  .lightbox-stage { padding: 70px 12px 110px; }
+  .lightbox-img { max-height: calc(100vh - 224px); }
+  .lightbox-caption { font-size: 0.83rem; }
+  .lightbox-close { top: 12px; right: 12px; }
+  .lightbox-controls { bottom: 20px; }
+}
+
+/* Dynamic viewport height keeps mobile browser chrome from clipping the image. */
+@supports (height: 100dvh) {
+  .lightbox-img { max-height: calc(100dvh - 240px); }
+  @media (max-width: 640px) {
+    .lightbox-img { max-height: calc(100dvh - 224px); }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
