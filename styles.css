@@ -322,6 +322,120 @@ h1.font-display,
 }
 
 /* ==========================================================================
+   Lightbox — click a case-study image to enlarge it, then step through the set.
+   Markup is created by lightbox.js; images opt out with [data-no-zoom].
+   ========================================================================== */
+.zoomable { cursor: zoom-in; }
+.zoomable:focus-visible { outline: 2px solid #B8DC12; outline-offset: 4px; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(23, 36, 18, 0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-spring);
+}
+.lightbox.is-open { opacity: 1; pointer-events: auto; }
+
+.lightbox-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 76px 76px 92px;
+}
+.lightbox-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 200px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(244, 241, 235, 0.04);
+  transform: scale(0.97);
+  transition: transform 0.35s var(--ease-spring);
+}
+.lightbox.is-open .lightbox-img { transform: scale(1); }
+.lightbox-caption {
+  margin: 0;
+  max-width: 62ch;
+  text-align: center;
+  color: rgba(244, 241, 235, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.lightbox-caption:empty { display: none; }
+
+.lightbox-btn {
+  position: absolute;
+  z-index: 2;
+  border: none;
+  padding: 0;
+  background: rgba(244, 241, 235, 0.12);
+  color: #F4F1EB;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.25s var(--ease-spring);
+}
+.lightbox-btn:hover { background: rgba(244, 241, 235, 0.24); }
+.lightbox-btn:active { transform: scale(0.94); }
+.lightbox-btn:focus-visible { outline: 2px solid #B8DC12; outline-offset: 3px; }
+.lightbox-btn[hidden] { display: none; }
+
+.lightbox-close { top: 20px; right: 20px; width: 46px; height: 46px; font-size: 26px; }
+.lightbox-prev,
+.lightbox-next { top: 50%; margin-top: -24px; width: 48px; height: 48px; font-size: 19px; }
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 26px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: rgba(244, 241, 235, 0.5);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 640px) {
+  .lightbox-stage { padding: 64px 12px 84px; }
+  .lightbox-img { max-height: calc(100vh - 175px); }
+  .lightbox-close { top: 12px; right: 12px; width: 42px; height: 42px; }
+  .lightbox-prev,
+  .lightbox-next { width: 42px; height: 42px; margin-top: -21px; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox { transition: none; }
+  .lightbox-img { transition: none; transform: none; }
+  .lightbox-btn { transition: none; }
+}
+
+/* ==========================================================================
    Logogenerator case study — 1881 product mockups
    (the product keeps its own 1881-blue identity inside the device frames)
    ========================================================================== */
