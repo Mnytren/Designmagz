@@ -15,6 +15,7 @@ assets/pyramid/*-designmagz.png
 assets/pyramid/The-Pyramid-page-*.png
 assets/brand-character/soeke-collection.png
 assets/brand-character/isometric-soeke-city.png
+assets/logogenerator/*.png
 
 # Dependencies (if any tooling is added later)
 node_modules/
