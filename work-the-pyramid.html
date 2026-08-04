@@ -273,26 +273,38 @@
       </figure>
 
       <!-- Building the pyramid -->
-      <div class="mt-16 md:mt-24 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <div class="md:col-span-6 reveal">
+      <div class="mt-16 md:mt-24">
+        <div class="max-w-2xl reveal">
           <h3 class="font-display text-2xl md:text-3xl leading-tight">Building the Pyramid</h3>
-          <p class="mt-5 max-w-lg text-forest-deep/80 leading-[1.8]">
+          <p class="mt-5 text-forest-deep/80 leading-[1.8]">
             The game board is built from four modular levels stacked to create a physical
             pyramid. Players gradually climb towards the summit while navigating traps,
             tombs and secret pathways.
           </p>
         </div>
-        <figure class="md:col-span-5 md:col-start-8 reveal" style="transition-delay: 120ms;">
-          <img src="assets/pyramid/building-the-pyramid.webp" alt="The four levels of the game board shown apart &mdash; a large base ring of tiles marked Start, traps and tombs, two smaller rings above it, and the single summit tile on top" width="2000" height="3048" loading="lazy" decoding="async" class="w-full rounded-2xl border border-forest-deep/15" />
-          <figcaption class="eyebrow text-forest-deep/40 mt-3">The four levels, taken apart</figcaption>
-        </figure>
+        <div class="grid md:grid-cols-12 gap-6 md:gap-8 mt-10 md:mt-12 items-start">
+          <figure class="md:col-span-4 reveal">
+            <img src="assets/pyramid/building-the-pyramid.webp" alt="The four levels of the game board shown apart &mdash; a large base ring of tiles marked Start, traps and tombs, two smaller rings above it, and the single summit tile on top" width="2000" height="3048" loading="lazy" decoding="async" class="w-full rounded-2xl border border-forest-deep/15" />
+            <figcaption class="eyebrow text-forest-deep/40 mt-3">The four levels, taken apart</figcaption>
+          </figure>
+          <figure class="md:col-span-8 reveal" style="transition-delay: 100ms;">
+            <img src="assets/pyramid/level-transition.webp" alt="Close-up of the stacked levels, showing the Up and Down tiles and the arrows that carry a player between one level and the next" width="1600" height="1225" loading="lazy" decoding="async" class="w-full rounded-2xl border border-forest-deep/15" />
+            <figcaption class="eyebrow text-forest-deep/40 mt-3">Up and down, from one level to the next</figcaption>
+          </figure>
+        </div>
       </div>
 
       <!-- Gameplay overview -->
-      <div class="mt-16 md:mt-24 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <div class="md:col-span-4 reveal">
-          <h3 class="font-display text-2xl md:text-3xl leading-tight">Gameplay Overview</h3>
-          <ol class="mt-7 space-y-3">
+      <div class="mt-16 md:mt-24">
+        <div class="grid md:grid-cols-12 gap-10 md:gap-16 reveal">
+          <div class="md:col-span-5">
+            <h3 class="font-display text-2xl md:text-3xl leading-tight">Gameplay Overview</h3>
+            <p class="mt-5 text-forest-deep/80 leading-[1.8]">
+              A turn is short by design: move, draw, climb. The rules stay out of the way
+              so the exploring can take the foreground.
+            </p>
+          </div>
+          <ol class="md:col-span-6 md:col-start-7 space-y-3">
             <li class="eyebrow text-forest-deep/75">Start</li>
             <li class="eyebrow text-forest-deep/75"><span aria-hidden="true" class="block text-forest text-base leading-none mb-3">&darr;</span>Explore</li>
             <li class="eyebrow text-forest-deep/75"><span aria-hidden="true" class="block text-forest text-base leading-none mb-3">&darr;</span>Draw cards</li>
@@ -301,25 +313,23 @@
             <li class="eyebrow text-forest"><span aria-hidden="true" class="block text-forest text-base leading-none mb-3">&darr;</span>Collect the treasure</li>
           </ol>
         </div>
-        <figure class="md:col-span-7 md:col-start-6 reveal" style="transition-delay: 120ms;">
+        <figure class="mt-10 md:mt-12 reveal">
           <img src="assets/pyramid/gameplay-arrow.webp" alt="The assembled pyramid board seen at an angle, with a red line tracing the route from Start, around the base ring and up through each level to the summit tile" width="1800" height="1433" loading="lazy" decoding="async" class="w-full rounded-2xl border border-forest-deep/15" />
           <figcaption class="eyebrow text-forest-deep/40 mt-3">One route to the top, traced</figcaption>
         </figure>
       </div>
 
       <!-- Board details -->
-      <div class="mt-16 md:mt-24 grid md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <figure class="md:col-span-6 reveal">
-          <img src="assets/pyramid/coin-summit.webp" alt="Close-up of a gold coin resting on the summit tile of the pyramid, surrounded by trap, tomb, up and down tiles" width="1400" height="1400" loading="lazy" decoding="async" class="w-full rounded-2xl border border-forest-deep/15" />
-          <figcaption class="eyebrow text-forest-deep/40 mt-3">The treasure, waiting at the summit</figcaption>
-        </figure>
-        <div class="md:col-span-5 md:col-start-8 reveal" style="transition-delay: 120ms;">
-          <h3 class="font-display text-2xl md:text-3xl leading-tight">Board Details</h3>
-          <p class="mt-5 text-forest-deep/80 leading-[1.8]">
-            Every tile carries its own instruction, drawn so it can be read at a glance
-            from across the table.
-          </p>
-          <ul class="mt-6 space-y-3 pl-5 list-disc marker:text-forest text-forest-deep/80">
+      <div class="mt-16 md:mt-24">
+        <div class="grid md:grid-cols-12 gap-10 md:gap-16 reveal">
+          <div class="md:col-span-5">
+            <h3 class="font-display text-2xl md:text-3xl leading-tight">Board Details</h3>
+            <p class="mt-5 text-forest-deep/80 leading-[1.8]">
+              Every tile carries its own instruction, drawn so it can be read at a glance
+              from across the table.
+            </p>
+          </div>
+          <ul class="md:col-span-6 md:col-start-7 space-y-3 pl-5 list-disc marker:text-forest text-forest-deep/80">
             <li>Tomb fields</li>
             <li>Trap fields</li>
             <li>Up fields</li>
@@ -327,6 +337,10 @@
             <li>Treasure</li>
           </ul>
         </div>
+        <figure class="mt-10 md:mt-12 reveal">
+          <img src="assets/pyramid/coin-summit.webp" alt="Close-up of a gold coin resting on the summit tile of the pyramid, surrounded by trap, tomb, up and down tiles" width="1400" height="1400" loading="lazy" decoding="async" class="w-full rounded-2xl border border-forest-deep/15" />
+          <figcaption class="eyebrow text-forest-deep/40 mt-3">The treasure, waiting at the summit</figcaption>
+        </figure>
       </div>
 
       <!-- Character gallery -->
