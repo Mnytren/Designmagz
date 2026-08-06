@@ -140,7 +140,11 @@ h1.font-display,
    the filled and ghost buttons. The arrow carries the affordance instead of a
    border, and nudges forward on hover so the link still feels pressable. */
 .link-cta .arrow {
-  display: inline-block;
+  /* No display here — the markup's own inline-flex must survive so the chip
+     can center its chevron; this rule only animates the hover nudge. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.4s var(--ease-spring);
 }
 .link-cta:hover .arrow,
