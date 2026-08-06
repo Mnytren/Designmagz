@@ -404,6 +404,9 @@ h1.font-display,
 /* Solid fill + hairline so the controls hold up over pale artwork too. */
 .lightbox-btn {
   flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 46px;
   height: 46px;
   padding: 0;
