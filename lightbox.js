@@ -42,11 +42,11 @@
     '<button class="lightbox-btn lightbox-close" type="button" aria-label="Close image viewer">&times;</button>' +
     '<div class="lightbox-controls">' +
       '<button class="lightbox-btn lightbox-prev" type="button" aria-label="Previous image">' +
-        '<svg viewBox="0 0 179.61 258.61" style="height:18px;width:auto;transform:scaleX(-1)" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg>' +
+        '<svg viewBox="0 0 179.61 258.61" style="height:18px;width:12.5px;transform:scaleX(-1)" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg>' +
       '</button>' +
       '<p class="lightbox-counter" aria-hidden="true"></p>' +
       '<button class="lightbox-btn lightbox-next" type="button" aria-label="Next image">' +
-        '<svg viewBox="0 0 179.61 258.61" style="height:18px;width:auto" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg>' +
+        '<svg viewBox="0 0 179.61 258.61" style="height:18px;width:12.5px" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg>' +
       '</button>' +
     '</div>';
   document.body.appendChild(box);
