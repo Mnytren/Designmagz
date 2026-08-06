@@ -131,6 +131,11 @@ h1.font-display,
 }
 .btn-ghost:hover::before { opacity: 1; }
 
+/* Ghost button on light surfaces — the cream hover wash above is invisible on
+   the cream background, so this variant swaps it for a faint ink wash, per the
+   design system's secondary button spec. */
+.btn-ghost-light::before { background: rgba(23, 36, 18, 0.05); }
+
 /* Tertiary CTA — a text link that offers the next step without competing with
    the filled and ghost buttons. The arrow carries the affordance instead of a
    border, and nudges forward on hover so the link still feels pressable. */
