@@ -23,3 +23,10 @@ node_modules/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Character-system sources — the .webp/.svg beside each is what ships
+assets/brand-character/1881-soeke-font.svg
+assets/brand-character/soeke-4-rotation.png
+assets/brand-character/soeke-flat-1.png
+assets/brand-character/Ellipse-soeke-1.png
+assets/brand-character/Gradient - 12.svg
