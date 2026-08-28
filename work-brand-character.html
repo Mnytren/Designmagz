@@ -186,10 +186,15 @@
                     touchpoints.
                   </p>
                 </div>
-                <div class="mt-10 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8">
-                  <span class="font-sans font-bold text-lg">2D S&oslash;ke</span>
-                  <svg viewBox="0 0 179.61 258.61" class="h-4 w-auto shrink-0 text-white/70 rotate-90 sm:rotate-0" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg>
-                  <span class="font-sans font-bold text-lg">3D S&oslash;ke</span>
+                <div class="mt-10 md:mt-14 flex items-center justify-center gap-6">
+                  <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-8">
+                    <span class="font-sans font-bold text-lg">2D S&oslash;ke</span>
+                    <svg viewBox="0 0 179.61 258.61" class="h-4 w-auto shrink-0 text-white/70 rotate-90 sm:rotate-0" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg>
+                    <span class="font-sans font-bold text-lg">3D S&oslash;ke</span>
+                  </div>
+                  <!-- On narrow screens the badge sits beside the labels instead of on the
+                       seam, where the stacked panels would push it onto the 3D character. -->
+                  <img src="assets/brand-character/soeke-badge.webp" alt="" aria-hidden="true" width="400" height="400" loading="lazy" decoding="async" class="sm:hidden w-20 h-auto shrink-0" />
                 </div>
               </div>
             </div>
@@ -197,7 +202,7 @@
             <div class="relative grid grid-cols-1 sm:grid-cols-2">
               <img src="assets/brand-character/soeke-flat.webp" alt="The original 2D S&oslash;ke &mdash; a flat illustration of the character, with a speech-bubble face, orange antenna and wheels" width="1200" height="1200" loading="lazy" decoding="async" class="w-full aspect-square object-cover" />
               <img src="assets/brand-character/soeke-3d.webp" alt="The same character rebuilt as a 3D render, standing on a round plinth against a deep blue background" width="1200" height="1200" loading="lazy" decoding="async" class="w-full aspect-square object-cover" />
-              <img src="assets/brand-character/soeke-badge.webp" alt="" aria-hidden="true" width="400" height="400" loading="lazy" decoding="async" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 sm:w-28 lg:w-36 h-auto" />
+              <img src="assets/brand-character/soeke-badge.webp" alt="" aria-hidden="true" width="400" height="400" loading="lazy" decoding="async" class="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-28 lg:w-36 h-auto" />
             </div>
 
           </div>
