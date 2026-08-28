@@ -224,27 +224,44 @@
           </ul>
         </div>
 
-        <!-- Character DNA &mdash; the turntable shows it directly, so the constants are
-             named in the caption rather than called out on a separate diagram. -->
-        <figure class="mt-16 md:mt-20 max-w-3xl reveal">
-          <video
-            class="w-full rounded-2xl border border-forest-deep/10 shadow-forest bg-[#003A8C]"
-            poster="assets/brand-character/soeke-rotation-3d-cover.webp"
-            preload="none"
-            controls
-            muted
-            loop
-            playsinline
-            width="1080"
-            height="1080">
-            <source src="assets/brand-character/soeke-rotation-3d.webm" type="video/webm" />
-            <source src="assets/brand-character/soeke-rotation-3d.mp4" type="video/mp4" />
-            <p class="p-6 text-forest-deep/70">
-              Your browser cannot play this video.
-              <a href="assets/brand-character/soeke-rotation-3d.mp4" class="underline">Download the turntable (MP4)</a>.
-            </p>
-          </video>
-          <figcaption class="eyebrow text-forest-deep/40 mt-3">The character DNA from every angle &mdash; screen head, antenna, modular body, wheels and core palette hold from all sides</figcaption>
+        <!-- Character DNA &mdash; the turntable shows the constants directly, so they are
+             named beneath it rather than called out on a separate diagram. The square
+             render is centred on a panel from the same gradient family as the section
+             above, so the space either side of it reads as intended rather than as a gap. -->
+        <figure class="mt-16 md:mt-20 reveal">
+          <div class="rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest bg-[#003A8C] bg-cover bg-center" style="background-image: url('assets/brand-character/gradient-12.svg');">
+            <div class="px-6 py-10 md:px-12 md:py-14">
+              <!-- data-autoplay rather than the autoplay attribute: the script starts it only
+                   when it scrolls into view, and never for reduced-motion visitors. -->
+              <video
+                data-autoplay
+                class="w-full max-w-md mx-auto block rounded-xl ring-1 ring-white/15 bg-[#003A8C]"
+                poster="assets/brand-character/soeke-rotation-3d-cover.webp"
+                preload="metadata"
+                controls
+                muted
+                loop
+                playsinline
+                width="1080"
+                height="1080">
+                <source src="assets/brand-character/soeke-rotation-3d.webm" type="video/webm" />
+                <source src="assets/brand-character/soeke-rotation-3d.mp4" type="video/mp4" />
+                <p class="p-6 text-white/75">
+                  Your browser cannot play this video.
+                  <a href="assets/brand-character/soeke-rotation-3d.mp4" class="underline">Download the turntable (MP4)</a>.
+                </p>
+              </video>
+
+              <ul class="mt-8 md:mt-10 flex flex-wrap justify-center gap-2 max-w-xl mx-auto">
+                <li class="eyebrow text-white/90 border border-white/30 rounded-full px-4 py-1.5">Screen head</li>
+                <li class="eyebrow text-white/90 border border-white/30 rounded-full px-4 py-1.5">Signature antenna</li>
+                <li class="eyebrow text-white/90 border border-white/30 rounded-full px-4 py-1.5">Modular body</li>
+                <li class="eyebrow text-white/90 border border-white/30 rounded-full px-4 py-1.5">Wheels</li>
+                <li class="eyebrow text-white/90 border border-white/30 rounded-full px-4 py-1.5">Core colour palette</li>
+              </ul>
+            </div>
+          </div>
+          <figcaption class="eyebrow text-forest-deep/40 mt-4">The full turn &mdash; the character reads the same from every angle</figcaption>
         </figure>
       </div>
     </div>
@@ -521,6 +538,26 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setMenuOpen(false);
     });
+
+    /* Ambient video: plays itself once it is on screen, pauses when it leaves so it is not
+       burning battery out of sight. Anyone who asks the system for reduced motion keeps the
+       poster frame and the controls instead — motion that starts on its own is exactly what
+       that setting is for. */
+    const wantsStill = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!wantsStill) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            /* Rejected play() is fine — a browser is entitled to refuse autoplay. */
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      }, { threshold: 0.25 });
+      document.querySelectorAll('video[data-autoplay]').forEach((v) => videoObserver.observe(v));
+    }
   </script>
   <script src="lightbox.js" defer></script>
 </body>
