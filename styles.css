@@ -371,6 +371,17 @@ h1.font-display,
   line-height: 1.35;
   margin-top: 3.5rem;
 }
+/* Second level, for posts that break a section into named parts. Sits clearly
+   below h2 without competing with it. */
+.article-body h3 {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-top: 2.25rem;
+  color: #172412;
+}
 .article-body blockquote {
   margin: 3rem 0;
   border-left: 4px solid #B8DC12;
