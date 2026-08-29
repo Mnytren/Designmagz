@@ -51,6 +51,12 @@
 </head>
 <body class="bg-cream text-forest-deep antialiased">
 
+  <!-- Reading progress. Decorative, so it is hidden from assistive tech; the scrollbar
+       already tells that story to anyone using one. -->
+  <div id="read-progress" class="fixed top-0 left-0 h-[3px] w-full z-50 pointer-events-none" aria-hidden="true">
+    <div id="read-progress-bar" class="h-full bg-acid origin-left scale-x-0"></div>
+  </div>
+
   <!-- ============ NAV ============ -->
   <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
     <nav class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between relative z-10">
@@ -110,6 +116,37 @@
         <figcaption class="eyebrow text-forest-deep/40 mt-4">The Magnifica S &mdash; with a concept &ldquo;Good Morning Mode&rdquo; screen mocked in above the grinder</figcaption>
       </figure>
 
+      <!-- Every figure below is drawn from the article's own sentences; nothing here
+           states anything the piece does not already say. -->
+      <dl class="mt-10 md:mt-12 grid grid-cols-2 md:grid-cols-4 rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] divide-x divide-y md:divide-y-0 divide-forest-deep/10 overflow-hidden reveal">
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">7</dd>
+          <dt class="eyebrow text-forest mt-2">R&amp;D centers</dt>
+        </div>
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">9</dd>
+          <dt class="eyebrow text-forest mt-2">Production plants</dt>
+        </div>
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">120+</dd>
+          <dt class="eyebrow text-forest mt-2">Markets worldwide</dt>
+        </div>
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">15+</dd>
+          <dt class="eyebrow text-forest mt-2">Years on the market</dt>
+        </div>
+      </dl>
+
+      <nav class="mt-6 rounded-2xl border border-forest-deep/15 p-6 md:p-7 reveal" aria-label="In this article">
+        <p class="eyebrow text-forest">In this article</p>
+        <ol class="mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-forest-deep/75">
+          <li><a href="#recyclable" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">How can we make it reusable/fully recyclable?</a></li>
+          <li><a href="#experience" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">From a product into an experience?</a></li>
+          <li><a href="#ecosystem" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">Where it fits in a larger ecosystem</a></li>
+          <li><a href="#conclusion" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">Conclusion</a></li>
+        </ol>
+      </nav>
+
       <div class="article-body mt-6 md:mt-10 reveal">
         <p>
           The name of the brand is DeLonghi Magnifica S. It is a rather popular coffee
@@ -144,7 +181,7 @@
           </ul>
         </aside>
 
-        <h2>How can we make it reusable/fully recyclable?</h2>
+        <h2 id="recyclable" class="scroll-mt-28">How can we make it reusable/fully recyclable?</h2>
         <p>
           While the DeLonghi Magnifica S has strong features such as compact design,
           reliable technology and durable construction, it still follows a linear
@@ -180,7 +217,7 @@
           <figcaption class="eyebrow text-forest-deep/40 mt-5 text-center">From linear to circular replacement</figcaption>
         </figure>
 
-        <h2>Is there a way for us to turn the model from a product into an experience?</h2>
+        <h2 id="experience" class="scroll-mt-28">Is there a way for us to turn the model from a product into an experience?</h2>
         <p>
           The experience I have with the DeLonghi Magnifica S feels like a great
           experience to me — but more in a basic way. A user like me usually just
@@ -213,7 +250,7 @@
           <p>&ldquo;A light or sound cue that makes the start of coffee&#8209;making feel ceremonial.&rdquo;</p>
         </blockquote>
 
-        <h2>Where does DeLonghi Magnifica S fit in a larger ecosystem?</h2>
+        <h2 id="ecosystem" class="scroll-mt-28">Where does DeLonghi Magnifica S fit in a larger ecosystem?</h2>
         <p>
           According to DeLonghi Group&rsquo;s website, the Magnifica S is a part of a
           hybrid ecosystem. De&rsquo;Longhi runs a multi-brand, global setup with 7
@@ -232,19 +269,21 @@
           than ever!
         </p>
 
-        <h2>Conclusion</h2>
-        <p>
-          The DeLonghi Magnifica S is very valued for durability, also having freshly
-          made coffee, and a design that works very much forward the product we often
-          see otherwise and experience every day. A circular redesign would have been
-          much better with components such as the following: Modular components,
-          sustainable components, waste free coffee consumption, refurbishment
-          programs, and subscription-based ownership models. The DeLonghi Magnifica S
-          can shift from a traditional appliance to a circular, sustainable service.
-          This transformation can reduce waste, extend product life and support an
-          economic product model overall: It would turn daily coffee rituals into
-          more long-term benefit for everyone (in the environmental way).
-        </p>
+        <aside id="conclusion" class="scroll-mt-28 mt-12 md:mt-16 bg-forest-deep text-cream rounded-2xl p-7 md:p-9 relative overflow-hidden grain" aria-label="Conclusion">
+          <p class="eyebrow relative z-10" style="color:#B8DC12">Conclusion</p>
+          <p class="relative z-10 text-cream/90 text-[1.05rem] md:text-[1.15rem] leading-[1.75]">
+            The DeLonghi Magnifica S is very valued for durability, also having freshly
+            made coffee, and a design that works very much forward the product we often
+            see otherwise and experience every day. A circular redesign would have been
+            much better with components such as the following: Modular components,
+            sustainable components, waste free coffee consumption, refurbishment
+            programs, and subscription-based ownership models. The DeLonghi Magnifica S
+            can shift from a traditional appliance to a circular, sustainable service.
+            This transformation can reduce waste, extend product life and support an
+            economic product model overall: It would turn daily coffee rituals into
+            more long-term benefit for everyone (in the environmental way).
+          </p>
+        </aside>
       </div>
 
       <div class="mt-16 pt-8 border-t border-forest-deep/15 reveal">
@@ -316,6 +355,25 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setMenuOpen(false);
     });
+
+    /* Reading progress. Scaling a bar costs no layout, and rAF keeps it off the
+       scroll handler's critical path. */
+    const progressBar = document.getElementById('read-progress-bar');
+    let progressQueued = false;
+    function drawProgress() {
+      progressQueued = false;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
+    }
+    function queueProgress() {
+      if (progressQueued) return;
+      progressQueued = true;
+      requestAnimationFrame(drawProgress);
+    }
+    window.addEventListener('scroll', queueProgress, { passive: true });
+    window.addEventListener('resize', queueProgress);
+    drawProgress();
   </script>
   <script src="lightbox.js" defer></script>
 </body>

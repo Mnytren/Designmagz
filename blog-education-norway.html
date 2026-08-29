@@ -51,6 +51,12 @@
 </head>
 <body class="bg-cream text-forest-deep antialiased">
 
+  <!-- Reading progress. Decorative, so it is hidden from assistive tech; the scrollbar
+       already tells that story to anyone using one. -->
+  <div id="read-progress" class="fixed top-0 left-0 h-[3px] w-full z-50 pointer-events-none" aria-hidden="true">
+    <div id="read-progress-bar" class="h-full bg-acid origin-left scale-x-0"></div>
+  </div>
+
   <!-- ============ NAV ============ -->
   <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
     <nav class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between relative z-10">
@@ -181,14 +187,16 @@
           <figcaption class="eyebrow text-forest-deep/40 mt-5 text-center">One measurement, or many kinds of mastery</figcaption>
         </figure>
 
-        <h2>Conclusion</h2>
-        <p>
-          Grades prove to be useful, but I do not think this kind of measurement
-          should be the absolute decisive factor for great success in school. A
-          modern educational system should not only evaluate students by what they
-          remember, but also how they apply knowledge, collaborate and handle
-          challenges in the real world.
-        </p>
+        <aside class="mt-12 md:mt-16 bg-forest-deep text-cream rounded-2xl p-7 md:p-9 relative overflow-hidden grain" aria-label="Conclusion">
+          <p class="eyebrow relative z-10" style="color:#B8DC12">Conclusion</p>
+          <p class="relative z-10 text-cream/90 text-[1.05rem] md:text-[1.15rem] leading-[1.75]">
+            Grades prove to be useful, but I do not think this kind of measurement
+            should be the absolute decisive factor for great success in school. A
+            modern educational system should not only evaluate students by what they
+            remember, but also how they apply knowledge, collaborate and handle
+            challenges in the real world.
+          </p>
+        </aside>
       </div>
 
       <div class="mt-16 pt-8 border-t border-forest-deep/15 reveal">
@@ -260,6 +268,25 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setMenuOpen(false);
     });
+
+    /* Reading progress. Scaling a bar costs no layout, and rAF keeps it off the
+       scroll handler's critical path. */
+    const progressBar = document.getElementById('read-progress-bar');
+    let progressQueued = false;
+    function drawProgress() {
+      progressQueued = false;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
+    }
+    function queueProgress() {
+      if (progressQueued) return;
+      progressQueued = true;
+      requestAnimationFrame(drawProgress);
+    }
+    window.addEventListener('scroll', queueProgress, { passive: true });
+    window.addEventListener('resize', queueProgress);
+    drawProgress();
   </script>
   <script src="lightbox.js" defer></script>
 </body>
