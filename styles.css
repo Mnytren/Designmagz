@@ -395,6 +395,23 @@ h1.font-display,
   margin-top: 0.75rem;
   padding-left: 0.25rem;
 }
+
+/* A callout brings its own padding and rhythm. Without this the article's
+   paragraph margin lands on top of the box's padding — 60px above the label
+   against 36px below the list — and the article's bullet indent pushes the
+   numbered rows off the box's own left edge. */
+.article-body aside p {
+  margin-top: 0;
+}
+.article-body aside ul {
+  margin-top: 1.5rem;
+  padding-left: 0;
+  list-style: none;
+}
+.article-body aside ul li {
+  padding-left: 0;
+}
+
 @media (min-width: 768px) {
   .article-body { font-size: 1.1875rem; } /* 19px */
   .article-body h2 { font-size: 1.6rem; }
