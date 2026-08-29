@@ -51,6 +51,12 @@
 </head>
 <body class="bg-cream text-forest-deep antialiased">
 
+  <!-- Reading progress. Decorative, so it is hidden from assistive tech; the scrollbar
+       already tells that story to anyone using one. -->
+  <div id="read-progress" class="fixed top-0 left-0 h-[3px] w-full z-50 pointer-events-none" aria-hidden="true">
+    <div id="read-progress-bar" class="h-full bg-acid origin-left scale-x-0"></div>
+  </div>
+
   <!-- ============ NAV ============ -->
   <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
     <nav class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between relative z-10">
@@ -106,8 +112,40 @@
         <figcaption class="eyebrow text-forest-deep/40 mt-4">Oslo City Bike</figcaption>
       </figure>
 
+      <!-- Every figure below is drawn from the author's own sentences; nothing here
+           states anything the article does not already say. -->
+      <dl class="mt-10 md:mt-12 grid grid-cols-2 md:grid-cols-4 rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] divide-x divide-y md:divide-y-0 divide-forest-deep/10 overflow-hidden reveal">
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">3,000</dd>
+          <dt class="eyebrow text-forest mt-2">Bikes</dt>
+        </div>
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">266</dd>
+          <dt class="eyebrow text-forest mt-2">Stations</dt>
+        </div>
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">55,000</dd>
+          <dt class="eyebrow text-forest mt-2">Active users a year</dt>
+        </div>
+        <div class="p-5 md:p-6">
+          <dd class="font-display text-3xl md:text-4xl leading-none">2003</dd>
+          <dt class="eyebrow text-forest mt-2">In service since</dt>
+        </div>
+      </dl>
+
+      <nav class="mt-6 rounded-2xl border border-forest-deep/15 p-6 md:p-7 reveal" aria-label="In this article">
+        <p class="eyebrow text-forest">In this article</p>
+        <ol class="mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-forest-deep/75">
+          <li><a href="#description" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">A description of the service</a></li>
+          <li><a href="#problems" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">What problems it seeks to solve</a></li>
+          <li><a href="#users" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">The primary users of the solution</a></li>
+          <li><a href="#principles" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">The five humanity-centered design principles</a></li>
+          <li><a href="#conclusion" class="quiet-link underline decoration-forest-deep/20 underline-offset-4">Conclusion</a></li>
+        </ol>
+      </nav>
+
       <div class="article-body mt-6 md:mt-10 reveal">
-        <h2>A description of the service.</h2>
+        <h2 id="description" class="scroll-mt-28">A description of the service.</h2>
         <p>
           My product/service is The Oslo City Bike Scheme: A local bike-sharing service I am
           proud to have in my city. Oslo has become more sustainable throughout the years,
@@ -118,7 +156,7 @@
           like Oslo. The Oslo City bike is a cheap, eco-friendly transportation option.
         </p>
 
-        <h2>What problems does Oslo City Bike seek to solve?</h2>
+        <h2 id="problems" class="scroll-mt-28">What problems does Oslo City Bike seek to solve?</h2>
         <p>
           The Oslo city bike scheme seeks to solve problems such as the following:
         </p>
@@ -158,7 +196,7 @@
           </li>
         </ul>
 
-        <h2>The primary users of the solution.</h2>
+        <h2 id="users" class="scroll-mt-28">The primary users of the solution.</h2>
         <p>
           An estimated 55,000 unique active users take trips annually.
         </p>
@@ -166,117 +204,141 @@
           Primary users can be:
         </p>
 
-        <h3>Daily commuters and workers in general:</h3>
-        <ul>
-          <li>
-            They tend to experience delays in public transits and might go to the nearest
-            docking station to grab a bike.
-          </li>
-          <li>
-            They want some fresh air on their way to the office, using Oslo&rsquo;s friendly
-            bike routes, but they still want to be quick enough for the morning coffee with
-            their colleagues.
-          </li>
-          <li>
-            Some might use the service to travel between meetings in the city center during
-            working hours.
-          </li>
-        </ul>
+        <div class="grid md:grid-cols-2 gap-5 mt-6">
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-7">
+            <h3>Daily commuters and workers in general:</h3>
+            <ul>
+              <li>
+                They tend to experience delays in public transits and might go to the nearest
+                docking station to grab a bike.
+              </li>
+              <li>
+                They want some fresh air on their way to the office, using Oslo&rsquo;s
+                friendly bike routes, but they still want to be quick enough for the morning
+                coffee with their colleagues.
+              </li>
+              <li>
+                Some might use the service to travel between meetings in the city center
+                during working hours.
+              </li>
+            </ul>
+          </div>
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-7">
+            <h3>Residents living within specific public transit zones:</h3>
+            <p>
+              Being a resident myself living and working in zone 1 for almost thirteen years, a
+              zone that covers all of Oslo and inner municipalities like B&aelig;rum, including
+              the entire metro system, I can with my hand on my heart I have used bikes for
+              quick errands, shopping, shorter trips for fun or socializing in central
+              neighborhoods and parks.
+            </p>
+          </div>
+        </div>
 
-        <h3>Residents living within specific public transit zones:</h3>
-        <p>
-          Being a resident myself living and working in zone 1 for almost thirteen years, a
-          zone that covers all of Oslo and inner municipalities like B&aelig;rum, including the
-          entire metro system, I can with my hand on my heart I have used bikes for quick
-          errands, shopping, shorter trips for fun or socializing in central neighborhoods and
-          parks.
-        </p>
+        <h2 id="principles" class="scroll-mt-28">Evaluating the solution against the five humanity-centered design principles. To what extent does it meet the five principles of humanity-centered design?</h2>
 
-        <h2>Evaluating the solution against the five humanity-centered design principles. To what extent does it meet the five principles of humanity-centered design?</h2>
+        <div class="space-y-5 mt-8">
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-8">
+            <span class="eyebrow inline-flex items-center justify-center h-8 w-8 rounded-full bg-forest text-cream shrink-0" aria-hidden="true">01</span>
+            <h3 class="mt-4">Focusing on the ecosystem:</h3>
+            <p>
+              It has a well-designed structure and aligns well with Oslo&rsquo;s transport
+              ecosystem. The service does benefit the environment by reducing car usage, traffic
+              congestion and emissions. We can clearly see that transportation affects people, the
+              city, and the environment as interconnected systems.
+            </p>
+            <p>
+              However, the scheme wouldn&rsquo;t be as effective if it weren&rsquo;t for Oslo
+              investing heavily in bike lanes and cycling infrastructure in general.
+            </p>
+          </div>
 
-        <h3>1. Focusing on the ecosystem:</h3>
-        <p>
-          It has a well-designed structure and aligns well with Oslo&rsquo;s transport
-          ecosystem. The service does benefit the environment by reducing car usage, traffic
-          congestion and emissions. We can clearly see that transportation affects people, the
-          city, and the environment as interconnected systems.
-        </p>
-        <p>
-          However, the scheme wouldn&rsquo;t be as effective if it weren&rsquo;t for Oslo
-          investing heavily in bike lanes and cycling infrastructure in general.
-        </p>
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-8">
+            <span class="eyebrow inline-flex items-center justify-center h-8 w-8 rounded-full bg-forest text-cream shrink-0" aria-hidden="true">02</span>
+            <h3 class="mt-4">Solving the root issue:</h3>
+            <p>
+              The goal of Oslo City Bike is to reduce the dependence on private cars and lower
+              transportation costs. People do not need to stay afraid of losing their bikes to
+              theft. Not only that but being a bike owner also requires maintenance.
+            </p>
+            <p>
+              That said, I will not say that it solves deeper urban planning challenges. There are
+              still inequalities in access to the service in different parts of the city, and it is
+              apparent that certain bike stations have fewer bikes than others, or none, because
+              certain people prefer bicycling downhill only, causing congestion in the city center
+              on certain bike stations.
+            </p>
+          </div>
 
-        <h3>2. Solving the root issue:</h3>
-        <p>
-          The goal of Oslo City Bike is to reduce the dependence on private cars and lower
-          transportation costs. People do not need to stay afraid of losing their bikes to
-          theft. Not only that but being a bike owner also requires maintenance.
-        </p>
-        <p>
-          That said, I will not say that it solves deeper urban planning challenges. There are
-          still inequalities in access to the service in different parts of the city, and it is
-          apparent that certain bike stations have fewer bikes than others, or none, because
-          certain people prefer bicycling downhill only, causing congestion in the city center
-          on certain bike stations.
-        </p>
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-8">
+            <span class="eyebrow inline-flex items-center justify-center h-8 w-8 rounded-full bg-forest text-cream shrink-0" aria-hidden="true">03</span>
+            <h3 class="mt-4">Take a Long-Term Systems Approach:</h3>
+            <p>
+              The Oslo City Bike Scheme has a long-term goal, and that is making Oslo a more
+              sustainable and livable city. It does not aim for a short-term fix only. The service
+              contributes to lasting behavioral and environmental change.
+            </p>
+            <p>
+              The service offers people a sustainable option in their everyday life. It has solid
+              roots in the city and it still grows to this day: The Oslo City Bike Scheme is
+              excellent because it encourages physical activity and makes active transportation
+              much easier.
+            </p>
+            <p>
+              The success of the service is dependent on ongoing investment in infrastructure,
+              maintenance and expansion to new areas as Oslo becomes bigger.
+            </p>
+          </div>
 
-        <h3>3. Take a Long-Term Systems Approach:</h3>
-        <p>
-          The Oslo City Bike Scheme has a long-term goal, and that is making Oslo a more
-          sustainable and livable city. It does not aim for a short-term fix only. The service
-          contributes to lasting behavioral and environmental change.
-        </p>
-        <p>
-          The service offers people a sustainable option in their everyday life. It has solid
-          roots in the city and it still grows to this day: The Oslo City Bike Scheme is
-          excellent because it encourages physical activity and makes active transportation
-          much easier.
-        </p>
-        <p>
-          The success of the service is dependent on ongoing investment in infrastructure,
-          maintenance and expansion to new areas as Oslo becomes bigger.
-        </p>
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-8">
+            <span class="eyebrow inline-flex items-center justify-center h-8 w-8 rounded-full bg-forest text-cream shrink-0" aria-hidden="true">04</span>
+            <h3 class="mt-4">Test and Refine Designs</h3>
+            <p>
+              Since the opening of The Oslo City Bike Scheme in 2003, with around 1000 bikes across
+              100 stations, it has since grown massively. It was later in 2016 upgraded with a
+              brand new, modern system with app-based unlocking. The old set-up was completely
+              replaced.
+            </p>
+            <p>
+              The number of stations, bicycles, digital features, and service coverage have been
+              adjusted based on user needs and city development. The service is certainly improved
+              through feedback and real-world use.
+            </p>
+            <p>
+              A challenge I still see with the service is that it could be improved even more with
+              broader feedback to improve accessibility for the elderly, tourists or people with
+              disabilities.
+            </p>
+          </div>
 
-        <h3>4. Test and Refine Designs</h3>
-        <p>
-          Since the opening of The Oslo City Bike Scheme in 2003, with around 1000 bikes across
-          100 stations, it has since grown massively. It was later in 2016 upgraded with a
-          brand new, modern system with app-based unlocking. The old set-up was completely
-          replaced.
-        </p>
-        <p>
-          The number of stations, bicycles, digital features, and service coverage have been
-          adjusted based on user needs and city development. The service is certainly improved
-          through feedback and real-world use.
-        </p>
-        <p>
-          A challenge I still see with the service is that it could be improved even more with
-          broader feedback to improve accessibility for the elderly, tourists or people with
-          disabilities.
-        </p>
+          <div class="article-card rounded-2xl border border-forest-deep/15 bg-[#FBF8F0] p-6 md:p-8">
+            <span class="eyebrow inline-flex items-center justify-center h-8 w-8 rounded-full bg-forest text-cream shrink-0" aria-hidden="true">05</span>
+            <h3 class="mt-4">Work with the Community, Not for Them</h3>
+            <p>
+              The service is designed around the needs of me and the rest of the community in Oslo.
+              Its success relies on how we use the bikes and interact with the city&rsquo;s
+              transportation network. Our behaviour as users, along with our demands and feedback,
+              have influenced station placement and service improvements.
+            </p>
+            <p>
+              I do believe that community involvement could be increased by allowing residents to
+              have a bigger influence on where the stations are located or how the service is
+              supposed to be in &ldquo;discarded&rdquo; areas.
+            </p>
+          </div>
+        </div>
 
-        <h3>5. Work with the Community, Not for Them</h3>
-        <p>
-          The service is designed around the needs of me and the rest of the community in Oslo.
-          Its success relies on how we use the bikes and interact with the city&rsquo;s
-          transportation network. Our behaviour as users, along with our demands and feedback,
-          have influenced station placement and service improvements.
-        </p>
-        <p>
-          I do believe that community involvement could be increased by allowing residents to
-          have a bigger influence on where the stations are located or how the service is
-          supposed to be in &ldquo;discarded&rdquo; areas.
-        </p>
-
-        <h2>Conclusion:</h2>
-        <p>
-          Having lived in Oslo for many years already, and more to come, I can tell that Oslo
-          demonstrates how a clean, sustainable and simple idea can have a meaningful impact
-          across an entire city. The service does, while it still can be improved, help people
-          move around in a more sustainable, affordable, and healthy way. The good design that
-          the service has shows that it is solving practical problems and improving everyday
-          life for me and the rest of the community in the core part of Oslo City.
-        </p>
+        <aside id="conclusion" class="scroll-mt-28 mt-12 md:mt-16 bg-forest-deep text-cream rounded-2xl p-7 md:p-9 relative overflow-hidden grain" aria-label="Conclusion">
+          <p class="eyebrow relative z-10" style="color:#B8DC12">Conclusion:</p>
+          <p class="mt-5 relative z-10 text-cream/90 text-[1.05rem] md:text-[1.15rem] leading-[1.75]">
+            Having lived in Oslo for many years already, and more to come, I can tell that Oslo
+            demonstrates how a clean, sustainable and simple idea can have a meaningful impact
+            across an entire city. The service does, while it still can be improved, help people
+            move around in a more sustainable, affordable, and healthy way. The good design that
+            the service has shows that it is solving practical problems and improving everyday
+            life for me and the rest of the community in the core part of Oslo City.
+          </p>
+        </aside>
       </div>
 
       <div class="mt-16 pt-8 border-t border-forest-deep/15 reveal">
@@ -348,6 +410,25 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setMenuOpen(false);
     });
+
+    /* Reading progress. Scaling a bar costs no layout, and rAF keeps it off the
+       scroll handler's critical path. */
+    const progressBar = document.getElementById('read-progress-bar');
+    let progressQueued = false;
+    function drawProgress() {
+      progressQueued = false;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
+    }
+    function queueProgress() {
+      if (progressQueued) return;
+      progressQueued = true;
+      requestAnimationFrame(drawProgress);
+    }
+    window.addEventListener('scroll', queueProgress, { passive: true });
+    window.addEventListener('resize', queueProgress);
+    drawProgress();
   </script>
   <script src="lightbox.js" defer></script>
 </body>

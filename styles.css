@@ -407,11 +407,31 @@ h1.font-display,
   padding-left: 0.25rem;
 }
 
+/* A card sets its own box, so the article's first-child margins must not push
+   its opening line away from the top edge. */
+.article-body .article-card > :first-child,
+.article-body .article-card h3:first-child,
+.article-body .article-card p:first-child,
+.article-body .article-card ul:first-child {
+  margin-top: 0;
+}
+.article-body .article-card ul {
+  padding-left: 1.1rem;
+}
+
 /* A callout brings its own padding and rhythm. Without this the article's
    paragraph margin lands on top of the box's padding — 60px above the label
    against 36px below the list — and the article's bullet indent pushes the
    numbered rows off the box's own left edge. */
 .article-body aside p {
+  /* The article's ink is near-black for cream; a dark callout sets its own, and
+     without this the utility class loses to .article-body p on specificity and
+     the text goes dark-on-dark. */
+  color: inherit;
+}
+/* Only the opening line sits flush against the box's padding — later paragraphs
+   keep the article's normal spacing between them. */
+.article-body aside > p:first-of-type {
   margin-top: 0;
 }
 .article-body aside ul {
