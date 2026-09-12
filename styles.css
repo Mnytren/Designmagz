@@ -112,6 +112,35 @@ h1.font-display,
 .work-card:focus-visible { outline: 2px solid #276F27; outline-offset: 6px; }
 .work-card:active img { transform: scale(1.02); }
 
+/* Project tags — disciplines a card covers, so the breadth of the work reads at
+   a glance. Kept deliberately quiet: tinted forest rather than a brand colour,
+   so they sit as metadata under the description instead of competing with the
+   title. Loud fills here would read as a product page, not a portfolio. */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.tag {
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  padding: 6px 11px;
+  border-radius: 999px;
+  color: rgba(23, 36, 18, 0.62);
+  background: rgba(23, 36, 18, 0.04);
+  border: 1px solid rgba(23, 36, 18, 0.09);
+}
+
+/* The cards are links, so the tags inherit the card's hover. Lift them a shade
+   with it rather than letting them look inert while the image zooms. */
+.work-card:hover .tag,
+.work-card:focus-visible .tag {
+  background: rgba(23, 36, 18, 0.07);
+  border-color: rgba(23, 36, 18, 0.14);
+}
+
 .btn-field {
   transition: transform 0.5s var(--ease-spring), opacity 0.4s var(--ease-spring);
 }
