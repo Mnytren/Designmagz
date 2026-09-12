@@ -112,15 +112,14 @@ h1.font-display,
 .work-card:focus-visible { outline: 2px solid #276F27; outline-offset: 6px; }
 .work-card:active img { transform: scale(1.02); }
 
-/* Project tags — disciplines a card covers, so the breadth of the work reads at
-   a glance. Kept deliberately quiet: tinted forest rather than a brand colour,
-   so they sit as metadata under the description instead of competing with the
-   title. Loud fills here would read as a product page, not a portfolio. */
+/* Project tags — one metadata row above the title carrying year, client and the
+   disciplines a card covers, so the breadth of the work reads at a glance.
+   Outline only at rest: no fill means they sit as metadata rather than as
+   badges, and the title keeps the weight. */
 .tag-row {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 14px;
 }
 .tag {
   font-size: 12px;
@@ -128,17 +127,33 @@ h1.font-display,
   letter-spacing: 0.02em;
   padding: 6px 11px;
   border-radius: 999px;
-  color: rgba(23, 36, 18, 0.62);
-  background: rgba(23, 36, 18, 0.04);
-  border: 1px solid rgba(23, 36, 18, 0.09);
+  background: transparent;
+  border: 1px solid rgba(23, 36, 18, 0.12);
+  color: rgba(23, 36, 18, 0.55);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* The cards are links, so the tags inherit the card's hover. Lift them a shade
-   with it rather than letting them look inert while the image zooms. */
+/* The whole card is one link, so the row warms green together on card hover
+   rather than tag by tag — a per-tag hover would imply each tag is separately
+   clickable. The green is a mid leaf tone, deliberately not the acid CTA
+   colour, which would pull the eye away from the buttons. No glow, no shadow,
+   no scale; a 1px lift is the whole gesture. */
 .work-card:hover .tag,
 .work-card:focus-visible .tag {
-  background: rgba(23, 36, 18, 0.07);
-  border-color: rgba(23, 36, 18, 0.14);
+  background-color: rgba(126, 181, 38, 0.10);
+  border-color: rgba(126, 181, 38, 0.35);
+  color: #2D5A1C;
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag { transition: none; }
+  .work-card:hover .tag,
+  .work-card:focus-visible .tag { transform: none; }
 }
 
 .btn-field {
