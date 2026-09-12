@@ -112,14 +112,17 @@ h1.font-display,
 .work-card:focus-visible { outline: 2px solid #276F27; outline-offset: 6px; }
 .work-card:active img { transform: scale(1.02); }
 
-/* Project tags — one metadata row above the title carrying year, client and the
-   disciplines a card covers, so the breadth of the work reads at a glance.
-   Outline only at rest: no fill means they sit as metadata rather than as
-   badges, and the title keeps the weight. */
+/* Project tags — the disciplines a card covers, so the breadth of the work
+   reads at a glance. They sit below the description, not beside the year: the
+   eyebrow above the title says when and for whom, the tags say what the work
+   is. Keeping the two apart stops one pill row from flattening two different
+   kinds of metadata into one. Outline only at rest, so the title keeps the
+   weight and these read as metadata rather than badges. */
 .tag-row {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 14px;
 }
 .tag {
   font-size: 12px;
