@@ -305,10 +305,15 @@ h1.font-display,
    Lime and brand greens, toned down from photographic neon so the hero copy
    stays the focus; the folds sit on the right, where there is no text.
 
+   Movement: every layer runs its own loop, with durations that don't divide
+   into each other (19s to 53s) and uneven keyframes, so the layers drift in
+   and out of step and the sky rarely looks the same twice. Negative delays
+   start each loop mid-way, so the page opens on motion already underway.
+
    Performance: every shape is a plain radial gradient. The gradients are
    soft on their own, so there is no filter and no mask, and the motion is
    only transform and opacity, which the compositor runs without
-   repainting. The folds share one element, so they cost a single layer. */
+   repainting. */
 .aurora {
   position: absolute;
   inset: 0;
@@ -334,7 +339,7 @@ h1.font-display,
     rgba(110, 195, 90, 0.18) 45%,
     rgba(45, 125, 70, 0.07) 72%,
     transparent);
-  animation: aurora-horizon 44s ease-in-out infinite;
+  animation: aurora-horizon 31s ease-in-out -7s infinite;
 }
 
 /* The band arcing across the top of the sky, the one the folds hang from. */
@@ -348,25 +353,35 @@ h1.font-display,
     rgba(170, 222, 65, 0.34),
     rgba(115, 195, 75, 0.17) 50%,
     transparent);
-  animation: aurora-veil-arc 56s ease-in-out infinite;
+  animation: aurora-veil-arc 43s ease-in-out -12s infinite;
 }
 
 /* Curtain folds hanging from the arc on the right: tall, narrow ellipses
-   with bright lime cores, at uneven widths, heights and spacing. The layer
-   sways from its top edge, so the folds move like fabric on a rail. */
-.aurora-veil--folds {
+   with bright lime cores. They are split across two layers that sway from
+   their top edge on different rhythms, so neighbouring folds pass each
+   other like fabric on a rail instead of moving as one block. The second
+   set leans cooler, toward teal, for colour variation. */
+.aurora-veil--folds-a,
+.aurora-veil--folds-b {
   left: 42%;
   width: 62%;
   top: 0;
   height: 78%;
   transform-origin: 50% 0;
+}
+.aurora-veil--folds-a {
   background:
     radial-gradient(10% 42% at 18% 40%, rgba(178, 225, 60, 0.38), rgba(120, 200, 70, 0.16) 55%, transparent),
-    radial-gradient(8% 36% at 36% 52%, rgba(150, 215, 70, 0.32), rgba(100, 185, 70, 0.14) 55%, transparent),
     radial-gradient(11% 40% at 56% 45%, rgba(178, 225, 60, 0.34), rgba(110, 195, 70, 0.15) 55%, transparent),
-    radial-gradient(7% 30% at 74% 38%, rgba(140, 210, 80, 0.28), rgba(95, 180, 75, 0.12) 55%, transparent),
     radial-gradient(9% 34% at 90% 30%, rgba(150, 215, 75, 0.24), transparent 70%);
-  animation: aurora-veil-folds 32s ease-in-out infinite;
+  animation: aurora-folds-a 23s ease-in-out -4s infinite;
+}
+.aurora-veil--folds-b {
+  background:
+    radial-gradient(8% 36% at 36% 52%, rgba(130, 215, 110, 0.32), rgba(80, 185, 110, 0.14) 55%, transparent),
+    radial-gradient(6% 28% at 64% 34%, rgba(120, 210, 140, 0.26), rgba(70, 175, 120, 0.10) 55%, transparent),
+    radial-gradient(7% 30% at 76% 42%, rgba(140, 210, 80, 0.28), rgba(95, 180, 75, 0.12) 55%, transparent);
+  animation: aurora-folds-b 29s ease-in-out -15s infinite;
 }
 
 /* Sweeps up from the horizon to the top-left corner, behind the headline,
@@ -381,7 +396,7 @@ h1.font-display,
     rgba(150, 215, 80, 0.32),
     rgba(80, 175, 95, 0.14) 50%,
     transparent);
-  animation: aurora-veil-left 52s ease-in-out infinite;
+  animation: aurora-veil-left 53s ease-in-out -20s infinite;
 }
 
 /* The tall column climbing on the right, leaning slightly outward. */
@@ -395,29 +410,42 @@ h1.font-display,
     rgba(130, 210, 100, 0.28),
     rgba(75, 175, 105, 0.12) 55%,
     transparent);
-  animation: aurora-veil-right 38s ease-in-out infinite;
+  animation: aurora-veil-right 37s ease-in-out -9s infinite;
 }
 
-/* Slow and shallow on purpose: the sky shifts, it does not dance. */
+/* Uneven stops and amounts, so no loop settles into a plain back-and-forth.
+   Still gentle: the sky shifts and breathes, it does not dance. */
 @keyframes aurora-horizon {
-  0%, 100% { transform: scaleX(1); opacity: 0.8; }
-  50%      { transform: scaleX(1.06) translateX(-2%); opacity: 1; }
+  0%, 100% { transform: scaleX(1) translateX(0); opacity: 0.75; }
+  30%      { transform: scaleX(1.08) translateX(-3%); opacity: 1; }
+  65%      { transform: scaleX(0.96) translateX(2%); opacity: 0.85; }
 }
 @keyframes aurora-veil-arc {
-  0%, 100% { transform: rotate(-8deg) translate(0, 0); opacity: 0.8; }
-  50%      { transform: rotate(-5deg) translate(-3%, 3%); opacity: 1; }
+  0%, 100% { transform: rotate(-8deg) translate(0, 0) scaleY(1); opacity: 0.75; }
+  35%      { transform: rotate(-4deg) translate(-4%, 4%) scaleY(1.12); opacity: 1; }
+  70%      { transform: rotate(-10deg) translate(3%, -2%) scaleY(0.94); opacity: 0.85; }
 }
-@keyframes aurora-veil-folds {
-  0%, 100% { transform: skewX(-3deg) scaleY(1); opacity: 0.85; }
-  50%      { transform: skewX(3deg) scaleY(1.06); opacity: 1; }
+@keyframes aurora-folds-a {
+  0%, 100% { transform: skewX(-5deg) scaleY(1) translateX(0); opacity: 0.8; }
+  25%      { transform: skewX(2deg) scaleY(1.10) translateX(2%); opacity: 1; }
+  55%      { transform: skewX(6deg) scaleY(0.95) translateX(-1%); opacity: 0.6; }
+  80%      { transform: skewX(-1deg) scaleY(1.06) translateX(-3%); opacity: 0.95; }
+}
+@keyframes aurora-folds-b {
+  0%, 100% { transform: skewX(4deg) scaleY(1.04) translateX(0); opacity: 0.9; }
+  30%      { transform: skewX(-4deg) scaleY(0.94) translateX(-3%); opacity: 0.55; }
+  60%      { transform: skewX(-7deg) scaleY(1.12) translateX(1%); opacity: 1; }
+  85%      { transform: skewX(1deg) scaleY(1) translateX(3%); opacity: 0.7; }
 }
 @keyframes aurora-veil-left {
-  0%, 100% { transform: rotate(24deg) translate(0, 0); opacity: 0.85; }
-  50%      { transform: rotate(20deg) translate(3%, -4%); opacity: 1; }
+  0%, 100% { transform: rotate(24deg) translate(0, 0); opacity: 0.8; }
+  40%      { transform: rotate(18deg) translate(4%, -5%); opacity: 1; }
+  75%      { transform: rotate(27deg) translate(-2%, 2%); opacity: 0.7; }
 }
 @keyframes aurora-veil-right {
-  0%, 100% { transform: rotate(18deg) scaleY(1); opacity: 1; }
-  50%      { transform: rotate(13deg) scaleY(1.08) translateX(-4%); opacity: 0.7; }
+  0%, 100% { transform: rotate(18deg) scaleY(1) translateX(0); opacity: 1; }
+  35%      { transform: rotate(11deg) scaleY(1.12) translateX(-5%); opacity: 0.65; }
+  70%      { transform: rotate(21deg) scaleY(0.95) translateX(2%); opacity: 0.9; }
 }
 @media (prefers-reduced-motion: reduce) {
   .aurora-horizon,
