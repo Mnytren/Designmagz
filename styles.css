@@ -299,101 +299,80 @@ h1.font-display,
 /* ==========================================================================
    Home hero — aurora borealis (brand greens, quiet drift)
    ========================================================================== */
-/* The bands are spread over the whole hero so the glow fills the background
-   rather than pooling in one corner. The layer bleeds past the section edges
-   so the blurred bands never show a hard rim, and the motion is slow and
-   shallow on purpose: a drift you notice on a second look, not a light show. */
+/* One curved ribbon of light across the hero: a bright pale-sage lower edge,
+   vertical curtains rising from it and fading into the dark, like the real
+   thing seen from a hillside. Two layers share the same shape: a heavily
+   blurred glow for the haze, and a sharper curtain layer whose streaks come
+   from a striped mask.
+
+   The shape is the rim of a very wide ellipse whose centre sits far below
+   the hero, so only a gentle arch shows. Rotating it about that distant
+   centre slides the crest sideways, which tilts the visible arch: higher on
+   the left, dipping to the right. */
 .aurora {
   position: absolute;
-  inset: -12%;
+  inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
-.aurora-band {
+.aurora-glow,
+.aurora-curtain {
   position: absolute;
-  border-radius: 9999px;
-  filter: blur(90px);
+  left: -80%;
+  width: 260%;
+  top: 34%;
+  height: 200%;
+  background: radial-gradient(closest-side,
+    transparent 0 64%,
+    rgba(120, 170, 90, 0.35) 68%,
+    rgba(190, 218, 160, 0.80) 71%,
+    rgba(150, 195, 115, 0.50) 76%,
+    rgba(90, 150, 60, 0.20) 86%,
+    transparent 97%);
+  transform: rotate(-4deg);
   will-change: transform;
+  animation: aurora-sway 46s ease-in-out infinite;
 }
-.aurora-band-1 {
-  top: -6%; left: -8%;
-  width: 78%; height: 62%;
-  background: radial-gradient(ellipse at center, rgba(39, 111, 39, 0.55), transparent 68%);
+.aurora-glow {
+  filter: blur(48px);
+  opacity: 0.75;
+}
+/* Three stripe patterns at different widths, intersected, so the curtains
+   look irregular instead of like a barcode. Their periods (24, 120, 200px)
+   all divide 600px, so sliding the mask by 600px loops without a seam. */
+.aurora-curtain {
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.35) 0, #000 5px, rgba(0,0,0,0.55) 9px, #000 14px, rgba(0,0,0,0.30) 19px, rgba(0,0,0,0.35) 24px),
+    repeating-linear-gradient(90deg, #000 0, #000 30px, rgba(0,0,0,0.35) 48px, #000 70px, rgba(0,0,0,0.60) 95px, #000 120px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.40) 0, #000 60px, #000 110px, rgba(0,0,0,0.20) 150px, rgba(0,0,0,0.40) 200px);
+          mask-image:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.35) 0, #000 5px, rgba(0,0,0,0.55) 9px, #000 14px, rgba(0,0,0,0.30) 19px, rgba(0,0,0,0.35) 24px),
+    repeating-linear-gradient(90deg, #000 0, #000 30px, rgba(0,0,0,0.35) 48px, #000 70px, rgba(0,0,0,0.60) 95px, #000 120px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.40) 0, #000 60px, #000 110px, rgba(0,0,0,0.20) 150px, rgba(0,0,0,0.40) 200px);
+  -webkit-mask-size: 600px 100%;
+          mask-size: 600px 100%;
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
   animation:
-    aurora-dance-1 32s ease-in-out infinite,
-    aurora-shimmer-1 14s ease-in-out infinite alternate;
+    aurora-sway 46s ease-in-out infinite,
+    aurora-drift 140s linear infinite,
+    aurora-breathe 13s ease-in-out infinite alternate;
 }
-.aurora-band-2 {
-  top: 4%; right: -10%;
-  width: 72%; height: 66%;
-  background: radial-gradient(ellipse at center, rgba(73, 154, 22, 0.40), transparent 68%);
-  animation:
-    aurora-dance-2 38s ease-in-out infinite,
-    aurora-shimmer-2 12s ease-in-out infinite alternate;
+@keyframes aurora-sway {
+  0%, 100% { transform: rotate(-4deg) translateX(0); }
+  50%      { transform: rotate(-2.8deg) translateX(2%); }
 }
-.aurora-band-3 {
-  bottom: -8%; left: 18%;
-  width: 70%; height: 56%;
-  background: radial-gradient(ellipse at center, rgba(142, 202, 60, 0.24), transparent 68%);
-  animation:
-    aurora-dance-3 28s ease-in-out infinite,
-    aurora-shimmer-3 16s ease-in-out infinite alternate;
+@keyframes aurora-drift {
+  from { -webkit-mask-position: 0 0; mask-position: 0 0; }
+  to   { -webkit-mask-position: 600px 0; mask-position: 600px 0; }
 }
-/* Band 4: a lighter spring-green highlight, kept to the upper right, away from the copy */
-.aurora-band-4 {
-  top: -4%; right: 12%;
-  width: 44%; height: 42%;
-  background: radial-gradient(ellipse at center, rgba(190, 224, 135, 0.20), transparent 64%);
-  animation:
-    aurora-dance-4 34s ease-in-out infinite,
-    aurora-shimmer-4 18s ease-in-out infinite alternate;
-}
-@keyframes aurora-dance-1 {
-  0%   { transform: translate3d(0, 0, 0) rotate(-6deg) skewX(0deg) scale(1); }
-  25%  { transform: translate3d(4%, 4%, 0) rotate(-2deg) skewX(-5deg) scale(1.05); }
-  50%  { transform: translate3d(7%, 1%, 0) rotate(2deg) skewX(3deg) scale(1.08); }
-  75%  { transform: translate3d(2%, -4%, 0) rotate(-4deg) skewX(5deg) scale(1.03); }
-  100% { transform: translate3d(0, 0, 0) rotate(-6deg) skewX(0deg) scale(1); }
-}
-@keyframes aurora-dance-2 {
-  0%   { transform: translate3d(2%, 2%, 0) rotate(5deg) skewX(0deg) scale(1.02); }
-  25%  { transform: translate3d(-3%, -3%, 0) rotate(1deg) skewX(6deg) scale(0.98); }
-  50%  { transform: translate3d(-6%, 2%, 0) rotate(-4deg) skewX(-3deg) scale(1.06); }
-  75%  { transform: translate3d(-1%, 5%, 0) rotate(2deg) skewX(-6deg) scale(1); }
-  100% { transform: translate3d(2%, 2%, 0) rotate(5deg) skewX(0deg) scale(1.02); }
-}
-@keyframes aurora-dance-3 {
-  0%   { transform: translate3d(-3%, 2%, 0) rotate(-8deg) skewX(0deg) scale(0.97); }
-  25%  { transform: translate3d(2%, -2%, 0) rotate(-3deg) skewX(-6deg) scale(1.04); }
-  50%  { transform: translate3d(6%, -4%, 0) rotate(1deg) skewX(4deg) scale(1.08); }
-  75%  { transform: translate3d(2%, 2%, 0) rotate(-6deg) skewX(6deg) scale(0.99); }
-  100% { transform: translate3d(-3%, 2%, 0) rotate(-8deg) skewX(0deg) scale(0.97); }
-}
-@keyframes aurora-dance-4 {
-  0%   { transform: translate3d(1%, 1%, 0) rotate(4deg) skewX(0deg) scale(1); }
-  25%  { transform: translate3d(-4%, -2%, 0) rotate(-2deg) skewX(5deg) scale(1.05); }
-  50%  { transform: translate3d(-7%, 2%, 0) rotate(3deg) skewX(-4deg) scale(1.08); }
-  75%  { transform: translate3d(-2%, 4%, 0) rotate(-3deg) skewX(5deg) scale(1.01); }
-  100% { transform: translate3d(1%, 1%, 0) rotate(4deg) skewX(0deg) scale(1); }
-}
-@keyframes aurora-shimmer-1 {
-  from { opacity: 0.75; }
+@keyframes aurora-breathe {
+  from { opacity: 0.8; }
   to   { opacity: 1; }
-}
-@keyframes aurora-shimmer-2 {
-  from { opacity: 1; }
-  to   { opacity: 0.70; }
-}
-@keyframes aurora-shimmer-3 {
-  from { opacity: 0.65; }
-  to   { opacity: 1; }
-}
-@keyframes aurora-shimmer-4 {
-  from { opacity: 0.55; }
-  to   { opacity: 0.90; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .aurora-band { animation: none; }
+  .aurora-glow,
+  .aurora-curtain { animation: none; }
 }
 
 /* Scrim that keeps hero copy legible over the aurora. Lighter than a full
