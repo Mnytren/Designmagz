@@ -299,107 +299,113 @@ h1.font-display,
 /* ==========================================================================
    Home hero — aurora borealis (brand greens, quiet drift)
    ========================================================================== */
+/* The bands are spread over the whole hero so the glow fills the background
+   rather than pooling in one corner. The layer bleeds past the section edges
+   so the blurred bands never show a hard rim, and the motion is slow and
+   shallow on purpose: a drift you notice on a second look, not a light show. */
 .aurora {
   position: absolute;
-  inset: 0;
+  inset: -12%;
   overflow: hidden;
   pointer-events: none;
 }
 .aurora-band {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(70px);
+  filter: blur(90px);
   will-change: transform;
 }
 .aurora-band-1 {
-  top: -18%; right: -8%;
-  width: 75%; height: 60%;
-  background: radial-gradient(ellipse at center, rgba(39, 111, 39, 0.60), transparent 65%);
+  top: -6%; left: -8%;
+  width: 78%; height: 62%;
+  background: radial-gradient(ellipse at center, rgba(39, 111, 39, 0.55), transparent 68%);
   animation:
-    aurora-dance-1 14s ease-in-out infinite,
-    aurora-shimmer-1 7s ease-in-out infinite alternate;
+    aurora-dance-1 32s ease-in-out infinite,
+    aurora-shimmer-1 14s ease-in-out infinite alternate;
 }
 .aurora-band-2 {
-  top: 0%; right: 8%;
-  width: 60%; height: 50%;
-  background: radial-gradient(ellipse at center, rgba(73, 154, 22, 0.45), transparent 65%);
+  top: 4%; right: -10%;
+  width: 72%; height: 66%;
+  background: radial-gradient(ellipse at center, rgba(73, 154, 22, 0.40), transparent 68%);
   animation:
-    aurora-dance-2 17s ease-in-out infinite,
-    aurora-shimmer-2 6s ease-in-out infinite alternate;
+    aurora-dance-2 38s ease-in-out infinite,
+    aurora-shimmer-2 12s ease-in-out infinite alternate;
 }
 .aurora-band-3 {
-  top: -10%; right: 28%;
-  width: 50%; height: 45%;
-  background: radial-gradient(ellipse at center, rgba(142, 202, 60, 0.30), transparent 65%);
+  bottom: -8%; left: 18%;
+  width: 70%; height: 56%;
+  background: radial-gradient(ellipse at center, rgba(142, 202, 60, 0.24), transparent 68%);
   animation:
-    aurora-dance-3 10s ease-in-out infinite,
-    aurora-shimmer-3 8s ease-in-out infinite alternate;
+    aurora-dance-3 28s ease-in-out infinite,
+    aurora-shimmer-3 16s ease-in-out infinite alternate;
 }
-/* Band 4 — a lighter spring-green highlight, kept to the right, away from the copy */
+/* Band 4: a lighter spring-green highlight, kept to the upper right, away from the copy */
 .aurora-band-4 {
-  top: -16%; right: 16%;
-  width: 40%; height: 38%;
-  background: radial-gradient(ellipse at center, rgba(190, 224, 135, 0.26), transparent 62%);
+  top: -4%; right: 12%;
+  width: 44%; height: 42%;
+  background: radial-gradient(ellipse at center, rgba(190, 224, 135, 0.20), transparent 64%);
   animation:
-    aurora-dance-4 12s ease-in-out infinite,
-    aurora-shimmer-4 9s ease-in-out infinite alternate;
+    aurora-dance-4 34s ease-in-out infinite,
+    aurora-shimmer-4 18s ease-in-out infinite alternate;
 }
 @keyframes aurora-dance-1 {
-  0%   { transform: translate3d(0, 0, 0) rotate(-10deg) skewX(0deg) scale(1); }
-  25%  { transform: translate3d(-9%, 9%, 0) rotate(1deg) skewX(-11deg) scale(1.11); }
-  50%  { transform: translate3d(-15%, 2%, 0) rotate(8deg) skewX(6deg) scale(1.18); }
-  75%  { transform: translate3d(-5%, -8%, 0) rotate(-7deg) skewX(12deg) scale(1.06); }
-  100% { transform: translate3d(0, 0, 0) rotate(-10deg) skewX(0deg) scale(1); }
+  0%   { transform: translate3d(0, 0, 0) rotate(-6deg) skewX(0deg) scale(1); }
+  25%  { transform: translate3d(4%, 4%, 0) rotate(-2deg) skewX(-5deg) scale(1.05); }
+  50%  { transform: translate3d(7%, 1%, 0) rotate(2deg) skewX(3deg) scale(1.08); }
+  75%  { transform: translate3d(2%, -4%, 0) rotate(-4deg) skewX(5deg) scale(1.03); }
+  100% { transform: translate3d(0, 0, 0) rotate(-6deg) skewX(0deg) scale(1); }
 }
 @keyframes aurora-dance-2 {
-  0%   { transform: translate3d(5%, 4%, 0) rotate(9deg) skewX(0deg) scale(1.05); }
-  25%  { transform: translate3d(-7%, -5%, 0) rotate(2deg) skewX(13deg) scale(0.95); }
-  50%  { transform: translate3d(-13%, 4%, 0) rotate(-9deg) skewX(-7deg) scale(1.14); }
-  75%  { transform: translate3d(-3%, 10%, 0) rotate(5deg) skewX(-13deg) scale(1.01); }
-  100% { transform: translate3d(5%, 4%, 0) rotate(9deg) skewX(0deg) scale(1.05); }
+  0%   { transform: translate3d(2%, 2%, 0) rotate(5deg) skewX(0deg) scale(1.02); }
+  25%  { transform: translate3d(-3%, -3%, 0) rotate(1deg) skewX(6deg) scale(0.98); }
+  50%  { transform: translate3d(-6%, 2%, 0) rotate(-4deg) skewX(-3deg) scale(1.06); }
+  75%  { transform: translate3d(-1%, 5%, 0) rotate(2deg) skewX(-6deg) scale(1); }
+  100% { transform: translate3d(2%, 2%, 0) rotate(5deg) skewX(0deg) scale(1.02); }
 }
 @keyframes aurora-dance-3 {
-  0%   { transform: translate3d(-6%, 5%, 0) rotate(-14deg) skewX(0deg) scale(0.93); }
-  25%  { transform: translate3d(4%, -4%, 0) rotate(-4deg) skewX(-14deg) scale(1.10); }
-  50%  { transform: translate3d(12%, -9%, 0) rotate(2deg) skewX(8deg) scale(1.19); }
-  75%  { transform: translate3d(4%, 4%, 0) rotate(-11deg) skewX(14deg) scale(0.98); }
-  100% { transform: translate3d(-6%, 5%, 0) rotate(-14deg) skewX(0deg) scale(0.93); }
+  0%   { transform: translate3d(-3%, 2%, 0) rotate(-8deg) skewX(0deg) scale(0.97); }
+  25%  { transform: translate3d(2%, -2%, 0) rotate(-3deg) skewX(-6deg) scale(1.04); }
+  50%  { transform: translate3d(6%, -4%, 0) rotate(1deg) skewX(4deg) scale(1.08); }
+  75%  { transform: translate3d(2%, 2%, 0) rotate(-6deg) skewX(6deg) scale(0.99); }
+  100% { transform: translate3d(-3%, 2%, 0) rotate(-8deg) skewX(0deg) scale(0.97); }
 }
 @keyframes aurora-dance-4 {
-  0%   { transform: translate3d(2%, 2%, 0) rotate(6deg) skewX(0deg) scale(1); }
-  25%  { transform: translate3d(-8%, -4%, 0) rotate(-4deg) skewX(11deg) scale(1.10); }
-  50%  { transform: translate3d(-14%, 5%, 0) rotate(5deg) skewX(-8deg) scale(1.17); }
-  75%  { transform: translate3d(-4%, 9%, 0) rotate(-7deg) skewX(12deg) scale(1.02); }
-  100% { transform: translate3d(2%, 2%, 0) rotate(6deg) skewX(0deg) scale(1); }
+  0%   { transform: translate3d(1%, 1%, 0) rotate(4deg) skewX(0deg) scale(1); }
+  25%  { transform: translate3d(-4%, -2%, 0) rotate(-2deg) skewX(5deg) scale(1.05); }
+  50%  { transform: translate3d(-7%, 2%, 0) rotate(3deg) skewX(-4deg) scale(1.08); }
+  75%  { transform: translate3d(-2%, 4%, 0) rotate(-3deg) skewX(5deg) scale(1.01); }
+  100% { transform: translate3d(1%, 1%, 0) rotate(4deg) skewX(0deg) scale(1); }
 }
 @keyframes aurora-shimmer-1 {
-  from { opacity: 0.70; }
+  from { opacity: 0.75; }
   to   { opacity: 1; }
 }
 @keyframes aurora-shimmer-2 {
   from { opacity: 1; }
-  to   { opacity: 0.55; }
+  to   { opacity: 0.70; }
 }
 @keyframes aurora-shimmer-3 {
-  from { opacity: 0.5; }
+  from { opacity: 0.65; }
   to   { opacity: 1; }
 }
 @keyframes aurora-shimmer-4 {
-  from { opacity: 0.40; }
-  to   { opacity: 0.85; }
+  from { opacity: 0.55; }
+  to   { opacity: 0.90; }
 }
 @media (prefers-reduced-motion: reduce) {
   .aurora-band { animation: none; }
 }
 
-/* Scrim that keeps hero copy legible over the aurora */
+/* Scrim that keeps hero copy legible over the aurora. Lighter than a full
+   blackout so the glow still reads behind the text, heaviest where the
+   headline sits and fading out toward the illustration. */
 .hero-scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(78deg, rgba(23, 36, 18, 0.92) 0%, rgba(23, 36, 18, 0.70) 45%, rgba(23, 36, 18, 0.22) 100%),
-    linear-gradient(to top, rgba(23, 36, 18, 0.92) 0%, transparent 45%);
+    linear-gradient(78deg, rgba(23, 36, 18, 0.72) 0%, rgba(23, 36, 18, 0.45) 45%, rgba(23, 36, 18, 0.12) 100%),
+    linear-gradient(to top, rgba(23, 36, 18, 0.75) 0%, transparent 35%);
 }
 
 /* ==========================================================================
