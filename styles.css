@@ -412,14 +412,24 @@ h1.font-display,
   --shift: -3%;
   --peak: 0.45;
   background: radial-gradient(closest-side,
-    transparent 0 72%,
-    rgba(150, 195, 120, 0.35) 76%,
-    rgba(190, 220, 160, 0.55) 79%,
-    rgba(120, 175, 90, 0.25) 85%,
-    transparent 95%);
-  -webkit-mask-image: var(--aurora-stripes),
+    transparent 0 70%,
+    rgba(150, 195, 120, 0.22) 75%,
+    rgba(185, 218, 155, 0.45) 79%,
+    rgba(130, 185, 100, 0.28) 86%,
+    rgba(90, 150, 60, 0.10) 93%,
+    transparent 99%);
+  /* Broad stripes only: on a ribbon this thin, the fine 60px pattern breaks
+     into little blocks. The plain third layer is a placeholder that keeps
+     the brightness wave in fourth place, where the drift leaves it still. */
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg, #000 0, #000 75px, rgba(0,0,0,0.45) 120px, #000 175px, rgba(0,0,0,0.65) 238px, #000 300px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.50) 0, #000 135px, #000 248px, rgba(0,0,0,0.35) 338px, rgba(0,0,0,0.50) 450px),
+    linear-gradient(#000, #000),
     linear-gradient(90deg, rgba(0,0,0,0.20) 25%, #000 36%, rgba(0,0,0,0.35) 47%, #000 58%, rgba(0,0,0,0.15) 72%);
-          mask-image: var(--aurora-stripes),
+          mask-image:
+    repeating-linear-gradient(90deg, #000 0, #000 75px, rgba(0,0,0,0.45) 120px, #000 175px, rgba(0,0,0,0.65) 238px, #000 300px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.50) 0, #000 135px, #000 248px, rgba(0,0,0,0.35) 338px, rgba(0,0,0,0.50) 450px),
+    linear-gradient(#000, #000),
     linear-gradient(90deg, rgba(0,0,0,0.20) 25%, #000 36%, rgba(0,0,0,0.35) 47%, #000 58%, rgba(0,0,0,0.15) 72%);
   animation:
     aurora-sway 58s ease-in-out infinite,
