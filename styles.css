@@ -39,14 +39,14 @@ h1.font-display,
   letter-spacing: -0.02em;
 }
 
+/* Menu, labels and lesser headings: sentence case at a medium weight, so they
+   read as quiet signposts rather than shouted caps. */
 .eyebrow {
   font-family: "DM Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  /* Tracked uppercase runs long; without this the wider labels break mid-word
-     rather than between words on narrow screens. */
+  letter-spacing: 0.01em;
+  /* Keeps long labels from overflowing their column on narrow screens. */
   overflow-wrap: break-word;
 }
 
@@ -643,9 +643,9 @@ h1.font-display,
    (the product keeps its own 1881-blue identity inside the device frames)
    ========================================================================== */
 .dev-label {
-  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(244,241,235,0.55);
+  font-size: 13px; letter-spacing: 0.01em; color: rgba(244,241,235,0.55);
   margin-bottom: 16px; display: flex; gap: 12px; align-items: center;
-  font-weight: 700; font-family: "DM Sans", sans-serif;
+  font-weight: 600; font-family: "DM Sans", sans-serif;
 }
 .dev-label::after { content: ""; flex: 1; height: 1px; background: rgba(244,241,235,0.15); }
 
