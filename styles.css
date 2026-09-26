@@ -299,107 +299,117 @@ h1.font-display,
 /* ==========================================================================
    Home hero — aurora borealis (brand greens, quiet drift)
    ========================================================================== */
+/* Soft veils of light, as in a long-exposure photo of the real thing: a
+   glow low on the horizon, and broad sweeps rising from it, one arcing up to
+   the top left, one climbing on the right. Muted brand greens rather than
+   photographic emerald, so the hero copy stays the focus.
+
+   Performance: each veil is a plain radial gradient. The gradient is soft
+   on its own, so there is no filter and no mask, and the motion is only
+   transform and opacity, which the compositor runs without repainting. */
 .aurora {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  contain: paint;
 }
-.aurora-band {
+.aurora-horizon,
+.aurora-veil {
   position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
-  will-change: transform;
-}
-.aurora-band-1 {
-  top: -18%; right: -8%;
-  width: 75%; height: 60%;
-  background: radial-gradient(ellipse at center, rgba(39, 111, 39, 0.60), transparent 65%);
-  animation:
-    aurora-dance-1 14s ease-in-out infinite,
-    aurora-shimmer-1 7s ease-in-out infinite alternate;
-}
-.aurora-band-2 {
-  top: 0%; right: 8%;
-  width: 60%; height: 50%;
-  background: radial-gradient(ellipse at center, rgba(73, 154, 22, 0.45), transparent 65%);
-  animation:
-    aurora-dance-2 17s ease-in-out infinite,
-    aurora-shimmer-2 6s ease-in-out infinite alternate;
-}
-.aurora-band-3 {
-  top: -10%; right: 28%;
-  width: 50%; height: 45%;
-  background: radial-gradient(ellipse at center, rgba(142, 202, 60, 0.30), transparent 65%);
-  animation:
-    aurora-dance-3 10s ease-in-out infinite,
-    aurora-shimmer-3 8s ease-in-out infinite alternate;
-}
-/* Band 4 — a lighter spring-green highlight, kept to the right, away from the copy */
-.aurora-band-4 {
-  top: -16%; right: 16%;
-  width: 40%; height: 38%;
-  background: radial-gradient(ellipse at center, rgba(190, 224, 135, 0.26), transparent 62%);
-  animation:
-    aurora-dance-4 12s ease-in-out infinite,
-    aurora-shimmer-4 9s ease-in-out infinite alternate;
-}
-@keyframes aurora-dance-1 {
-  0%   { transform: translate3d(0, 0, 0) rotate(-10deg) skewX(0deg) scale(1); }
-  25%  { transform: translate3d(-9%, 9%, 0) rotate(1deg) skewX(-11deg) scale(1.11); }
-  50%  { transform: translate3d(-15%, 2%, 0) rotate(8deg) skewX(6deg) scale(1.18); }
-  75%  { transform: translate3d(-5%, -8%, 0) rotate(-7deg) skewX(12deg) scale(1.06); }
-  100% { transform: translate3d(0, 0, 0) rotate(-10deg) skewX(0deg) scale(1); }
-}
-@keyframes aurora-dance-2 {
-  0%   { transform: translate3d(5%, 4%, 0) rotate(9deg) skewX(0deg) scale(1.05); }
-  25%  { transform: translate3d(-7%, -5%, 0) rotate(2deg) skewX(13deg) scale(0.95); }
-  50%  { transform: translate3d(-13%, 4%, 0) rotate(-9deg) skewX(-7deg) scale(1.14); }
-  75%  { transform: translate3d(-3%, 10%, 0) rotate(5deg) skewX(-13deg) scale(1.01); }
-  100% { transform: translate3d(5%, 4%, 0) rotate(9deg) skewX(0deg) scale(1.05); }
-}
-@keyframes aurora-dance-3 {
-  0%   { transform: translate3d(-6%, 5%, 0) rotate(-14deg) skewX(0deg) scale(0.93); }
-  25%  { transform: translate3d(4%, -4%, 0) rotate(-4deg) skewX(-14deg) scale(1.10); }
-  50%  { transform: translate3d(12%, -9%, 0) rotate(2deg) skewX(8deg) scale(1.19); }
-  75%  { transform: translate3d(4%, 4%, 0) rotate(-11deg) skewX(14deg) scale(0.98); }
-  100% { transform: translate3d(-6%, 5%, 0) rotate(-14deg) skewX(0deg) scale(0.93); }
-}
-@keyframes aurora-dance-4 {
-  0%   { transform: translate3d(2%, 2%, 0) rotate(6deg) skewX(0deg) scale(1); }
-  25%  { transform: translate3d(-8%, -4%, 0) rotate(-4deg) skewX(11deg) scale(1.10); }
-  50%  { transform: translate3d(-14%, 5%, 0) rotate(5deg) skewX(-8deg) scale(1.17); }
-  75%  { transform: translate3d(-4%, 9%, 0) rotate(-7deg) skewX(12deg) scale(1.02); }
-  100% { transform: translate3d(2%, 2%, 0) rotate(6deg) skewX(0deg) scale(1); }
-}
-@keyframes aurora-shimmer-1 {
-  from { opacity: 0.70; }
-  to   { opacity: 1; }
-}
-@keyframes aurora-shimmer-2 {
-  from { opacity: 1; }
-  to   { opacity: 0.55; }
-}
-@keyframes aurora-shimmer-3 {
-  from { opacity: 0.5; }
-  to   { opacity: 1; }
-}
-@keyframes aurora-shimmer-4 {
-  from { opacity: 0.40; }
-  to   { opacity: 0.85; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .aurora-band { animation: none; }
+  will-change: transform, opacity;
 }
 
-/* Scrim that keeps hero copy legible over the aurora */
+/* The brightest light sits low, behind the illustration and below the
+   buttons, warmer and more lime than the veils above it. */
+.aurora-horizon {
+  left: 18%;
+  width: 92%;
+  top: 60%;
+  height: 62%;
+  background: radial-gradient(closest-side,
+    rgba(185, 220, 95, 0.30),
+    rgba(95, 185, 105, 0.16) 45%,
+    rgba(40, 120, 70, 0.06) 72%,
+    transparent);
+  animation: aurora-horizon 44s ease-in-out infinite;
+}
+
+/* Sweeps up from the horizon to the top-left corner, behind the headline,
+   where the scrim keeps it faint. */
+.aurora-veil--left {
+  left: -12%;
+  width: 85%;
+  top: 18%;
+  height: 30%;
+  transform: rotate(24deg);
+  background: radial-gradient(closest-side,
+    rgba(80, 195, 125, 0.26),
+    rgba(55, 160, 105, 0.12) 50%,
+    transparent);
+  animation: aurora-veil-left 52s ease-in-out infinite;
+}
+
+/* The tall column climbing on the right, leaning slightly outward. */
+.aurora-veil--right {
+  left: 40%;
+  width: 40%;
+  top: -10%;
+  height: 95%;
+  transform: rotate(18deg);
+  background: radial-gradient(closest-side,
+    rgba(90, 200, 130, 0.22),
+    rgba(60, 165, 110, 0.10) 55%,
+    transparent);
+  animation: aurora-veil-right 38s ease-in-out infinite;
+}
+
+/* A faint teal wash high on the right, for the cooler edge of the sky. */
+.aurora-veil--high {
+  left: 62%;
+  width: 55%;
+  top: -15%;
+  height: 60%;
+  transform: rotate(-20deg);
+  background: radial-gradient(closest-side,
+    rgba(70, 185, 150, 0.14),
+    rgba(50, 150, 120, 0.06) 55%,
+    transparent);
+  animation: aurora-veil-high 60s ease-in-out infinite;
+}
+
+/* Slow and shallow on purpose: the sky shifts, it does not dance. */
+@keyframes aurora-horizon {
+  0%, 100% { transform: scaleX(1); opacity: 0.8; }
+  50%      { transform: scaleX(1.06) translateX(-2%); opacity: 1; }
+}
+@keyframes aurora-veil-left {
+  0%, 100% { transform: rotate(24deg) translate(0, 0); opacity: 0.85; }
+  50%      { transform: rotate(20deg) translate(3%, -4%); opacity: 1; }
+}
+@keyframes aurora-veil-right {
+  0%, 100% { transform: rotate(18deg) scaleY(1); opacity: 1; }
+  50%      { transform: rotate(13deg) scaleY(1.08) translateX(-4%); opacity: 0.7; }
+}
+@keyframes aurora-veil-high {
+  0%, 100% { transform: rotate(-20deg) translate(0, 0); opacity: 0.6; }
+  50%      { transform: rotate(-14deg) translate(-5%, 4%); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-horizon,
+  .aurora-veil { animation: none; }
+}
+
+/* Scrim that keeps hero copy legible over the aurora. Lighter than a full
+   blackout so the glow still reads behind the text, heaviest where the
+   headline sits and fading out toward the illustration. */
 .hero-scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(78deg, rgba(23, 36, 18, 0.92) 0%, rgba(23, 36, 18, 0.70) 45%, rgba(23, 36, 18, 0.22) 100%),
-    linear-gradient(to top, rgba(23, 36, 18, 0.92) 0%, transparent 45%);
+    linear-gradient(78deg, rgba(23, 36, 18, 0.72) 0%, rgba(23, 36, 18, 0.45) 45%, rgba(23, 36, 18, 0.12) 100%),
+    linear-gradient(to top, rgba(23, 36, 18, 0.75) 0%, transparent 35%);
 }
 
 /* ==========================================================================
