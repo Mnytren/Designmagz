@@ -301,26 +301,46 @@ h1.font-display,
    ========================================================================== */
 /* One curved ribbon of light across the hero: a bright pale-sage lower edge,
    vertical curtains rising from it and fading into the dark, like the real
-   thing seen from a hillside. Two layers share the same shape: a heavily
-   blurred glow for the haze, and a sharper curtain layer whose streaks come
-   from a striped mask.
+   thing seen from a hillside. A blurred glow gives the haze; curtain layers
+   get their streaks from a striped mask; a fainter ribbon behind adds depth.
 
    The shape is the rim of a wide ellipse whose centre sits below the hero,
    so an arch shows. Rotating it about that centre slides the crest to the
    right, behind the illustration, so the band runs low beneath the copy on
-   the left and rises where there is no text to compete with. */
+   the left and rises where there is no text to compete with.
+
+   Performance: every layer is painted once and then only moved. The motion
+   is transform and opacity alone, which the compositor runs without
+   repainting; the masks stay still and there is no filter on the container
+   (either would force a full repaint of the hero every frame). Layers are
+   kept just large enough to cover the hero through the sway, since each one
+   costs GPU memory in proportion to its area. */
 .aurora {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  /* Softens the curtain stripes after masking, so they read as light rather
-     than as hard lines. (A filter on the masked element itself would run
-     before the mask and leave the stripe edges crisp.) */
-  filter: blur(3px);
+  contain: paint;
 
-  /* The main ribbon: bright pale-sage lower edge, fading upward. */
-  --aurora-ribbon: radial-gradient(closest-side,
+  /* Three stripe patterns at different widths, intersected, so the curtains
+     look irregular instead of like a barcode. */
+  --aurora-stripes:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.70) 0, #000 12px, rgba(0,0,0,0.80) 22px, #000 35px, rgba(0,0,0,0.65) 48px, rgba(0,0,0,0.70) 60px),
+    repeating-linear-gradient(90deg, #000 0, #000 75px, rgba(0,0,0,0.45) 120px, #000 175px, rgba(0,0,0,0.65) 238px, #000 300px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.50) 0, #000 135px, #000 248px, rgba(0,0,0,0.35) 338px, rgba(0,0,0,0.50) 450px);
+}
+
+/* Each layer overhangs the hero by 15% on every side, enough to hide its
+   edges through the sway. The ellipse is sized and placed inside that box,
+   and the layer rotates about the ellipse's centre, not its own. The visible
+   hero spans roughly 12%–88% of the layer's width, which is where the
+   brightness patches below sit. */
+.aurora-layer {
+  position: absolute;
+  inset: -15%;
+  transform-origin: 50% 108.46%;
+  transform: rotate(-5deg);
+  background: radial-gradient(76.92% 76.92% at 50% 108.46%,
     transparent 0 60%,
     rgba(150, 190, 120, 0.45) 64%,
     rgba(200, 225, 170, 0.90) 68%,
@@ -328,130 +348,97 @@ h1.font-display,
     rgba(130, 180, 95, 0.45) 80%,
     rgba(90, 150, 60, 0.18) 90%,
     transparent 98%);
-  /* Three stripe patterns at different widths, intersected, so the curtains
-     look irregular instead of like a barcode. Their periods (60, 300, 450px)
-     all divide 900px, so sliding them by 900px loops without a seam. */
-  --aurora-stripes:
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.55) 0, #000 12px, rgba(0,0,0,0.70) 22px, #000 35px, rgba(0,0,0,0.50) 48px, rgba(0,0,0,0.55) 60px),
-    repeating-linear-gradient(90deg, #000 0, #000 75px, rgba(0,0,0,0.45) 120px, #000 175px, rgba(0,0,0,0.65) 238px, #000 300px),
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.50) 0, #000 135px, #000 248px, rgba(0,0,0,0.35) 338px, rgba(0,0,0,0.50) 450px);
-}
-
-/* Every layer shares the ribbon's geometry and sway, so they stay locked
-   together. Only the middle half of each 200%-wide layer is on screen, which
-   is why the brightness patches below sit between 25% and 75%. */
-.aurora-layer {
-  position: absolute;
-  left: -50%;
-  width: 200%;
-  top: 26%;
-  height: 200%;
-  --tilt: -5deg;
-  --tilt-to: -3.8deg;
-  --shift: 2%;
-  --peak: 1;
-  background: var(--aurora-ribbon);
-  transform: rotate(var(--tilt));
   will-change: transform;
   animation: aurora-sway 46s ease-in-out infinite;
 }
 
-/* Soft haze beneath the curtains, also uneven along its length. */
+/* Soft haze beneath the curtains. The blur is painted once; the layer is
+   then only moved. */
 .aurora-glow {
   filter: blur(40px);
   opacity: 0.9;
 }
 
-/* Curtains, with a slow brightness wave along the ribbon: bright stretches,
-   dimmer gaps, as in a real display. That fourth mask layer stays put while
-   the stripes drift through it. */
+/* Curtains, with a brightness wave along the ribbon: bright stretches and
+   dimmer gaps, as in a real display. */
 .aurora-curtain {
   -webkit-mask-image: var(--aurora-stripes),
-    linear-gradient(90deg, rgba(0,0,0,0.45) 25%, #000 32%, rgba(0,0,0,0.40) 39%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.30) 52%, #000 60%, rgba(0,0,0,0.55) 66%, #000 73%);
+    linear-gradient(90deg, rgba(0,0,0,0.45) 11.5%, #000 22.3%, rgba(0,0,0,0.40) 33.1%, rgba(0,0,0,0.85) 42.3%, rgba(0,0,0,0.30) 53.1%, #000 65.4%, rgba(0,0,0,0.55) 74.6%, #000 85.4%);
           mask-image: var(--aurora-stripes),
-    linear-gradient(90deg, rgba(0,0,0,0.45) 25%, #000 32%, rgba(0,0,0,0.40) 39%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.30) 52%, #000 60%, rgba(0,0,0,0.55) 66%, #000 73%);
-  -webkit-mask-size: 900px 100%, 900px 100%, 900px 100%, 100% 100%;
-          mask-size: 900px 100%, 900px 100%, 900px 100%, 100% 100%;
+    linear-gradient(90deg, rgba(0,0,0,0.45) 11.5%, #000 22.3%, rgba(0,0,0,0.40) 33.1%, rgba(0,0,0,0.85) 42.3%, rgba(0,0,0,0.30) 53.1%, #000 65.4%, rgba(0,0,0,0.55) 74.6%, #000 85.4%);
   -webkit-mask-composite: source-in;
           mask-composite: intersect;
+  opacity: 1;
   animation:
     aurora-sway 46s ease-in-out infinite,
-    aurora-drift 180s linear infinite,
     aurora-breathe 13s ease-in-out infinite alternate;
 }
 
 /* Taller, fainter rays that shoot up in only a few places, so the curtain
    tops are ragged instead of one even line. */
 .aurora-curtain--tall {
-  background: radial-gradient(closest-side,
+  background: radial-gradient(76.92% 76.92% at 50% 108.46%,
     transparent 0 66%,
     rgba(175, 210, 145, 0.40) 72%,
     rgba(130, 185, 100, 0.28) 84%,
     rgba(90, 150, 60, 0.12) 94%,
     transparent 100%);
   -webkit-mask-image: var(--aurora-stripes),
-    linear-gradient(90deg, transparent 28%, #000 32%, transparent 37%, transparent 47%, #000 51%, #000 54%, transparent 59%, transparent 64%, #000 69%, transparent 74%);
+    linear-gradient(90deg, transparent 16.2%, #000 22.3%, transparent 30%, transparent 45.4%, #000 51.5%, #000 56.2%, transparent 63.9%, transparent 71.5%, #000 79.2%, transparent 86.9%);
           mask-image: var(--aurora-stripes),
-    linear-gradient(90deg, transparent 28%, #000 32%, transparent 37%, transparent 47%, #000 51%, #000 54%, transparent 59%, transparent 64%, #000 69%, transparent 74%);
+    linear-gradient(90deg, transparent 16.2%, #000 22.3%, transparent 30%, transparent 45.4%, #000 51.5%, #000 56.2%, transparent 63.9%, transparent 71.5%, #000 79.2%, transparent 86.9%);
   animation:
     aurora-sway 46s ease-in-out infinite,
-    aurora-drift 150s linear infinite,
     aurora-breathe 17s ease-in-out -6s infinite alternate;
 }
 
-/* A second, thinner ribbon further back: tilted the other way, swaying on
-   its own slower rhythm and drifting in the opposite direction. It gives the
-   sky depth without adding brightness near the copy. */
+/* A second, thinner ribbon further back: higher, tilted the other way and
+   swaying on its own slower rhythm. Broad stripes only; on a ribbon this
+   thin the fine pattern breaks into little blocks. */
 .aurora-curtain--far {
-  left: -35%;
-  width: 170%;
-  top: 4%;
-  height: 150%;
-  --tilt: 6deg;
-  --tilt-to: 7.5deg;
-  --shift: -3%;
-  --peak: 0.45;
-  background: radial-gradient(closest-side,
+  transform-origin: 50% 72.31%;
+  transform: rotate(6deg);
+  background: radial-gradient(65.38% 57.69% at 50% 72.31%,
     transparent 0 70%,
     rgba(150, 195, 120, 0.22) 75%,
     rgba(185, 218, 155, 0.45) 79%,
     rgba(130, 185, 100, 0.28) 86%,
     rgba(90, 150, 60, 0.10) 93%,
     transparent 99%);
-  /* Broad stripes only: on a ribbon this thin, the fine 60px pattern breaks
-     into little blocks. The plain third layer is a placeholder that keeps
-     the brightness wave in fourth place, where the drift leaves it still. */
   -webkit-mask-image:
     repeating-linear-gradient(90deg, #000 0, #000 75px, rgba(0,0,0,0.45) 120px, #000 175px, rgba(0,0,0,0.65) 238px, #000 300px),
     repeating-linear-gradient(90deg, rgba(0,0,0,0.50) 0, #000 135px, #000 248px, rgba(0,0,0,0.35) 338px, rgba(0,0,0,0.50) 450px),
-    linear-gradient(#000, #000),
-    linear-gradient(90deg, rgba(0,0,0,0.20) 25%, #000 36%, rgba(0,0,0,0.35) 47%, #000 58%, rgba(0,0,0,0.15) 72%);
+    linear-gradient(90deg, rgba(0,0,0,0.20) 17.3%, #000 31.7%, rgba(0,0,0,0.35) 46.1%, #000 60.5%, rgba(0,0,0,0.15) 78.8%);
           mask-image:
     repeating-linear-gradient(90deg, #000 0, #000 75px, rgba(0,0,0,0.45) 120px, #000 175px, rgba(0,0,0,0.65) 238px, #000 300px),
     repeating-linear-gradient(90deg, rgba(0,0,0,0.50) 0, #000 135px, #000 248px, rgba(0,0,0,0.35) 338px, rgba(0,0,0,0.50) 450px),
-    linear-gradient(#000, #000),
-    linear-gradient(90deg, rgba(0,0,0,0.20) 25%, #000 36%, rgba(0,0,0,0.35) 47%, #000 58%, rgba(0,0,0,0.15) 72%);
+    linear-gradient(90deg, rgba(0,0,0,0.20) 17.3%, #000 31.7%, rgba(0,0,0,0.35) 46.1%, #000 60.5%, rgba(0,0,0,0.15) 78.8%);
+  opacity: 0.45;
   animation:
-    aurora-sway 58s ease-in-out infinite,
-    aurora-drift 240s linear infinite reverse,
-    aurora-breathe 21s ease-in-out -9s infinite alternate;
+    aurora-sway-far 58s ease-in-out infinite,
+    aurora-breathe-far 21s ease-in-out -9s infinite alternate;
 }
 
+/* Plain values in the keyframes (no custom properties), so browsers can hand
+   the animations to the compositor. */
 @keyframes aurora-sway {
-  0%, 100% { transform: rotate(var(--tilt)) translateX(0); }
-  50%      { transform: rotate(var(--tilt-to)) translateX(var(--shift)); }
+  0%, 100% { transform: rotate(-5deg) translateX(0); }
+  50%      { transform: rotate(-3.8deg) translateX(3%); }
 }
-@keyframes aurora-drift {
-  from { -webkit-mask-position: 0 0, 0 0, 0 0, 0 0; mask-position: 0 0, 0 0, 0 0, 0 0; }
-  to   { -webkit-mask-position: 900px 0, 900px 0, 900px 0, 0 0; mask-position: 900px 0, 900px 0, 900px 0, 0 0; }
+@keyframes aurora-sway-far {
+  0%, 100% { transform: rotate(6deg) translateX(0); }
+  50%      { transform: rotate(7.5deg) translateX(-3.9%); }
 }
 @keyframes aurora-breathe {
-  from { opacity: calc(var(--peak) * 0.75); }
-  to   { opacity: var(--peak); }
+  from { opacity: 0.75; }
+  to   { opacity: 1; }
+}
+@keyframes aurora-breathe-far {
+  from { opacity: 0.34; }
+  to   { opacity: 0.45; }
 }
 @media (prefers-reduced-motion: reduce) {
   .aurora-layer { animation: none; }
-  .aurora-curtain { opacity: var(--peak); }
 }
 
 /* Scrim that keeps hero copy legible over the aurora. Lighter than a full
