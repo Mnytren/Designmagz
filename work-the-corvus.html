@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Corvus | Magnus Nytrøen (MAGZ)</title>
+  <meta name="description" content="The Corvus: a personal concept artwork exploring digital compositing, atmospheric storytelling and sci-fi worldbuilding, built in Photoshop. Digital art by Magnus Nytrøen (MAGZ)." />
+  <link rel="canonical" href="https://www.designmagz.dev/work-the-corvus" />
+  <meta name="author" content="Magnus Nytrøen" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="MAGZ | Magnus Nytrøen" />
+  <meta property="og:title" content="The Corvus | Magnus Nytrøen (MAGZ)" />
+  <meta property="og:description" content="A personal concept artwork exploring digital compositing, atmospheric storytelling and sci-fi worldbuilding. Digital art by Magnus Nytrøen (MAGZ)." />
+  <meta property="og:url" content="https://www.designmagz.dev/work-the-corvus" />
+  <meta property="og:image" content="https://www.designmagz.dev/assets/corvus/corvus-cover.jpg" />
+  <meta property="og:locale" content="en" />
+  <meta property="article:author" content="Magnus Nytrøen" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Corvus | Magnus Nytrøen (MAGZ)" />
+  <meta name="twitter:description" content="A personal concept artwork exploring digital compositing, atmospheric storytelling and sci-fi worldbuilding. Digital art by Magnus Nytrøen (MAGZ)." />
+  <meta name="twitter:image" content="https://www.designmagz.dev/assets/corvus/corvus-cover.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'forest-deep': '#172412',
+            'forest': '#276F27',
+            'moss': '#499A16',
+            'lime': '#8ECA3C',
+            'acid': '#B8DC12',
+            'cream': '#F4F1EB',
+            /* The Corvus palette, taken from the Figma boards */
+            'night': '#001724',
+            'void': '#02060C',
+            'storm': '#1770D0',
+            'deep-sky': '#185E93',
+            'frost': '#B0DDFF',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            corvus: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* The Corvus runs on its own night palette and Manrope, as in the Figma boards.
+       Site chrome (nav, footer) stays MAGZ so the page still belongs to the portfolio. */
+    .corvus { font-family: Manrope, system-ui, sans-serif; }
+    .corvus ::selection { background: #B0DDFF; color: #001724; }
+
+    /* Soft blurred glows standing in for the boards' blurred ellipses. */
+    .corvus-intro {
+      background-color: #001724;
+      background-image:
+        radial-gradient(60% 70% at 0% 0%, rgba(24, 94, 147, 0.85) 0%, rgba(24, 94, 147, 0) 70%),
+        radial-gradient(45% 60% at 0% 100%, rgba(23, 112, 208, 0.35) 0%, rgba(23, 112, 208, 0) 70%),
+        radial-gradient(50% 70% at 100% 20%, rgba(200, 218, 250, 0.10) 0%, rgba(200, 218, 250, 0) 70%);
+    }
+    .corvus-creating {
+      background-color: #052E58;
+      background-image:
+        radial-gradient(55% 120% at 50% 0%, rgba(23, 112, 208, 0.55) 0%, rgba(23, 112, 208, 0) 75%),
+        linear-gradient(180deg, #0A4278 0%, #062F58 100%);
+    }
+    .corvus-assets {
+      background-color: #010C16;
+      background-image:
+        radial-gradient(40% 35% at 50% 50%, rgba(23, 112, 208, 0.22) 0%, rgba(23, 112, 208, 0) 70%),
+        linear-gradient(180deg, #001224 0%, #010811 100%);
+    }
+    .corvus-smoke {
+      background-color: #000;
+      background-image: url("assets/corvus/corvus-smoke-bg.webp");
+      background-size: cover;
+      background-position: center;
+    }
+    .corvus-clouds {
+      background-color: #071a33;
+      background-image: url("assets/corvus/corvus-clouds-bg.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Outline pill used as the section label above each image set. */
+    .corvus-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 13rem;
+      padding: 0.7rem 2rem;
+      border: 1px solid #1770D0;
+      border-radius: 9999px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.125rem;
+      letter-spacing: 0.01em;
+    }
+    @media (min-width: 768px) {
+      .corvus-pill { min-width: 16.5rem; font-size: 1.375rem; padding: 0.75rem 2.5rem; }
+    }
+
+    .corvus-tile img {
+      transition: transform 1.2s var(--ease-spring), opacity 0.6s var(--ease-spring);
+    }
+    .corvus-tile:hover img { transform: scale(1.03); }
+
+    .corvus-back:focus-visible { outline: 2px solid #B0DDFF; outline-offset: 4px; }
+    .corvus-btn { transition: transform 0.5s var(--ease-spring), opacity 0.4s var(--ease-spring); }
+    .corvus-btn:hover { transform: translateY(-2px); }
+    .corvus-btn:focus-visible { outline: 2px solid #B0DDFF; outline-offset: 4px; }
+    .corvus-btn:active { transform: translateY(0); opacity: 0.85; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .corvus-tile img, .corvus-btn { transition: none; }
+      .corvus-tile:hover img { transform: none; }
+    }
+  </style>
+</head>
+<body class="bg-night text-cream antialiased">
+
+  <!-- ============ NAV ============ -->
+  <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
+    <nav class="max-w-6xl mx-auto px-6 md:px-10 py-6 flex items-center justify-between relative z-10">
+      <a href="/" class="flex items-center gap-3 quiet-link" aria-label="MAGZ home">
+        <svg viewBox="0 0 660.46 481.69" class="h-7 w-auto" fill="currentColor" aria-hidden="true">
+          <circle cx="387.12" cy="28.61" r="28.61"/>
+          <path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/>
+        </svg>
+        <span class="font-display text-xl tracking-wide">MAGZ</span>
+      </a>
+      <div class="hidden md:flex items-center gap-10 eyebrow">
+        <a href="work" class="quiet-link text-acid" aria-current="page">Work</a>
+        <a href="practice" class="quiet-link">About</a>
+        <a href="blog" class="quiet-link">Blog</a>
+        <a href="#contact" class="quiet-link">Contact</a>
+      </div>
+      <button id="menu-toggle" type="button" class="md:hidden relative z-10 w-8 h-8 flex flex-col justify-center items-center gap-[6px]" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu">
+        <span class="burger-line burger-line-1 block w-6 h-[1.5px] bg-cream"></span>
+        <span class="burger-line burger-line-2 block w-6 h-[1.5px] bg-cream"></span>
+        <span class="burger-line burger-line-3 block w-6 h-[1.5px] bg-cream"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div id="mobile-menu" class="md:hidden bg-forest-deep text-cream grain">
+    <nav class="h-full flex flex-col justify-center px-8 gap-2 relative z-10">
+      <a href="work" class="font-display text-4xl py-3 quiet-link text-acid">Work</a>
+      <a href="practice" class="font-display text-4xl py-3 quiet-link">About</a>
+      <a href="blog" class="font-display text-4xl py-3 quiet-link">Blog</a>
+      <a href="#contact" class="font-display text-4xl py-3 quiet-link">Contact</a>
+    </nav>
+  </div>
+
+  <main class="corvus">
+
+    <!-- ============ BOARD 1 · THE ARTWORK ============ -->
+    <section class="bg-night" aria-labelledby="corvus-title">
+      <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-5 flex items-center justify-between gap-4 text-sm">
+        <a href="work" class="corvus-back quiet-link text-frost/70 inline-flex items-center gap-2 font-medium">
+          <svg viewBox="0 0 179.61 258.61" class="h-[0.85em] w-[0.59em] shrink-0 -scale-x-100" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg> All work
+        </a>
+        <p class="text-frost/60 font-medium tracking-wide">Mini project &middot; Digital art</p>
+      </div>
+      <figure class="max-w-[1440px] mx-auto">
+        <img
+          src="assets/corvus/corvus-artwork-1440.webp"
+          srcset="assets/corvus/corvus-artwork-1440.webp 1436w, assets/corvus/corvus-artwork-2400.webp 2393w"
+          sizes="(min-width: 1440px) 1440px, 100vw"
+          alt="Corvus: a dark raven with feathered horns and glowing blue eyes swoops through a stormy night sky, lightning crackling along its wings, towards a pixelated skyscraper lit with blue windows. A crescent moon hangs above and the words CORVUS, 30,000 AMPS glow at the bottom."
+          width="1436" height="1436" fetchpriority="high" decoding="async"
+          class="block w-full h-auto" />
+      </figure>
+    </section>
+
+    <!-- ============ INTRO ============ -->
+    <section class="corvus-intro relative overflow-hidden border-t-2 border-storm/60">
+      <div class="max-w-4xl mx-auto px-6 md:px-10 py-20 md:py-32 text-center">
+        <p class="text-frost/70 text-sm md:text-base font-medium tracking-[0.2em] uppercase reveal">The Corvus</p>
+        <h1 id="corvus-title" class="mt-5 text-[2.75rem] sm:text-6xl md:text-7xl leading-[1.1] tracking-[-0.02em] reveal" style="transition-delay: 80ms;">
+          <span class="font-normal text-white">Personal Digital</span><br />
+          <span class="font-bold text-frost">Art Project</span>
+        </h1>
+        <p class="mt-10 md:mt-14 text-lg md:text-2xl leading-[1.65] text-white/90 max-w-3xl mx-auto reveal" style="transition-delay: 160ms;">
+          <strong class="font-bold text-white">Corvus</strong> is a personal concept artwork exploring digital
+          compositing, atmospheric storytelling and sci-fi worldbuilding. Built from multiple visual
+          elements and refined through color grading, lighting and visual effects, the project aims to
+          create a cinematic and immersive futuristic scene.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ BOARD 2 · CREATING THE ARTWORK ============ -->
+    <section aria-labelledby="creating-title">
+      <div class="corvus-creating">
+        <div class="max-w-4xl mx-auto px-6 md:px-10 py-16 md:py-24 text-center">
+          <h2 id="creating-title" class="text-4xl md:text-6xl leading-[1.15] tracking-[-0.02em] reveal">
+            <span class="font-bold text-frost">Creating</span><br />
+            <span class="font-normal text-white">the artwork</span>
+          </h2>
+          <p class="mt-8 md:mt-10 text-base md:text-xl leading-[1.65] text-white/90 max-w-2xl mx-auto reveal" style="transition-delay: 120ms;">
+            The artwork was built by combining multiple visual elements into a cohesive composition.
+            Atmospheric effects, lighting and color grading were used to establish depth and mood.
+          </p>
+        </div>
+      </div>
+
+      <div class="corvus-assets">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-7 py-16 md:py-20">
+          <!-- Source assets -->
+          <div class="text-center reveal">
+            <h3 class="corvus-pill">Source assets</h3>
+          </div>
+          <div class="mt-8 md:mt-11 grid grid-cols-3 gap-3 sm:gap-6 md:gap-14 max-w-[1024px] mx-auto">
+            <figure class="corvus-tile overflow-hidden reveal">
+              <img src="assets/corvus/corvus-source-clouds.webp" alt="Source asset: a photo of dark, turbulent blue storm clouds" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+            <figure class="corvus-tile overflow-hidden reveal" style="transition-delay: 100ms;">
+              <img src="assets/corvus/corvus-source-raven.webp" alt="Source asset: a photo of a black raven landing with wings spread, against a pale sky" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+            <figure class="corvus-tile overflow-hidden reveal" style="transition-delay: 200ms;">
+              <img src="assets/corvus/corvus-source-city.webp" alt="Source asset: a close-up of a pixelated building facade with rows of small, yellow-lit windows" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+          </div>
+
+          <!-- Composition -->
+          <div class="mt-16 md:mt-20 text-center reveal">
+            <h3 class="corvus-pill">Composition</h3>
+          </div>
+          <div class="mt-8 md:mt-11 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 md:gap-14">
+            <figure class="corvus-tile overflow-hidden reveal">
+              <img src="assets/corvus/corvus-comp-1.webp" alt="Composition layer: the stormy sky with the crescent moon and the glowing pixel towers in place" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+            <figure class="corvus-tile overflow-hidden reveal" style="transition-delay: 100ms;">
+              <img src="assets/corvus/corvus-comp-2.webp" alt="Composition layer: the graded raven with lightning and blue mist, isolated on black" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+            <figure class="corvus-tile overflow-hidden reveal" style="transition-delay: 200ms;">
+              <img src="assets/corvus/corvus-comp-3.webp" alt="Composition layer: soft blue atmospheric haze and glow on black" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+            <figure class="corvus-tile overflow-hidden reveal" style="transition-delay: 300ms;">
+              <img src="assets/corvus/corvus-comp-4.webp" alt="Composition detail: four close-ups of the raven, showing the feathered horns, the glowing eye, the talons and the blue-lit wing" width="912" height="807" loading="lazy" decoding="async" class="block w-full h-auto" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOARD 3 · BEHIND THE SCENES ============ -->
+    <section class="bg-black" aria-labelledby="bts-title">
+      <div class="corvus-smoke">
+        <div class="max-w-4xl mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
+          <h2 id="bts-title" class="text-3xl md:text-5xl font-bold text-frost tracking-[-0.01em] reveal">Behind the Scenes</h2>
+          <p class="mt-5 md:mt-6 text-base md:text-xl leading-[1.65] text-white/90 reveal" style="transition-delay: 120ms;">
+            A look behind the scenes at the compositing process inside Photoshop.
+          </p>
+        </div>
+      </div>
+
+      <!-- Process video, directly under the Behind the Scenes board -->
+      <div class="max-w-6xl mx-auto px-6 md:px-10 pb-20 md:pb-28">
+        <figure class="reveal">
+          <video
+            class="block w-full h-auto bg-black border border-storm/30"
+            poster="assets/corvus/corvus-video-poster.webp"
+            preload="metadata"
+            controls
+            playsinline
+            width="1920"
+            height="1080">
+            <source src="assets/corvus/corvus-behind-the-scenes.mp4" type="video/mp4" />
+            <p class="p-6 text-white/75">
+              Your browser cannot play this video.
+              <a href="assets/corvus/corvus-behind-the-scenes.mp4" class="underline">Download the video (MP4)</a>.
+            </p>
+          </video>
+          <figcaption class="text-sm text-white/45 mt-3 font-medium">The compositing process, from single layers to the finished frame</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ BOARD 4 · FINAL PRESENTATION ============ -->
+    <section class="bg-black" aria-labelledby="final-title">
+      <div class="max-w-4xl mx-auto px-6 md:px-10 pt-20 md:pt-24 pb-14 md:pb-20 text-center">
+        <h2 id="final-title" class="text-3xl md:text-5xl font-bold text-frost tracking-[-0.01em] reveal">Final Presentation</h2>
+        <p class="mt-5 md:mt-6 text-base md:text-xl leading-[1.65] text-white/90 reveal" style="transition-delay: 120ms;">
+          The final artwork showcased as a framed sci-fi poster concept.
+        </p>
+      </div>
+      <figure class="max-w-[1440px] mx-auto">
+        <img
+          src="assets/corvus/corvus-poster-1440.webp"
+          srcset="assets/corvus/corvus-poster-1440.webp 1440w, assets/corvus/corvus-poster-2400.webp 2400w"
+          sizes="(min-width: 1440px) 1440px, 100vw"
+          alt="The Corvus artwork as a framed poster hanging on a dark, blue-lit concrete wall"
+          width="1440" height="1725" loading="lazy" decoding="async"
+          class="block w-full h-auto" />
+      </figure>
+    </section>
+
+    <!-- ============ THANKS ============ -->
+    <section class="corvus-clouds border-t-2 border-storm/70">
+      <div class="max-w-4xl mx-auto px-6 md:px-10 py-20 md:py-24 text-center">
+        <p class="text-2xl md:text-4xl font-bold text-frost reveal">Thanks for viewing!</p>
+        <a href="work" class="corvus-btn inline-flex items-center gap-2.5 mt-10 bg-frost text-night font-bold px-8 py-4 rounded-full reveal" style="transition-delay: 120ms;">
+          <svg viewBox="0 0 179.61 258.61" class="h-[0.85em] w-[0.59em] shrink-0 -scale-x-100" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg> Back to all work
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer id="contact" class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="stars"></div>
+    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-12 md:pt-32 relative z-10">
+      <div class="max-w-3xl reveal">
+        <p class="eyebrow text-acid">Contact</p>
+        <h2 class="font-display text-4xl md:text-6xl mt-4 leading-tight">Send me a field note.</h2>
+        <p class="mt-8 text-cream/75 max-w-xl leading-[1.8]">
+          Feel free to say hello. I love hearing about ideas, products, experiments,
+          side projects, the weather and so on.
+        </p>
+        <a href="mailto:magnusny90@gmail.com" class="btn-field inline-block mt-10 bg-cream text-forest-deep font-medium px-8 py-4 rounded-full">
+          Say hello
+        </a>
+      </div>
+
+      <div class="mt-24 md:mt-32 pt-8 border-t border-cream/15 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <svg viewBox="0 0 660.46 481.69" class="h-5 w-auto" fill="currentColor" aria-hidden="true">
+            <circle cx="387.12" cy="28.61" r="28.61"/>
+            <path d="M660.46,5v471.69c0,2.76-2.24,5-5,5h-114.21c-2.76,0-5-2.24-5-5V184.25c0-5.57-7.72-6.97-9.68-1.76l-111.15,221.73c-.73,1.95-2.6,3.24-4.68,3.24h-47.95c-2.09,0-3.95-1.3-4.68-3.25l-110.43-221.56c-1.95-5.22-9.69-3.82-9.69,1.75v292.29c0,2.76-2.23,5-5,5H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.65-4.02-7.94l112.79-152.49H5.01c-4.1,0-6.46-4.66-4.02-7.95L113.78,0h169.11c2.1,0,3.97,1.31,4.69,3.27l94.46,182.63c1.62,4.41,7.85,4.41,9.48,0L486.66,3.26c.72-1.96,2.59-3.26,4.68-3.26h164.12c2.76,0,5,2.24,5,5Z"/>
+          </svg>
+          <span class="font-display text-lg">MAGZ</span>
+        </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+          <nav class="flex items-center gap-5" aria-label="Social media">
+            <a href="https://www.instagram.com/designmagz" target="_blank" rel="noopener" aria-label="Instagram" class="quiet-link text-cream/80"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.linkedin.com/in/magnus-nytroen" target="_blank" rel="noopener" aria-label="LinkedIn" class="quiet-link text-cream/80"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+          </nav>
+          <a href="magz-design-system" class="quiet-link eyebrow text-cream/40">Design System &#8599;</a>
+          <p class="eyebrow text-cream/40">Oslo &middot; Tynset, Norway &middot; 62.28&deg;N</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function setMenuOpen(open) {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.toggle('is-open', open);
+      document.body.classList.toggle('overflow-hidden', open);
+    }
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    });
+  </script>
+  <script src="lightbox.js" defer></script>
+</body>
+</html>
