@@ -34,8 +34,11 @@
   --rust:#A3402E;
 
   --ink:var(--forest-deep);
+  --page:var(--cream);
   --surface:var(--white);
-  --surface-sunken:var(--cream);
+  /* The deep night green, in both themes: the dark page background, and
+     sunken bands on a cream page (the journal on the home page). */
+  --surface-sunken:#11190C;
   --border:rgba(23,36,18,.14);
   --border-strong:rgba(23,36,18,.28);
   --muted:rgba(23,36,18,.78);
@@ -64,8 +67,8 @@
 
 html[data-theme="dark"]{
   --ink:var(--cream);
+  --page:var(--surface-sunken);
   --surface:#1B2A14;
-  --surface-sunken:#10190C;
   --border:rgba(244,241,235,.14);
   --border-strong:rgba(244,241,235,.32);
   --muted:rgba(244,241,235,.78);
@@ -79,7 +82,7 @@ body{
   margin:0;
   font-family:var(--sans);
   color:var(--ink);
-  background:var(--surface-sunken);
+  background:var(--page);
   font-size:15px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
@@ -118,7 +121,8 @@ button{font-family:inherit;}
 .sidebar-brand{ display:flex; align-items:center; gap:10px; margin-bottom:6px; text-decoration:none; }
 .sidebar-brand .mark{ width:26px; height:auto; color:var(--cream); }
 .sidebar-brand .mark path{ fill:currentColor; }
-.sidebar-brand .word{ font-family:var(--serif); font-size:19px; letter-spacing:.01em; }
+/* The wordmark is DM Sans Bold, as in the site's nav (tracking-wide, .025em). */
+.sidebar-brand .word{ font-family:var(--sans); font-weight:700; font-size:19px; letter-spacing:.025em; }
 .sidebar-sub{ font-size:11px; letter-spacing:.01em; opacity:.55; margin:0 0 24px 36px; }
 .sidebar-back{ display:inline-flex; align-items:center; gap:7px; font-size:11.5px; letter-spacing:.01em; font-weight:600; color:rgba(244,241,235,.6); text-decoration:none; margin:0 0 30px 0; transition:color .15s var(--ease); }
 .sidebar-back:hover{ color:var(--cream); }
@@ -170,7 +174,7 @@ button{font-family:inherit;}
 .mtb-brand .mark{ width:24px; height:auto; flex-shrink:0; }
 .mtb-brand .mark path{ fill:currentColor; }
 .mtb-titles{ display:flex; flex-direction:column; line-height:1.15; min-width:0; }
-.mtb-word{ font-family:var(--serif); font-size:17px; }
+.mtb-word{ font-family:var(--sans); font-weight:700; font-size:17px; letter-spacing:.025em; }
 .mtb-sub{ font-size:9.5px; letter-spacing:.01em; opacity:.55; }
 .mtb-home{
   display:inline-flex; align-items:center; gap:7px; flex-shrink:0;
@@ -393,7 +397,7 @@ button{font-family:inherit;}
 
 /* ============ NAVIGATION ============ */
 .navbar-demo{ background:var(--forest-deep); border-radius:var(--radius-lg); padding:16px 22px; display:flex; align-items:center; justify-content:space-between; width:100%; }
-.navbar-demo .brand{ display:flex; align-items:center; gap:9px; color:var(--cream); font-family:var(--serif); font-size:16px; }
+.navbar-demo .brand{ display:flex; align-items:center; gap:9px; color:var(--cream); font-family:var(--sans); font-weight:700; font-size:16px; letter-spacing:.025em; }
 .navbar-demo .brand .mark{ width:18px; height:auto; color:var(--cream); }
 .navbar-demo .brand .mark path{ fill:currentColor; }
 .navbar-demo .links{ display:flex; gap:26px; }
@@ -720,7 +724,7 @@ html[data-theme="dark"] .logo-lockup .logo-primary{ color:var(--cream); }
           <div class="color-grid">
             <div class="swatch"><div class="swatch-fill" style="background:#FFFFFF; border-bottom:1px solid var(--border);"></div><div class="swatch-info"><div class="name">Surface</div><div class="hex">#FFFFFF</div><div class="role">Card and input backgrounds</div></div></div>
             <div class="swatch"><div class="swatch-fill" style="background:#A3402E;"></div><div class="swatch-info"><div class="name">Rust</div><div class="hex">#A3402E</div><div class="role">Danger, destructive actions, errors</div></div></div>
-            <div class="swatch"><div class="swatch-fill" style="background:var(--surface-sunken);"></div><div class="swatch-info"><div class="name">Sunken</div><div class="hex">#F4F1EB</div><div class="role">Page background</div></div></div>
+            <div class="swatch"><div class="swatch-fill" style="background:#11190C;"></div><div class="swatch-info"><div class="name">Sunken</div><div class="hex">#11190C</div><div class="role">Sunken sections, dark page background</div></div></div>
           </div>
         </div>
       </section>
@@ -867,14 +871,14 @@ html[data-theme="dark"] .logo-lockup .logo-primary{ color:var(--cream); }
 
 <span class="cm">/* ---------- semantic (light) ---------- */</span>
 <span class="tk">--ink</span>: <span class="vl">var(--forest-deep)</span>;      <span class="tk">--surface</span>: <span class="vl">#FFFFFF</span>;
-<span class="tk">--surface-sunken</span>: <span class="vl">var(--cream)</span>;
+<span class="tk">--page</span>: <span class="vl">var(--cream)</span>;          <span class="tk">--surface-sunken</span>: <span class="vl">#11190C</span>;
 <span class="tk">--border</span>: <span class="vl">rgba(23,36,18,.14)</span>;  <span class="tk">--border-strong</span>: <span class="vl">rgba(23,36,18,.28)</span>;
 <span class="tk">--muted</span>: <span class="vl">rgba(23,36,18,.78)</span>;   <span class="tk">--faint</span>: <span class="vl">rgba(23,36,18,.65)</span>;
 <span class="tk">--focus-ring</span>: <span class="vl">var(--forest)</span>;
 
 <span class="cm">/* ---------- semantic (dark): html[data-theme="dark"] ---------- */</span>
 <span class="tk">--ink</span>: <span class="vl">var(--cream)</span>;            <span class="tk">--surface</span>: <span class="vl">#1B2A14</span>;
-<span class="tk">--surface-sunken</span>: <span class="vl">#10190C</span>;
+<span class="tk">--page</span>: <span class="vl">var(--surface-sunken)</span>;
 <span class="tk">--border</span>: <span class="vl">rgba(244,241,235,.14)</span>; <span class="tk">--border-strong</span>: <span class="vl">rgba(244,241,235,.32)</span>;
 <span class="tk">--muted</span>: <span class="vl">rgba(244,241,235,.78)</span>; <span class="tk">--faint</span>: <span class="vl">rgba(244,241,235,.64)</span>;
 <span class="tk">--focus-ring</span>: <span class="vl">var(--acid)</span>;

@@ -63,6 +63,7 @@
             'lime': '#8ECA3C',
             'acid': '#B8DC12',
             'cream': '#F4F1EB',
+            'sunken': '#11190C',
           },
           fontFamily: {
             serif: ['"DM Serif Display"', 'Georgia', 'serif'],
@@ -294,8 +295,18 @@
         </span>
       </a>
 
-      <!-- mini projects strip -->
-      <div class="mt-20 md:mt-28 pt-14 md:pt-16 border-t border-forest-deep/15">
+      <!-- mini projects strip, opened by a line through clouds instead of a
+           plain rule. The line draws out from the middle and the clouds
+           condense around it as it scrolls into view (see "Cloud divider"
+           in styles.css). -->
+      <div class="mt-16 md:mt-20">
+        <div class="cloud-divider mb-12 md:mb-14" aria-hidden="true">
+          <img class="cloud-divider__clouds" src="assets/clouds-divider.webp"
+               srcset="assets/clouds-divider-760.webp 760w, assets/clouds-divider.webp 1406w"
+               sizes="(min-width: 1152px) 703px, (min-width: 768px) calc(65.6vw - 52px), calc(82vw - 39px)"
+               alt="" width="1406" height="322" loading="lazy" decoding="async" />
+          <span class="cloud-divider__line"></span>
+        </div>
         <div class="mb-10 md:mb-12 reveal">
           <p class="eyebrow text-forest">Mini projects</p>
           <h2 class="font-display text-3xl md:text-4xl mt-3">Small things, done for the joy of it.</h2>
@@ -351,75 +362,36 @@
     </div>
   </section>
 
-  <!-- ============ PRACTICE ============ -->
-  <section id="practice" class="bg-forest-deep text-cream relative grain">
-    <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-36 relative z-10">
-      <div class="grid md:grid-cols-12 gap-12 md:gap-16">
-        <div class="md:col-span-5 reveal">
-          <p class="eyebrow text-cream/60">The practice</p>
-          <h2 class="font-display text-4xl md:text-5xl mt-4 leading-tight">A curious mind.</h2>
-          <p class="mt-8 text-cream/75 leading-[1.8]">
-            I grew up surrounded by forests, mountains, and long winters. That sense
-            of exploration still shapes how I approach design today.
-          </p>
-        </div>
-        <div class="md:col-span-6 md:col-start-7">
-          <ul class="divide-y divide-cream/15">
-            <li class="py-7 flex items-baseline gap-8 reveal">
-              <span class="eyebrow text-cream/40 w-8 shrink-0">01</span>
-              <div>
-                <h3 class="font-display text-2xl">Digital Design</h3>
-                <p class="text-cream/65 mt-1">Exploring ways to make products, services, and experiences a little easier to understand and use.</p>
-              </div>
-            </li>
-            <li class="py-7 flex items-baseline gap-8 reveal" style="transition-delay: 100ms;">
-              <span class="eyebrow text-cream/40 w-8 shrink-0">02</span>
-              <div>
-                <h3 class="font-display text-2xl">Visual Stories</h3>
-                <p class="text-cream/65 mt-1">Identity, illustration, and communication that help ideas feel clearer and more human.</p>
-              </div>
-            </li>
-            <li class="py-7 flex items-baseline gap-8 reveal" style="transition-delay: 200ms;">
-              <span class="eyebrow text-cream/40 w-8 shrink-0">03</span>
-              <div>
-                <h3 class="font-display text-2xl">Experiments</h3>
-                <p class="text-cream/65 mt-1">Personal projects, design exercises, and creative detours that keep me learning.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ JOURNAL ============ -->
-  <section id="journal" class="bg-cream">
+  <!-- On the design system's Sunken (#11190C): a deep band between the cream
+       work and the forest-deep footer. -->
+  <section id="journal" class="bg-sunken text-cream">
     <div class="max-w-6xl mx-auto px-6 md:px-10 py-24 md:py-36">
       <div class="reveal">
-        <p class="eyebrow text-forest">Studio journal</p>
+        <p class="eyebrow text-cream/60">Studio journal</p>
         <h2 class="font-display text-4xl md:text-6xl mt-4">Design reflections.</h2>
       </div>
 
-      <div class="mt-14 divide-y divide-forest-deep/15 border-t border-b border-forest-deep/15">
+      <div class="mt-14 divide-y divide-cream/15 border-t border-b border-cream/15">
         <a href="blog-oslo-city-bike" class="quiet-link block py-8 md:grid md:grid-cols-12 md:items-baseline gap-6 reveal">
-          <span class="eyebrow text-forest-deep/45 md:col-span-3">Studio journal &middot; 003</span>
+          <span class="eyebrow text-cream/55 md:col-span-3">Studio journal &middot; 003</span>
           <h3 class="font-display text-2xl md:text-3xl md:col-span-6 mt-2 md:mt-0">Oslo City Bike: A green, fresh bike-sharing service playing skillfully with Humanity Centered Design</h3>
-          <span class="eyebrow text-forest-deep/45 md:col-span-3 md:text-right block mt-2 md:mt-0">August 29, 2026</span>
+          <span class="eyebrow text-cream/55 md:col-span-3 md:text-right block mt-2 md:mt-0">August 29, 2026</span>
         </a>
         <a href="blog-delonghi-magnifica" class="quiet-link block py-8 md:grid md:grid-cols-12 md:items-baseline gap-6 reveal" style="transition-delay: 100ms;">
-          <span class="eyebrow text-forest-deep/45 md:col-span-3">Studio journal &middot; 002</span>
+          <span class="eyebrow text-cream/55 md:col-span-3">Studio journal &middot; 002</span>
           <h3 class="font-display text-2xl md:text-3xl md:col-span-6 mt-2 md:mt-0">Redesigning the DeLonghi Magnifica S for the circular economy</h3>
-          <span class="eyebrow text-forest-deep/45 md:col-span-3 md:text-right block mt-2 md:mt-0">March 12, 2026</span>
+          <span class="eyebrow text-cream/55 md:col-span-3 md:text-right block mt-2 md:mt-0">March 12, 2026</span>
         </a>
         <a href="blog-education-norway" class="quiet-link block py-8 md:grid md:grid-cols-12 md:items-baseline gap-6 reveal" style="transition-delay: 200ms;">
-          <span class="eyebrow text-forest-deep/45 md:col-span-3">Studio journal &middot; 001</span>
+          <span class="eyebrow text-cream/55 md:col-span-3">Studio journal &middot; 001</span>
           <h3 class="font-display text-2xl md:text-3xl md:col-span-6 mt-2 md:mt-0">The high-school education system in Norway, measured against traditional metrics</h3>
-          <span class="eyebrow text-forest-deep/45 md:col-span-3 md:text-right block mt-2 md:mt-0">February 11, 2025</span>
+          <span class="eyebrow text-cream/55 md:col-span-3 md:text-right block mt-2 md:mt-0">February 11, 2025</span>
         </a>
       </div>
 
       <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-7 sm:gap-10 reveal">
-        <a href="blog" class="btn-field btn-ghost btn-ghost-light link-cta inline-flex self-start sm:self-auto items-center gap-2.5 border border-forest-deep/30 text-forest-deep font-sans font-medium pl-8 pr-3 py-3 rounded-full">
+        <a href="blog" class="btn-field btn-ghost link-cta inline-flex self-start sm:self-auto items-center gap-2.5 border border-cream/30 text-cream font-sans font-medium pl-8 pr-3 py-3 rounded-full">
           <span class="relative">Read the blog</span>
           <span class="arrow relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-acid text-forest-deep" aria-hidden="true">
             <svg viewBox="0 0 179.61 258.61" class="h-4 w-[11px] translate-x-[1px]" fill="currentColor">
@@ -429,10 +401,10 @@
         </a>
         <!-- The old WordPress blog, kept as an archive: secondary to the journal. -->
         <div>
-          <a href="https://magnusny.wordpress.com/" target="_blank" rel="noopener" class="quiet-link font-sans font-medium text-forest-deep underline decoration-forest-deep/30 underline-offset-4">
+          <a href="https://magnusny.wordpress.com/" target="_blank" rel="noopener" class="quiet-link font-sans font-medium text-cream underline decoration-cream/30 underline-offset-4">
             Archive 2011&ndash;2022 <span aria-hidden="true">&#8599;</span><span class="sr-only"> (old blog, opens in a new tab)</span>
           </a>
-          <p class="mt-1.5 text-sm text-forest-deep/70">Matte paintings, branding, type and posters from before MAGZ. Mostly in Norwegian.</p>
+          <p class="mt-1.5 text-sm text-cream/70">Matte paintings, branding, type and posters from before MAGZ. Mostly in Norwegian.</p>
         </div>
       </div>
     </div>
@@ -509,6 +481,18 @@
       }
     }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // The cloud divider appears once most of it is in view, so it is seen
+    // rather than spent at the bottom edge of the screen.
+    const dividerObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          dividerObserver.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.6, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.cloud-divider').forEach((el) => dividerObserver.observe(el));
 
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
