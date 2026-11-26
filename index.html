@@ -44,6 +44,9 @@
   }
   </script>
 
+  <!-- Lets CSS hold back JS-driven entrances (the hero's "Magnus" rise); without JS everything just shows. -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
@@ -109,37 +112,77 @@
   </div>
 
   <!-- ============ HERO ============ -->
-  <section id="top" class="bg-forest-deep text-cream relative overflow-hidden grain">
-    <div class="aurora" aria-hidden="true">
-      <div class="aurora-wave aurora-wave--echo"></div>
-      <div class="aurora-wave"></div>
-    </div>
-    <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="stars"></div>
-    <div class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-28 md:pt-32 md:pb-40 relative z-10">
-      <div class="md:grid md:grid-cols-12 md:gap-12 md:items-center">
-        <div class="md:col-span-7">
-          <p class="eyebrow text-cream/60 reveal">Designer &middot; Oslo &middot; Tynset, Norway</p>
-          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] mt-6 reveal" style="transition-delay: 120ms;">
-            My name is <span class="text-acid">Magnus</span>, a creative from the forests in Tynset.
-          </h1>
-          <p class="mt-8 max-w-xl text-cream/80 text-lg leading-[1.8] reveal" style="transition-delay: 240ms;">
-            I challenge myself across paper and screens, exploring different colorful corners of design along the way. Feel free to say hello.
-          </p>
-          <div class="mt-12 flex flex-wrap items-center gap-4 reveal" style="transition-delay: 360ms;">
-            <a href="work" class="btn-field inline-block bg-acid text-forest-deep font-sans font-medium px-8 py-4 rounded-full">
-              See the work
-            </a>
-            <a href="practice" class="btn-field btn-ghost inline-block border border-cream/40 text-cream font-sans font-medium px-8 py-4 rounded-full">
-              <span class="relative">About me</span>
-            </a>
-          </div>
+  <!-- Tronfjell seen from Tynset. Layers (back to front): sky, the "Magnus" arc,
+       the mountain, the cloud bank at its foot, then the copy. The mist in front
+       of the buttons clears about two seconds after load. Layout and sizes come
+       from the 2752×1965 Photoshop comp; see "Home hero" in styles.css. -->
+  <section id="top" class="hero text-white">
+    <div class="hero__inner">
+      <div class="hero__top">
+        <h1 class="hero__title font-serif"><span>My name is</span> <span class="sr-only">Magnus</span></h1>
+        <p class="hero__label">From Tynset, Norway</p>
+      </div>
+
+      <div class="hero__scene">
+        <div class="hero__stage">
+          <picture>
+            <source media="(max-aspect-ratio: 1/1)" sizes="166vw"
+                    srcset="assets/hero/tronfjell-sky-1376.webp 1376w, assets/hero/tronfjell-sky-2064.webp 2064w, assets/hero/tronfjell-sky.webp 2752w" />
+            <img class="hero__sky" alt="" width="6858" height="1965" fetchpriority="high" decoding="async"
+                 src="assets/hero/tronfjell-pano-3429.webp"
+                 srcset="assets/hero/tronfjell-pano-3429.webp 3429w, assets/hero/tronfjell-pano-4115.webp 4115w, assets/hero/tronfjell-pano-5144.webp 5144w, assets/hero/tronfjell-pano.webp 6858w"
+                 sizes="349vh" />
+          </picture>
+          <svg class="hero__arc text-acid" viewBox="0 0 2752 1965" aria-hidden="true" focusable="false">
+            <defs>
+              <!-- Everything above Tronfjell's ridge (traced from the mountain image, 8px into the rock). The
+                   letters rise through it, so they emerge from behind the ridge even before the mountain
+                   image has painted: the sky photo has the same mountain in the same place. -->
+              <clipPath id="hero-ridge">
+                <path d="M-800 -1200H3552V1274H2568L2533 1274L2521 1248L2473 1221L2317 1157L2257 1138L2221 1123L2209 1121L2137 1091L2113 1085L2089 1075L2065 1071L1933 1027L1909 1017L1885 1014L1873 1008L1825 994L1801 986L1717 953L1705 952L1681 941L1669 939L1597 917L1573 915L1549 911L1489 910L1441 903L1429 904L1393 901L1309 905L1285 911L1213 916L1201 912L1141 907L1129 909L1117 919L1093 919L1057 925L1033 925L1021 928L997 940L961 964L937 973L865 987L853 993L805 1005L697 1045L685 1053L661 1061L637 1071L625 1074L601 1084L541 1112L493 1141L481 1145L469 1274L421 1274H-800Z" />
+              </clipPath>
+            </defs>
+            <g fill="currentColor" font-size="362.6" text-anchor="middle" clip-path="url(#hero-ridge)">
+              <g class="hero__letter" style="--i: 0"><text x="747.7" y="1038.4" transform="rotate(-8.15 747.7 1038.4)">M</text></g>
+              <g class="hero__letter" style="--i: 1"><text x="1018.3" y="920.8" transform="rotate(5.05 1018.3 920.8)">a</text></g>
+              <g class="hero__letter" style="--i: 2"><text x="1303.2" y="853.7" transform="rotate(12.35 1303.2 853.7)">g</text></g>
+              <g class="hero__letter" style="--i: 3"><text x="1577.4" y="910.1" transform="rotate(11.87 1577.4 910.1)">n</text></g>
+              <g class="hero__letter" style="--i: 4"><text x="1837.8" y="998.8" transform="rotate(-5.76 1837.8 998.8)">u</text></g>
+              <g class="hero__letter" style="--i: 5"><text x="2137" y="1055.1" transform="rotate(-19.71 2137 1055.1)">s</text></g>
+            </g>
+          </svg>
+          <img class="hero__mountain" alt="Tronfjell's broad, snow-dusted summit rising out of a sea of clouds"
+               width="2148" height="404" fetchpriority="high" decoding="async"
+               src="assets/hero/tronfjell-mountain.webp"
+               srcset="assets/hero/tronfjell-mountain-1074.webp 1074w, assets/hero/tronfjell-mountain.webp 2148w"
+               sizes="(max-aspect-ratio: 1/1) 130vw, 110vh" />
+          <img class="hero__cloudbank" alt="" width="2752" height="1036" decoding="async"
+               src="assets/hero/tronfjell-cloudbank.webp"
+               srcset="assets/hero/tronfjell-cloudbank-1376.webp 1376w, assets/hero/tronfjell-cloudbank-2064.webp 2064w, assets/hero/tronfjell-cloudbank.webp 2752w"
+               sizes="(max-aspect-ratio: 1/1) 166vw, 140vh" />
+          <img class="hero__glow" alt="" width="492" height="205" decoding="async" src="assets/hero/tronfjell-glow.webp" />
         </div>
-        <div class="md:col-span-5 mt-14 md:mt-0 reveal" style="transition-delay: 300ms;">
-          <img src="assets/magnus-hero-illustration.webp" alt="Traced illustration of Magnus in a green cap and green jacket, smiling over his shoulder"
-               class="w-full max-w-md mx-auto md:max-w-none" width="1600" height="1236" decoding="async" />
+        <div class="hero__stage hero__stage--front">
+          <img class="hero__mist" alt="" width="1316" height="450" decoding="async"
+               src="assets/hero/tronfjell-mist.webp"
+               srcset="assets/hero/tronfjell-mist-987.webp 987w, assets/hero/tronfjell-mist.webp 1316w"
+               sizes="(max-aspect-ratio: 1/1) 159vw, 134vh" />
         </div>
       </div>
+
+      <div class="hero__copy">
+        <p class="hero__lede">I grew up with this view of Tronfjell<span class="text-acid">.</span></p>
+        <p class="hero__detail">Now a designer in Oslo, working on paper and screens<span class="text-acid">.</span></p>
+      </div>
+      <div class="hero__actions">
+        <a href="work" class="hero__btn btn-field bg-acid text-forest-deep">See the work</a>
+        <a href="practice" class="hero__btn hero__btn--secondary btn-field btn-ghost text-white"><span class="relative">About me</span></a>
+      </div>
+      <a href="#work" class="hero__next btn-ghost" aria-label="Scroll to selected work">
+        <svg viewBox="-281.58 0 281.58 179.61" fill="currentColor" aria-hidden="true">
+          <path transform="rotate(90)" d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/>
+        </svg>
+      </a>
     </div>
   </section>
 
@@ -388,18 +431,29 @@
 
   <!-- ============ CONTACT / FOOTER ============ -->
   <footer id="contact" class="bg-forest-deep text-cream relative overflow-hidden grain">
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-wave aurora-wave--echo"></div>
+      <div class="aurora-wave"></div>
+    </div>
+    <div class="aurora-scrim" aria-hidden="true"></div>
     <div class="stars"></div>
     <div class="max-w-6xl mx-auto px-6 md:px-10 pt-24 pb-12 md:pt-36 relative z-10">
-      <div class="max-w-3xl reveal">
-        <p class="eyebrow text-acid">Contact</p>
-        <h2 class="font-display text-4xl md:text-6xl mt-4 leading-tight">Send me a field note.</h2>
-        <p class="mt-8 text-cream/75 max-w-xl leading-[1.8]">
-          Feel free to say hello. I love hearing about ideas, products, experiments,
-          side projects, the weather and so on.
-        </p>
-        <a href="mailto:magnusny90@gmail.com" class="btn-field inline-block mt-10 bg-cream text-forest-deep font-medium px-8 py-4 rounded-full">
-          Say hello
-        </a>
+      <div class="md:grid md:grid-cols-12 md:gap-12 md:items-center">
+        <div class="md:col-span-7 reveal">
+          <p class="eyebrow text-acid">Contact</p>
+          <h2 class="font-display text-4xl md:text-6xl mt-4 leading-tight">Send me a field note.</h2>
+          <p class="mt-8 text-cream/75 max-w-xl leading-[1.8]">
+            Feel free to say hello. I love hearing about ideas, products, experiments,
+            side projects, the weather and so on.
+          </p>
+          <a href="mailto:magnusny90@gmail.com" class="btn-field inline-block mt-10 bg-cream text-forest-deep font-medium px-8 py-4 rounded-full">
+            Say hello
+          </a>
+        </div>
+        <div class="md:col-span-5 mt-14 md:mt-0 reveal" style="transition-delay: 150ms;">
+          <img src="assets/magnus-hero-illustration.webp" alt="Traced illustration of Magnus in a green cap and green jacket, smiling over his shoulder"
+               class="w-full max-w-sm mx-auto md:max-w-none" width="1600" height="1236" loading="lazy" decoding="async" />
+        </div>
       </div>
 
       <div class="mt-24 md:mt-32 pt-8 border-t border-cream/15 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -421,6 +475,20 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Raise "Magnus" from behind Tronfjell once its typeface has loaded, so the
+    // letters never swap fonts mid-rise. Give up waiting after 1.2s. (Hiding
+    // the lowered letters doesn't depend on images loading: the SVG clips them
+    // at the ridge.)
+    (() => {
+      const arc = document.querySelector('.hero__arc');
+      if (!arc) return;
+      const rise = () => arc.classList.add('is-rising');
+      const font = document.fonts ? document.fonts.load('1em "DM Serif Display"') : Promise.resolve();
+      Promise.race([font, new Promise((r) => setTimeout(r, 1200))]).then(rise, rise);
+    })();
+  </script>
 
   <script>
     const observer = new IntersectionObserver((entries) => {

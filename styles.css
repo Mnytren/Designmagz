@@ -2,8 +2,8 @@
    MAGZ — shared styles
    Linked by every Tailwind-CDN page (index, work, practice, blog, case studies).
    Brand tokens live in each page's inline tailwind.config; this sheet holds the
-   custom CSS that Tailwind utilities don't cover. Page-specific blocks (aurora,
-   article typography, the 1881 mockups) are inert on pages that don't use them.
+   custom CSS that Tailwind utilities don't cover. Page-specific blocks (home
+   hero, article typography, the 1881 mockups) are inert on pages that don't use them.
    The standalone design-system page keeps its own stylesheet.
    ========================================================================== */
 
@@ -297,11 +297,375 @@ h1.font-display,
 }
 
 /* ==========================================================================
-   Home hero — aurora borealis (brand greens, quiet drift)
+   Home hero — Tronfjell
    ========================================================================== */
-/* A wavy ribbon of aurora: high on the left, dipping just left of centre
-   beneath the copy, rising again behind the illustration. Soft vertical
-   curtains rise from its lower edge and fade into the dark.
+/* The view of Tronfjell from Tynset, rebuilt from the 2752×1965 Photoshop
+   comp. Every layer keeps its comp position, so the whole hero is laid out in
+   one unit, --u: one comp pixel. Numbers below such as 421 or 1965 are comp
+   pixels, so they can be checked against the PSD directly.
+
+   Sizing: the full comp height (sky to cloud sea) fits the screen height, so
+   the whole aurora sky is always in view. Narrow portrait screens fit the
+   "Magnus" arc (comp x 579–2190, plus air) to the width instead.
+
+   Landscape screens are wider than the comp, so the sky behind it is a
+   panorama (the extended PSD, 6858 px, with the comp at x 2068). Screens
+   wider still than the panorama see its ends fade into the dark it already
+   darkens towards. Portrait screens get a compact hero that wraps the scene
+   and the copy rather than filling the whole screen.
+
+   The copy stays in normal flow. .hero__scene is an in-flow box exactly as
+   tall as the gap between "My name is" and the subline in the comp. The scene
+   layers hang off it, so picture and copy stay registered at every size.
+
+   Stacking inside .hero (which isolates): the scene at -1, the copy above
+   it, the mist at 1 over the buttons, then the subline and detail line at 2,
+   above the mist as in the comp. A button jumps to 2 on hover and focus, so
+   it is fully clear the moment someone reaches for it. */
+.hero {
+  --nav-h: 80px;
+  --u: min(calc(100vh / 1965), calc((100vw - 2rem) / 1660));
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Slide up under the sticky nav so the sky fills the whole first screen,
+     the top of it showing through the nav. */
+  margin-top: calc(-1 * var(--nav-h));
+  /* Beyond the panorama's ends (very wide screens): its own edge colours. */
+  background: linear-gradient(to bottom, #142111 0%, #132111 12%, #132216 30%, #1a2d24 46%, #17261e 62%, #0f1b15 78%, #0a120d 100%);
+}
+@supports (height: 100svh) {
+  .hero {
+    --u: min(calc(100svh / 1965), calc((100vw - 2rem) / 1660));
+    min-height: 100svh;
+  }
+}
+@media (min-width: 768px) {
+  .hero { --nav-h: 76px; }
+}
+
+/* Landscape: "My name is" starts at its comp height, which puts the scene's
+   top edge exactly on the top of the screen. */
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: calc(540.5 * var(--u)) 1rem 1rem;
+  text-align: center;
+}
+
+/* "My name is" on the left, the label on the right, sharing a baseline. The
+   row sits slightly right of centre so "My name is" starts above the M. */
+.hero__top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(calc(1838 * var(--u)), 100%);
+  left: min(calc(56 * var(--u)), max(0px, (100% - 1838 * var(--u)) / 2));
+}
+.hero__title {
+  margin: 0;
+  font-size: max(calc(110 * var(--u)), 2.25rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: left;
+}
+.hero__label {
+  margin: 0;
+  font-size: max(calc(30 * var(--u)), 0.875rem);
+  line-height: 1;
+  text-align: right;
+}
+
+/* The in-flow anchor: comp y 650.5 (bottom of the "My name is" line) to
+   1204.5 (top of the subline). */
+.hero__scene {
+  position: relative;
+  width: 100%;
+  height: calc(554 * var(--u));
+}
+.hero__stage {
+  position: absolute;
+  z-index: -1;
+  isolation: isolate;
+  left: 50%;
+  top: calc(-650.5 * var(--u));
+  width: calc(2752 * var(--u));
+  height: calc(1965 * var(--u));
+  margin-left: calc(-1376 * var(--u));
+  pointer-events: none;
+  user-select: none;
+}
+.hero__stage > *,
+.hero__sky {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+.hero__stage > picture { display: contents; }
+/* The panorama: comp x -2068 to 4790. Its far ends fade out, which only
+   shows on screens wider than about 3:1. */
+.hero__sky {
+  left: calc(-2068 * var(--u));
+  top: 0;
+  width: calc(6858 * var(--u));
+  height: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.hero__arc {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero__arc { overflow: visible; }
+.hero__arc text { font-family: "DM Serif Display", Georgia, serif; }
+
+/* "Magnus" rises from behind the mountain once, letter by letter. The letters
+   start --rise lower (SVG user units = comp px) and move up through a clip
+   path traced along the ridge (#hero-ridge in the markup), so they emerge
+   from behind it whether or not the mountain image has painted yet.
+   Transform only.
+
+   They stay invisible until JS adds .is-rising (once the font has loaded), so
+   a letter that starts partly above the ridge doesn't sit there waiting.
+   Without JS the name just shows; if .is-rising never arrives it shows
+   after 4s anyway. */
+.hero__arc { --rise: 220px; }
+.js .hero__letter { visibility: hidden; transform: translateY(var(--rise)); }
+.js .hero__arc:not(.is-rising) .hero__letter {
+  animation: hero-letter-show 1ms linear 4s forwards;
+}
+.js .hero__arc.is-rising .hero__letter {
+  visibility: visible;
+  animation: hero-letter-rise 1.7s var(--ease-spring) calc(var(--i) * 70ms) both;
+}
+@keyframes hero-letter-rise {
+  from { transform: translateY(var(--rise)); }
+  to   { transform: none; }
+}
+@keyframes hero-letter-show {
+  to { visibility: visible; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .hero__letter,
+  .js .hero__arc.is-rising .hero__letter,
+  .js .hero__arc:not(.is-rising) .hero__letter { visibility: visible; transform: none; animation: none; }
+}
+/* Includes the two summit cairns, darkened as in the comp. */
+.hero__mountain {
+  left: calc(421 * var(--u));
+  top: calc(862 * var(--u));
+  width: calc(2148 * var(--u));
+  height: calc(404 * var(--u));
+}
+/* Opaque to its side edges, so it feathers out over the same 220 comp px in
+   which the panorama blends from this comp into its extension. */
+.hero__cloudbank {
+  left: 0;
+  top: calc(929 * var(--u));
+  width: 100%;
+  height: calc(1036 * var(--u));
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+/* Five soft white glows along the arc, blended as overlay at the comp's 74%
+   fill: they lift the lime letters and the summit. */
+.hero__glow {
+  left: calc(381 * var(--u));
+  top: calc(404 * var(--u));
+  width: calc(1965 * var(--u));
+  height: calc(820 * var(--u));
+  mix-blend-mode: overlay;
+  opacity: 0.74;
+}
+
+/* The mist in front of the buttons. It clears once, ~2s after load, by
+   opacity alone. pointer-events: none (from .hero__stage) keeps the buttons
+   clickable the whole time. */
+.hero__stage--front {
+  z-index: 1;
+  animation: hero-mist-clear 1.3s cubic-bezier(0.33, 1, 0.68, 1) 2s both;
+}
+/* The mist's left edge is already soft; its right edge is cut, so fade it. */
+.hero__mist {
+  left: calc(120 * var(--u));
+  top: calc(1065 * var(--u));
+  width: calc(2632 * var(--u));
+  height: calc(900 * var(--u));
+  -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+          mask-image: linear-gradient(to right, #000 88%, transparent 100%);
+}
+@keyframes hero-mist-clear {
+  from { opacity: 1; }
+  to   { opacity: 0; visibility: hidden; }
+}
+
+/* Subline + detail line. A feathered shade of forest-deep sits behind them so
+   the brightest cloud tops still give WCAG AA contrast; it is soft enough to
+   read as cloud shadow rather than a shape. */
+.hero__copy {
+  position: relative;
+  z-index: 2;
+}
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -14% -9%;
+  background: radial-gradient(farthest-side at 50% 45%, rgba(23, 36, 18, 0.34), rgba(23, 36, 18, 0.28) 60%, rgba(23, 36, 18, 0) 100%);
+  pointer-events: none;
+}
+.hero__lede,
+.hero__detail {
+  margin: 0;
+  text-wrap: balance;
+}
+/* Never below 24px, so it stays "large text" for WCAG contrast (3:1). */
+.hero__lede {
+  font-size: max(calc(79.3 * var(--u)), 1.5rem);
+  line-height: 1.2;
+}
+.hero__detail {
+  margin-top: calc(30.5 * var(--u));
+  font-size: max(calc(36 * var(--u)), 1rem);
+  line-height: 1.5;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: max(calc(52 * var(--u)), 0.75rem);
+  margin-top: calc(45.8 * var(--u));
+}
+.hero__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(398 * var(--u));
+  min-height: max(calc(124 * var(--u)), 3rem);
+  padding: 0 max(calc(53 * var(--u)), 1.5rem);
+  border-radius: 9999px;
+  font-size: max(calc(48.7 * var(--u)), 1rem);
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+}
+.hero__btn--secondary { border: 1.5px solid #fff; }
+
+/* The way down to the selected work on this page ("See the work" opens the
+   full work page). A ring like the secondary button's, holding the site's
+   chevron turned to point down; the viewBox centres the chevron's tip. Once
+   the mist has cleared it nudges down twice (under 2s, then still), and on
+   hover or focus it nudges and stays. */
+.hero__next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max(calc(104 * var(--u)), 2.75rem);
+  height: max(calc(104 * var(--u)), 2.75rem);
+  margin-top: max(calc(96 * var(--u)), 1.5rem);
+  border: 1.5px solid #fff;
+  border-radius: 9999px;
+  color: #fff;
+}
+.hero__next svg {
+  position: relative;
+  width: 36%;
+  height: auto;
+  transition: transform 0.4s var(--ease-spring);
+  animation: hero-next-hint 0.9s ease-in-out 3.5s 2;
+}
+.hero__next:hover svg,
+.hero__next:focus-visible svg { transform: translateY(max(calc(8 * var(--u)), 3px)); }
+.hero__next:focus-visible { outline: 2px solid #B8DC12; outline-offset: 4px; }
+@keyframes hero-next-hint {
+  50% { transform: translateY(max(calc(10 * var(--u)), 4px)); }
+}
+/* Land the work section flush under the sticky nav (80px, 76px from md).
+   html's 88px scroll padding alone would leave a sliver of the hero showing. */
+#work { scroll-margin-top: -8px; }
+@media (min-width: 768px) {
+  #work { scroll-margin-top: -12px; }
+}
+
+.hero__btn:hover,
+.hero__btn:focus-visible,
+.hero__next:hover,
+.hero__next:focus-visible { z-index: 2; }
+/* No hover on touch screens, so the buttons sit above the mist from the start. */
+@media (hover: none) {
+  .hero__btn,
+  .hero__next { z-index: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__stage--front { animation: none; opacity: 0; visibility: hidden; }
+  .hero__next svg { animation: none; transition: none; }
+  .hero__next:hover svg,
+  .hero__next:focus-visible svg { transform: none; }
+}
+
+/* Portrait: the scene is far shorter than a phone screen, so instead of
+   filling the screen the hero wraps the copy with modest padding, and the
+   scene follows the copy. Where the scene doesn't reach, its top and bottom
+   edges fade into the sky's top colour and the cloud bank's bottom colour.
+   The sky is the comp-width image (the panorama's sides would never show). */
+@media (max-aspect-ratio: 1/1) {
+  .hero {
+    min-height: 0;
+    padding-top: var(--nav-h);
+    background: linear-gradient(to bottom, #28381E 50%, #1B261D 50%);
+  }
+  .hero__inner { padding: 2.5rem 1rem; }
+  .hero__sky {
+    left: 0;
+    width: 100%;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .hero__stage {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 84%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 84%, transparent 100%);
+  }
+  .hero__top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    width: 100%;
+    left: 0;
+    margin-bottom: 0.5rem;
+  }
+  .hero__label { order: -1; text-align: left; }
+  .hero__title { font-size: max(calc(110 * var(--u)), 2.5rem); }
+  .hero__detail { margin-top: max(calc(30.5 * var(--u)), 0.75rem); }
+  .hero__actions { margin-top: max(calc(45.8 * var(--u)), 1.75rem); }
+  .hero__btn {
+    min-width: 0;
+    min-height: max(calc(124 * var(--u)), 3.25rem);
+    padding: 0 max(calc(53 * var(--u)), 1.75rem);
+    font-size: max(calc(48.7 * var(--u)), 1.0625rem);
+  }
+}
+
+/* ==========================================================================
+   Footer — aurora borealis (brand greens, quiet drift)
+   ========================================================================== */
+/* Was the home hero's sky before Tronfjell. A wavy ribbon of aurora: high on
+   the left, dipping just left of centre beneath the copy, rising again behind
+   the illustration. Soft vertical curtains rise from its lower edge and fade
+   into the dark.
 
    The ribbon, its blur and its streaks are drawn once as SVG images
    (assets/aurora-wave*.svg, generated so each streak gets its own width,
@@ -351,10 +715,11 @@ h1.font-display,
   .aurora-wave { animation: none; }
 }
 
-/* Scrim that keeps hero copy legible over the aurora. Lighter than a full
+/* Scrim that keeps the copy legible over the aurora. Lighter than a full
    blackout so the glow still reads behind the text, heaviest where the
-   headline sits and fading out toward the illustration. */
-.hero-scrim {
+   heading sits and fading out toward the illustration, and dark again along
+   the bottom where the small footer links are. */
+.aurora-scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
