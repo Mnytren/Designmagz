@@ -495,12 +495,12 @@ h1.font-display,
   opacity: 0.74;
 }
 
-/* The mist in front of the buttons. It clears once, ~2s after load, by
-   opacity alone. pointer-events: none (from .hero__stage) keeps the buttons
-   clickable the whole time. */
+/* The mist in front of the buttons. It stays, for the depth; a button
+   comes through it, clear, on hover or keyboard focus (and always on touch
+   screens, which have no hover), see below. pointer-events: none (from
+   .hero__stage) keeps the buttons clickable through it. */
 .hero__stage--front {
   z-index: 1;
-  animation: hero-mist-clear 1.3s cubic-bezier(0.33, 1, 0.68, 1) 2s both;
 }
 /* The mist's left edge is already soft; its right edge is cut, so fade it. */
 .hero__mist {
@@ -510,10 +510,6 @@ h1.font-display,
   height: calc(900 * var(--u));
   -webkit-mask-image: linear-gradient(to right, #000 88%, transparent 100%);
           mask-image: linear-gradient(to right, #000 88%, transparent 100%);
-}
-@keyframes hero-mist-clear {
-  from { opacity: 1; }
-  to   { opacity: 0; visibility: hidden; }
 }
 
 /* Subline + detail line. A feathered shade of forest-deep sits behind them so
@@ -572,9 +568,9 @@ h1.font-display,
 
 /* The way down to the selected work on this page ("See the work" opens the
    full work page). A ring like the secondary button's, holding the site's
-   chevron turned to point down; the viewBox centres the chevron's tip. Once
-   the mist has cleared it nudges down twice (under 2s, then still), and on
-   hover or focus it nudges and stays. */
+   chevron turned to point down; the viewBox centres the chevron's tip. After
+   3.5s it nudges down twice (under 2s, then still), and on hover or focus it
+   nudges and stays. */
 .hero__next {
   display: inline-flex;
   align-items: center;
@@ -617,7 +613,6 @@ h1.font-display,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__stage--front { animation: none; opacity: 0; visibility: hidden; }
   .hero__next svg { animation: none; transition: none; }
   .hero__next:hover svg,
   .hero__next:focus-visible svg { transform: none; }
