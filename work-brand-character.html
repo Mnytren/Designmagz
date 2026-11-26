@@ -48,6 +48,16 @@
   </script>
 
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Selected text takes the case's 1881 blue (the headline band's #2966BF; white on it
+       is 5.6:1) instead of MAGZ lime. It reads on the cream, on the dark hero and on both
+       the light and the deep blue panels. Site chrome (nav, menu, footer) keeps the lime,
+       as on the Corvus and Neon Groove pages. */
+    ::selection { background: #2966BF; color: #fff; }
+    header ::selection,
+    #mobile-menu ::selection,
+    footer ::selection { background: #B8DC12; color: #172412; }
+  </style>
 </head>
 <body class="bg-cream text-forest-deep antialiased">
 
