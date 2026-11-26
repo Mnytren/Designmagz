@@ -117,7 +117,6 @@
     }
     .corvus-tile:hover img { transform: scale(1.03); }
 
-    .corvus-back:focus-visible { outline: 2px solid #B0DDFF; outline-offset: 4px; }
     .corvus-btn { transition: transform 0.5s var(--ease-spring), opacity 0.4s var(--ease-spring); }
     .corvus-btn:hover { transform: translateY(-2px); }
     .corvus-btn:focus-visible { outline: 2px solid #B0DDFF; outline-offset: 4px; }
@@ -129,7 +128,7 @@
     }
   </style>
 </head>
-<body class="bg-night text-cream antialiased">
+<body class="bg-cream text-forest-deep antialiased">
 
   <!-- ============ NAV ============ -->
   <header class="sticky top-0 z-40 bg-forest-deep/85 backdrop-blur-md text-cream grain">
@@ -165,21 +164,27 @@
     </nav>
   </div>
 
+  <!-- The Corvus boards sit as contained, rounded panels in the page column on the
+       site's cream, like the panels on the other case pages, instead of running edge to
+       edge. Inside each board the project keeps its own night palette and Manrope. -->
   <main class="corvus">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 pt-8 md:pt-10 pb-20 md:pb-28">
+    <div class="flex items-center justify-between gap-4 reveal">
+      <a href="work" class="quiet-link eyebrow text-forest-deep/70 inline-flex items-center gap-2">
+        <svg viewBox="0 0 179.61 258.61" class="h-[0.85em] w-[0.59em] shrink-0 -scale-x-100" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg> All work
+      </a>
+      <p class="eyebrow text-forest text-right">Mini project &middot; Digital art</p>
+    </div>
+
+    <div class="mt-6 md:mt-8 space-y-6 md:space-y-8">
 
     <!-- ============ BOARD 1 · THE ARTWORK ============ -->
-    <section class="bg-night" aria-labelledby="corvus-title">
-      <div class="max-w-6xl mx-auto px-6 md:px-10 py-5 flex items-center justify-between gap-4 text-sm">
-        <a href="work" class="corvus-back quiet-link text-frost/70 inline-flex items-center gap-2 font-medium">
-          <svg viewBox="0 0 179.61 258.61" class="h-[0.85em] w-[0.59em] shrink-0 -scale-x-100" fill="currentColor" aria-hidden="true"><path d="M179.22,140.79l.39.39-101.19,101.19c-21.66,21.65-56.77,21.65-78.42,0l101.57-101.58L0,39.21,39.21,0l140.4,140.4-.39.39Z"/></svg> All work
-        </a>
-        <p class="text-frost/60 font-medium tracking-wide">Mini project &middot; Digital art</p>
-      </div>
-      <figure class="max-w-6xl mx-auto px-6 md:px-10 pb-12 md:pb-16">
+    <section class="bg-night rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest text-cream" aria-labelledby="corvus-title">
+      <figure class="p-5 md:p-10">
         <img
           src="assets/corvus/corvus-artwork-1440.webp"
           srcset="assets/corvus/corvus-artwork-1440.webp 1436w, assets/corvus/corvus-artwork-2400.webp 2393w"
-          sizes="(min-width: 1152px) 1072px, calc(100vw - 48px)"
+          sizes="(min-width: 1152px) 990px, (min-width: 768px) calc(100vw - 162px), calc(100vw - 90px)"
           alt="Corvus: a dark raven with feathered horns and glowing blue eyes swoops through a stormy night sky, lightning crackling along its wings, towards a pixelated skyscraper lit with blue windows. A crescent moon hangs above and the words CORVUS, 30,000 AMPS glow at the bottom."
           width="1436" height="1436" fetchpriority="high" decoding="async"
           class="block w-full h-auto" />
@@ -187,10 +192,10 @@
     </section>
 
     <!-- ============ INTRO ============ -->
-    <section class="corvus-intro relative overflow-hidden border-t-2 border-storm/60">
-      <div class="max-w-4xl mx-auto px-6 md:px-10 py-20 md:py-32 text-center">
+    <section class="corvus-intro relative rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest text-cream">
+      <div class="max-w-4xl mx-auto px-6 md:px-10 py-16 md:py-24 text-center">
         <p class="text-frost/70 text-sm md:text-base font-medium tracking-[0.2em] uppercase reveal">The Corvus</p>
-        <h1 id="corvus-title" class="mt-5 text-[2.75rem] sm:text-6xl md:text-7xl leading-[1.1] tracking-[-0.02em] reveal" style="transition-delay: 80ms;">
+        <h1 id="corvus-title" class="mt-5 text-4xl sm:text-5xl md:text-6xl leading-[1.1] tracking-[-0.02em] reveal" style="transition-delay: 80ms;">
           <span class="font-normal text-white">Personal Digital</span><br />
           <span class="font-bold text-frost">Art Project</span>
         </h1>
@@ -204,7 +209,7 @@
     </section>
 
     <!-- ============ BOARD 2 · CREATING THE ARTWORK ============ -->
-    <section aria-labelledby="creating-title">
+    <section class="rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest text-cream" aria-labelledby="creating-title">
       <div class="corvus-creating">
         <div class="max-w-4xl mx-auto px-6 md:px-10 py-16 md:py-24 text-center">
           <h2 id="creating-title" class="text-4xl md:text-6xl leading-[1.15] tracking-[-0.02em] reveal">
@@ -259,7 +264,7 @@
     </section>
 
     <!-- ============ BOARD 3 · BEHIND THE SCENES ============ -->
-    <section class="bg-black" aria-labelledby="bts-title">
+    <section class="bg-black rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest text-cream" aria-labelledby="bts-title">
       <div class="corvus-smoke">
         <div class="max-w-4xl mx-auto px-6 md:px-10 py-20 md:py-28 text-center">
           <h2 id="bts-title" class="text-3xl md:text-5xl font-bold text-frost tracking-[-0.01em] reveal">Behind the Scenes</h2>
@@ -270,7 +275,7 @@
       </div>
 
       <!-- Process video, directly under the Behind the Scenes board -->
-      <div class="max-w-6xl mx-auto px-6 md:px-10 pt-10 md:pt-14">
+      <div class="max-w-6xl mx-auto px-6 md:px-10 pt-10 md:pt-14 pb-10 md:pb-14">
         <figure class="reveal">
           <video
             class="block w-full h-auto bg-black border border-storm/30"
@@ -292,7 +297,7 @@
     </section>
 
     <!-- ============ BOARD 4 · FINAL PRESENTATION ============ -->
-    <section class="bg-black" aria-labelledby="final-title">
+    <section class="bg-black rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest text-cream" aria-labelledby="final-title">
       <div class="max-w-4xl mx-auto px-6 md:px-10 pt-20 md:pt-28 pb-10 md:pb-14 text-center">
         <h2 id="final-title" class="text-3xl md:text-5xl font-bold text-frost tracking-[-0.01em] reveal">Final Presentation</h2>
         <p class="mt-5 md:mt-6 text-base md:text-xl leading-[1.65] text-white/90 reveal" style="transition-delay: 120ms;">
@@ -303,7 +308,7 @@
         <img
           src="assets/corvus/corvus-poster-1440.webp"
           srcset="assets/corvus/corvus-poster-1440.webp 1440w, assets/corvus/corvus-poster-2400.webp 2400w"
-          sizes="(min-width: 1152px) 1072px, calc(100vw - 48px)"
+          sizes="(min-width: 1152px) 990px, (min-width: 768px) calc(100vw - 162px), calc(100vw - 98px)"
           alt="The Corvus artwork as a framed poster hanging on a dark, blue-lit concrete wall"
           width="1440" height="1725" loading="lazy" decoding="async"
           class="block w-full h-auto" />
@@ -311,7 +316,7 @@
     </section>
 
     <!-- ============ THANKS ============ -->
-    <section class="corvus-clouds border-t-2 border-storm/70">
+    <section class="corvus-clouds rounded-2xl overflow-hidden border border-forest-deep/10 shadow-forest text-cream">
       <div class="max-w-4xl mx-auto px-6 md:px-10 py-20 md:py-24 text-center">
         <p class="text-2xl md:text-4xl font-bold text-frost reveal">Thanks for viewing!</p>
         <a href="work" class="corvus-btn inline-flex items-center gap-2.5 mt-10 bg-frost text-night font-bold px-8 py-4 rounded-full reveal" style="transition-delay: 120ms;">
@@ -320,6 +325,8 @@
       </div>
     </section>
 
+    </div>
+  </div>
   </main>
 
   <!-- ============ CONTACT / FOOTER ============ -->
