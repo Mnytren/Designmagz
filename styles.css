@@ -304,9 +304,14 @@ h1.font-display,
    one unit, --u: one comp pixel. Numbers below such as 421 or 1965 are comp
    pixels, so they can be checked against the PSD directly.
 
-   Sizing: the full comp height (sky to cloud sea) fits the screen height, so
-   the whole aurora sky is always in view. Narrow portrait screens fit the
-   "Magnus" arc (comp x 579–2190, plus air) to the width instead.
+   Sizing: the full comp height (sky to cloud sea) is 80% of the screen
+   height, so the hero sits in proportion with the other pages' heroes and
+   the next section shows below it. It stops growing once "My name is" (110
+   comp px) reaches the 60px of the other pages' h1. On short screens it
+   stays at least 560px tall: below that the copy's minimum sizes would
+   outgrow the comp and leave a strip under the cloud sea. Narrow portrait
+   screens fit the "Magnus" arc (comp x 579–2190, plus air) to the width
+   instead.
 
    Landscape screens are wider than the comp, so the sky behind it is a
    panorama (the extended PSD, 6858 px, with the comp at x 2068). Screens
@@ -324,23 +329,24 @@ h1.font-display,
    it is fully clear the moment someone reaches for it. */
 .hero {
   --nav-h: 80px;
-  --u: min(calc(100vh / 1965), calc((100vw - 2rem) / 1660));
+  --u: max(min(calc(80vh / 1965), calc((100vw - 2rem) / 1660), calc(60px / 110)),
+           min(calc(560px / 1965), calc((100vw - 2rem) / 1660)));
   position: relative;
   isolation: isolate;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  /* Slide up under the sticky nav so the sky fills the whole first screen,
-     the top of it showing through the nav. */
+  /* Exactly the comp's height, so the cloud sea reaches the bottom edge. */
+  min-height: calc(1965 * var(--u));
+  /* Slide up under the sticky nav, the top of the sky showing through it. */
   margin-top: calc(-1 * var(--nav-h));
   /* Beyond the panorama's ends (very wide screens): its own edge colours. */
   background: linear-gradient(to bottom, #142111 0%, #132111 12%, #132216 30%, #1a2d24 46%, #17261e 62%, #0f1b15 78%, #0a120d 100%);
 }
 @supports (height: 100svh) {
   .hero {
-    --u: min(calc(100svh / 1965), calc((100vw - 2rem) / 1660));
-    min-height: 100svh;
+    --u: max(min(calc(80svh / 1965), calc((100vw - 2rem) / 1660), calc(60px / 110)),
+             min(calc(560px / 1965), calc((100vw - 2rem) / 1660)));
   }
 }
 @media (min-width: 768px) {
