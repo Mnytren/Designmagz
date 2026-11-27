@@ -468,6 +468,25 @@ h1.font-display,
   max-width: none;
 }
 .hero__stage > picture { display: contents; }
+/* The scene waits until every one of its images has decoded, then fades in
+   whole (JS adds .is-ready to .hero). Otherwise the small images, the glows
+   first, paint before the large sky and mountain and show for a moment as
+   loose blobs on the dark background. The copy and buttons don't wait. If the
+   script never runs, the scene shows after 6s anyway. */
+.js .hero__stage {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+.js .hero.is-ready .hero__stage { opacity: 1; }
+.js .hero:not(.is-ready) .hero__stage {
+  animation: hero-stage-show 0.6s ease-out 6s forwards;
+}
+@keyframes hero-stage-show {
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .hero__stage { transition: none; }
+}
 /* The panorama: comp x -2068 to 4790. Its far ends fade out, which only
    shows on screens wider than about 3:1. */
 .hero__sky {
@@ -493,14 +512,15 @@ h1.font-display,
    from behind it whether or not the mountain image has painted yet.
    Transform only.
 
-   They stay invisible until JS adds .is-rising (once the font has loaded), so
-   a letter that starts partly above the ridge doesn't sit there waiting.
+   They stay invisible until JS adds .is-rising (once the scene is ready and
+   the font has loaded), so a letter that starts partly above the ridge
+   doesn't sit there waiting, and the name never rises over an empty sky.
    Without JS the name just shows; if .is-rising never arrives it shows
-   after 4s anyway. */
+   after 6s anyway, with the scene. */
 .hero__arc { --rise: 220px; }
 .js .hero__letter { visibility: hidden; transform: translateY(var(--rise)); }
 .js .hero__arc:not(.is-rising) .hero__letter {
-  animation: hero-letter-show 1ms linear 4s forwards;
+  animation: hero-letter-show 1ms linear 6s forwards;
 }
 .js .hero__arc.is-rising .hero__letter {
   visibility: visible;
@@ -570,12 +590,17 @@ h1.font-display,
   position: relative;
   z-index: 2;
 }
+/* The ellipse must fade to nothing before every edge of its box, or the box
+   edge shows as a hard line across the clouds. Its centre sits above the
+   middle of the copy (to favour the subline), so the box reaches further up
+   than down: same shade as ever around the text, now feathered out to zero at
+   the top too. */
 .hero__copy::before {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -14% -9%;
-  background: radial-gradient(farthest-side at 50% 45%, rgba(23, 36, 18, 0.34), rgba(23, 36, 18, 0.28) 60%, rgba(23, 36, 18, 0) 100%);
+  inset: -28% -9% -14%;
+  background: radial-gradient(50% 49.6% at 50% 50.4%, rgba(23, 36, 18, 0.34), rgba(23, 36, 18, 0.28) 60%, rgba(23, 36, 18, 0) 100%);
   pointer-events: none;
 }
 .hero__lede,

@@ -114,7 +114,9 @@
 
   <!-- ============ HERO ============ -->
   <!-- Tronfjell seen from Tynset. Layers (back to front): sky, the "Magnus" arc,
-       the mountain, the cloud bank at its foot, then the copy. The mist stays in
+       the mountain, the cloud bank at its foot, the glows, then the copy. The
+       scene fades in whole once all
+       of its images have decoded, then "Magnus" rises. The mist stays in
        front of the buttons; a hovered or focused button comes through it. Layout and sizes come
        from the 2752×1965 Photoshop comp; see "Home hero" in styles.css. -->
   <section id="top" class="hero text-white">
@@ -458,16 +460,23 @@
   </footer>
 
   <script>
-    // Raise "Magnus" from behind Tronfjell once its typeface has loaded, so the
-    // letters never swap fonts mid-rise. Give up waiting after 1.2s. (Hiding
-    // the lowered letters doesn't depend on images loading: the SVG clips them
-    // at the ridge.)
+    // Tronfjell: show the scene once every one of its images has decoded, so it
+    // arrives whole rather than glows first (see .hero.is-ready in styles.css).
+    // Then raise "Magnus" from behind the ridge once its typeface has loaded
+    // too, so the letters never swap fonts mid-rise. Give up waiting after 5s:
+    // the scene shows and the name rises with whatever has arrived.
     (() => {
+      const hero = document.querySelector('.hero');
       const arc = document.querySelector('.hero__arc');
-      if (!arc) return;
-      const rise = () => arc.classList.add('is-rising');
+      if (!hero || !arc) return;
+      const decoded = (img) => (img.decode ? img.decode() : Promise.resolve()).catch(() => {});
+      const scene = Promise.all([...hero.querySelectorAll('.hero__stage img')].map(decoded));
       const font = document.fonts ? document.fonts.load('1em "DM Serif Display"') : Promise.resolve();
-      Promise.race([font, new Promise((r) => setTimeout(r, 1200))]).then(rise, rise);
+      const timeout = new Promise((r) => setTimeout(r, 5000));
+      const ready = () => hero.classList.add('is-ready');
+      const rise = () => arc.classList.add('is-rising');
+      Promise.race([scene, timeout]).then(ready, ready);
+      Promise.race([Promise.all([scene, font]), timeout]).then(rise, rise);
     })();
   </script>
 
